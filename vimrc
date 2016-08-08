@@ -51,7 +51,7 @@ map f8 :call Flake8()<CR>
 "if has('gui_running')
     "set background=light
 "else
-	"set background=dark
+    "set background=dark
 "endif
 set background=dark
 
@@ -63,7 +63,12 @@ map fsjs :set syntax=javascript<CR>
 map fsh :set syntax=html<CR>
 
 
-let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='medium'
+
+" for terminal
+let g:gruvbox_italic=1
+let g:gruvbox_termcolors=256
+
 colorscheme gruvbox
 
 "omnisharp stuff
@@ -161,7 +166,7 @@ nnoremap <leader>th :OmniSharpHighlightTypes<cr>
 let g:airline#extensions#tabline#enabled = 1
 nnoremap tj :bnext<cr>
 nnoremap tk :bprevious<cr>
-nnoremap tt :enew<cr>:o 
+nnoremap tt :enew<cr>:o
 nnoremap tq :bd<cr>
 
 set laststatus=2
