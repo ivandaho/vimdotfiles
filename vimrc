@@ -213,6 +213,7 @@ let indent_guides_enable_on_vim_startup=1
 " au BufEnter * :IndentGuidesEnable
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 autocmd VimEnter * SyntasticToggleMode
 

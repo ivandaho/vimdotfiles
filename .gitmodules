@@ -16,9 +16,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = http://github.com/vim-airline/vim-airline-themes
-[submodule "bundle/vim-coloresque"]
-	path = bundle/vim-coloresque
-	url = https://github.com/gko/vim-coloresque
 [submodule "bundle/vim-commentary"]
 	path = bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary
@@ -46,3 +43,6 @@
 [submodule "bundle/vim-instant-markdown"]
 	path = bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown
+[submodule "morestuff/gnome-terminal-colors"]
+	path = morestuff/gnome-terminal-colors
+	url = http://github.com/metalelf0/gnome-terminal-colors
