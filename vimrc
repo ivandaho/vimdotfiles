@@ -33,8 +33,8 @@ map frp :w !python3<CR>
 " delete highlights from search etc
 map fdh :nohl<CR>
 
-map fdp ^dwx$x| " delete print statement
-map fwi ^wi(<Esc>$| " correct if statement
+map fdp ^dwx$x| " delete print statement (python)
+map fwi ^wi(<Esc>$| " correct if statement (python)
 
 "scroll remap
 map <c-j> <c-d>
@@ -78,11 +78,6 @@ let g:OmniSharp_timeout = 1
 "when the first match contains parentheses.
 set noshowmatch
 
-"Super tab settings - uncomment the next 4 lines
-"let g:SuperTabDefaultCompletionType = 'context'
-"let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-"let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-"let g:SuperTabClosePreviewOnPopupClose = 1
 
 "don't autoselect first item in omnicomplete, show if only one item (for preview)
 "remove preview if you don't want to see any documentation whatsoever.
@@ -158,9 +153,6 @@ set cmdheight=1
 
 nnoremap <leader>sp let<space>g:syntastic_cs_checkers<space>=<space>['syntax',<space>'semantic',<space>'issues']<cr>
 
-"custom added after pastinl
-nnoremap <leader>rl :OmniSharpReloadSolution<cr>
-nnoremap <leader>th :OmniSharpHighlightTypes<cr>
 
 "airline tabs
 let g:airline#extensions#tabline#enabled = 1
@@ -185,12 +177,6 @@ let g:airline_powerline_fonts = 1
 :map fe :Sexplore<cr>
 let g:netrw_liststyle=3
 
-"html comment & remove comment (for single line)
-:map fhc 0I<!-- <Esc>A --><Esc>
-:map fhdc ^5x$3hD
-
-"insert curly braces to word
-:map fcb lbi{<Esc>ea}<Esc>h
 
 " disable esc sound
 set noeb vb t_vb=
