@@ -28,8 +28,11 @@ A repo of the setup I use.
 
 install prepatched fonts, set terminal font (edit -> profile preferences)
 
-#### Gruvbox for Ubuntu Gnome Terminal Vim
-Font is Ubuntu Mono size 13 from [here](https://github.com/powerline/fonts/tree/master/UbuntuMono)
+#### Fonts
+
+Font for terminal Vim on Ubuntu is Ubuntu Mono size 13 from [here](https://github.com/powerline/fonts/tree/master/UbuntuMono)
+
+Font for Windows gVim is DejaVuSansMono size 10 from [here](https://github.com/powerline/fonts/tree/master/DejaVuSansMono)
 
 add to .bashrc:
 ~~~
