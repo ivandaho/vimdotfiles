@@ -18,6 +18,9 @@ A repo of the setup I use.
 [gnome-terminal-colors](https://github.com/metalelf0/gnome-terminal-colors)  
 # Instructions:
 * clone to ~/.vim
+* `git submodule init`
+* `git submodule update`
+* `git submodule foreach git pull origin master` to update to latest regardless of this repo's specific versions
 * see vimrc for more info
 
 # Specifics:
