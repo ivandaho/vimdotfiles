@@ -212,3 +212,4 @@ map \gp :Git push<cr>
 autocmd QuickFixCmdPost *grep* cwindow
 
 map TQ :bp<cr>:bd #<cr>
+map fdtw :%s/\s\+$//<cr>
