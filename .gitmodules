@@ -40,9 +40,6 @@
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
-[submodule "bundle/vim-instant-markdown"]
-	path = bundle/vim-instant-markdown
-	url = https://github.com/suan/vim-instant-markdown
 [submodule "morestuff/gnome-terminal-colors"]
 	path = morestuff/gnome-terminal-colors
 	url = http://github.com/metalelf0/gnome-terminal-colors

@@ -11,7 +11,6 @@ A repo of the setup I use.
 [vim-fugitive](https://github.com/tpope/vim-fugitive)  
 [vim-gitgutter](https://github.com/airblade/vim-gitgutter)  
 [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)  
-[vim-instant-markdown](https://github.com/suan/vim-instant-markdown)  
 [vim-less](https://github.com/groenewege/vim-less)  
 [vim-repeat](https://github.com/tpope/vim-repeat)  
 [vim-surround](https://github.com/tpope/vim-surround)  
@@ -50,12 +49,4 @@ sudo apt-get install dconf-cli
 then run installation after creating new terminal profile
 ~~~
 ./install.sh
-~~~
-
-### Instant Markdown:
-
-~~~
-sudo npm -g install instant-markdown-d
-sudo npm -g install xdg-utils
-sudo npm -g install curl
 ~~~
