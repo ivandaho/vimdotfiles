@@ -43,6 +43,3 @@
 [submodule "morestuff/gnome-terminal-colors"]
 	path = morestuff/gnome-terminal-colors
 	url = http://github.com/metalelf0/gnome-terminal-colors
-[submodule "dockerfile"]
-	path = dockerfile
-	url = https://github.com/ekalinin/Dockerfile.vim.git
