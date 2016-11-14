@@ -1,20 +1,35 @@
 A repo of the setup I use.
 
 [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
+
 [gruvbox](https://github.com/morhetz/gruvbox/)
+
 [supertab](https://github.com/ervandew/supertab)
+
 [syntastic](https://github.com/scrooloose/syntastic)
+
 [vim-airline](https://github.com/vim-airline/vim-airline)
+
 [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
+
 [vim-commentary](https://github.com/tpope/vim-commentary)
+
 [vim-dispatch](https://github.com/tpope/vim-dispatch)
+
 [vim-fugitive](https://github.com/tpope/vim-fugitive)
+
 [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+
 [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
+
 [vim-less](https://github.com/groenewege/vim-less)
+
 [vim-repeat](https://github.com/tpope/vim-repeat)
+
 [vim-surround](https://github.com/tpope/vim-surround)
+
 [gnome-terminal-colors](https://github.com/metalelf0/gnome-terminal-colors)
+
 [Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
 
 # Instructions:
