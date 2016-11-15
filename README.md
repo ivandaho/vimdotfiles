@@ -59,6 +59,8 @@ source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 ~~~
 #### gnome-terminal-colors (Gruvbox)
 
+(located in /morestuff)
+
 get dconf with:
 ~~~
 sudo apt-get install dconf-cli
