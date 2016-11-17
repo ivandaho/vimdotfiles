@@ -13,6 +13,8 @@ set hlsearch
 
 set scroll=5
 
+set timeout timeoutlen=1000 ttimeoutlen=100
+
 "syntastic
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['frosted']
