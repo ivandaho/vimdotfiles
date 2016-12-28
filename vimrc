@@ -215,3 +215,5 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 map TQ :bp<cr>:bd #<cr>
 map fdtw :%s/\s\+$//<cr>
+
+let g:jsx_ext_required = 0
