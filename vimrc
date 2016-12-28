@@ -93,11 +93,10 @@ set noshowmatch
 "
 "
 "Super tab settings - uncomment the next 4 lines
-"Su
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+" let g:SuperTabDefaultCompletionType = 'context'
+" let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 " let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
+" let g:SuperTabClosePreviewOnPopupClose = 1
 
 "Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
 "You might also want to look at the echodoc plugin
@@ -190,7 +189,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " disable pathogen
-let g:pathogen_disabled = ["omnisharp-vim","supertab"]
+let g:pathogen_disabled = ["omnisharp-vim"]
 set incsearch
 set scrolloff=1
 
@@ -216,4 +215,13 @@ autocmd QuickFixCmdPost *grep* cwindow
 map TQ :bp<cr>:bd #<cr>
 map fdtw :%s/\s\+$//<cr>
 
-let g:jsx_ext_required = 0
+" start CamelCasemotion
+map <silent> W <Plug>CamelCaseMotion_w
+map <silent> B <Plug>CamelCaseMotion_b
+map <silent> E <Plug>CamelCaseMotion_e
+map <silent> gE <Plug>CamelCaseMotion_ge
+sunmap W
+sunmap B
+sunmap E
+sunmap gE
+" end CamelCaseMotion
