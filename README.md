@@ -33,7 +33,7 @@ A repo of the setup I use.
 [Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
 
 # Instructions:
-* clone to ~/.vim
+* clone to ~/.vim on Linux, C:/Users/username/vimfiles on Windows
 * `git submodule init`
 * `git submodule update`
 * `git submodule foreach git pull origin master` to update to latest regardless of this repo's specific versions
