@@ -159,7 +159,9 @@ nnoremap <leader>sp let<space>g:syntastic_cs_checkers<space>=<space>['syntax',<s
 "airline tabs
 let g:airline#extensions#tabline#enabled = 1
 nnoremap tj :bnext<cr>
+nnoremap tl :bnext<cr>
 nnoremap tk :bprevious<cr>
+nnoremap th :bprevious<cr>
 nnoremap tt :enew<cr>:o
 nnoremap tq :bd<cr>
 
