@@ -168,7 +168,8 @@ nnoremap tq :bd<cr>
 set laststatus=2
 "let g:OmniSharp_typeLookupInPreview = 1
 set encoding=utf-8
-set guifont=DejaVu_Sans_Mono_for_Powerline:h10:cANSI
+" size 9 is better for 125% hdpi scaling
+set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 let g:airline_powerline_fonts = 1
 
 "backspace fix
@@ -227,3 +228,5 @@ sunmap B
 sunmap E
 sunmap gE
 " end CamelCaseMotion
+
+set dictionary+=dict.txt
