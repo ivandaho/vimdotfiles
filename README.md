@@ -1,5 +1,7 @@
 A repo of the setup I use.
 
+[CamelCaseMotion](https://github.com/bkad/camelcasemotion)
+
 [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
 
 [gruvbox](https://github.com/morhetz/gruvbox/)
@@ -16,11 +18,15 @@ A repo of the setup I use.
 
 [vim-dispatch](https://github.com/tpope/vim-dispatch)
 
+[vim-eunuch](https://github.com/tpope/vim-eunuch)
+
 [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
 [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 
 [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
+
+[vim-jsx](https://github.com/mxw/vim-jsx)
 
 [vim-less](https://github.com/groenewege/vim-less)
 
