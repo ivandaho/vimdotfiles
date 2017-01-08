@@ -230,3 +230,10 @@ sunmap gE
 " end CamelCaseMotion
 
 set dictionary+=dict.txt
+
+map <leader>cc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
+map <leader>cn :%s/class=/className=/g<cr>
+
+autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
+
+let g:jsx_ext_required = 0
