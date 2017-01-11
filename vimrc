@@ -231,9 +231,15 @@ sunmap gE
 
 set dictionary+=dict.txt
 
+" blaze to react change stuff
 map <leader>cc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
+map <leader>cb :%s/<br>/<br\/>/g<cr>
+map <leader>cl :%s/<a href/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>
 
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
 let g:jsx_ext_required = 0
+let g:ctrlp_custom_ignore = 'node_modules'
+
+set showcmd
