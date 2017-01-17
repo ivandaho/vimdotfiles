@@ -32,6 +32,8 @@ A repo of the setup I use.
 
 [vim-repeat](https://github.com/tpope/vim-repeat)
 
+[vim-sneak](https://github.com/justinmk/vim-sneak)
+
 [vim-surround](https://github.com/tpope/vim-surround)
 
 [gnome-terminal-colors](https://github.com/metalelf0/gnome-terminal-colors)
