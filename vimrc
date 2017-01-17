@@ -237,9 +237,13 @@ map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
 map <leader>cl :%s/<a href/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>
 
+" react helpers
+map \rc oclass Component extends Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
+map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
+
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
 let g:jsx_ext_required = 0
-let g:ctrlp_custom_ignore = 'node_modules'
+let g:ctrlp_custom_ignore = 'node_modules\|_public'
 
 set showcmd
