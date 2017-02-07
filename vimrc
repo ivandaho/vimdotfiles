@@ -236,10 +236,12 @@ map <leader>cc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
 map <leader>cl :%s/<a href/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>
+map <leader>cd :%s/{{//g<cr>:%s/}}//g<cr>
 
 " react helpers
 map \rc oclass Component extends Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
 map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
+map \rf _cwfunction<Esc>elct{(props) <Esc>jd3jk$%ddv$=
 
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
