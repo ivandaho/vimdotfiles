@@ -168,8 +168,13 @@ nnoremap tq :bd<cr>
 set laststatus=2
 "let g:OmniSharp_typeLookupInPreview = 1
 set encoding=utf-8
+
+" OSX
+set guifont=Menlo\ For\ Powerline
+
+" windows
 " size 9 is better for 125% hdpi scaling
-set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
+" set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 let g:airline_powerline_fonts = 1
 
 "backspace fix
@@ -249,3 +254,14 @@ let g:jsx_ext_required = 0
 let g:ctrlp_custom_ignore = 'node_modules\|_public'
 
 set showcmd
+let g:ctrlp_working_path_mode = 0
+
+map <c-]> :CtrlPClearCache<CR><C-p>
+
+" faster go to end of line
+map + g_
+
+" console log line with ;
+map csl; Iconsole.log(<esc>t;a)<esc>
+" console log line
+map csll Iconsole.log(<esc>A);<esc>
