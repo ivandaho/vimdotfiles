@@ -64,3 +64,6 @@
 [submodule "bundle/vim-sneak"]
 	path = bundle/vim-sneak
 	url = git@github.com:justinmk/vim-sneak
+[submodule "bundle/vim-mustache-handlebars"]
+	path = bundle/vim-mustache-handlebars
+	url = git@github.com:mustache/vim-mustache-handlebars.git

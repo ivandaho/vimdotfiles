@@ -265,3 +265,19 @@ map + g_
 map csl; Iconsole.log(<esc>t;a)<esc>
 " console log line
 map csll Iconsole.log(<esc>A);<esc>
+" fix syntax highlighting
+map \fs :syntax sync fromstart<cr>
+" cd to the current's file's directory
+map \wd :lcd %:p:h<cr>
+
+" spring convert variable into db mapping
+:map \sv _i@Column(name= "<esc>A")<esc>hvi"yoprivate String<esc>a <esc>pA;<esc>bo<esc>j
+" convert characters_like_this into charactersLikeThis
+:map \cz _f_x~
+" spring convert variable into getter/setters
+:map \sg _ywipublic String get<esc>l~A() {<return>return <esc>pa;<return>}<return><return>public void set<esc>pblll~A(String <esc>pA) {<return>this.<esc>pA = <esc>pA;<return>}<return><esc>j
+" spring convert variable into hashCode
+:map \sh _ywiresult = prime * result + ((<esc>A == null) ? 0 : <esc>pa.hashCode());<esc>j
+" spring convert variable into equals check
+:map \st _ywiif (<esc>A == null) {<return>if (other.<esc>pA != null)<return>return false;<return>} else if (!<esc>pA.equals(other.<esc>pA))<return>return false;<return><esc>j
+
