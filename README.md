@@ -8,8 +8,6 @@ A repo of the setup I use.
 
 [supertab](https://github.com/ervandew/supertab)
 
-[syntastic](https://github.com/scrooloose/syntastic)
-
 [vim-airline](https://github.com/vim-airline/vim-airline)
 
 [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)

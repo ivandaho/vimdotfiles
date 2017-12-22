@@ -1,3 +1,5 @@
+" disable pathogen
+let g:pathogen_disabled = ["omnisharp-vim"]
 execute pathogen#infect()
 Helptags
 syntax on
@@ -15,56 +17,14 @@ set scroll=5
 
 set timeout timeoutlen=1000 ttimeoutlen=100
 
-"syntastic
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_python_checkers = ['frosted']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_check_on_open = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_wq = 0
 
-nnoremap <leader>ss :SyntasticCheck<cr>
-nnoremap <leader>se :Errors<cr><C-W><C-W>
-nnoremap <leader>sc :lclose<cr>
-nnoremap <leader>st :SyntasticToggleMode<cr>
-
-
-map foc :Errors<CR>
 map gj :lnext<CR>
 map gk :lprevious<CR>
-map frp :w !python3<CR>
 " delete highlights from search etc
 map fdh :nohl<CR>
 
-map fdp ^dwx$x| " delete print statement (python)
-map fwi ^wi(<Esc>$| " correct if statement (python)
-
-"scroll remap
-map <c-j> <c-d>
-map <c-k> <c-u>
-
-"flake8
-let g:flake8_show_quickfix=1
-let g:flake8_show_in_gutter=1
-"let g:flake8_show_in_file=1
-map <F8> :call Flake8()<CR>
-map f8 :call Flake8()<CR>
-
-"solaris stuff
-"if has('gui_running')
-    "set background=light
-"else
-    "set background=dark
-"endif
-set background=dark
-
-map fbd :set background=dark<CR>
-map fbl :set background=light<CR>
-
-"syntax toggle
-map fsjs :set syntax=javascript<CR>
-map fsh :set syntax=html<CR>
-
+" map fdp ^dwx$x| " delete print statement (python)
+" map fwi ^wi(<Esc>$| " correct if statement (python)
 
 let g:gruvbox_contrast_dark='medium'
 
@@ -73,88 +33,10 @@ let g:gruvbox_italic=1
 let g:gruvbox_termcolors=256
 
 colorscheme gruvbox
-
-"omnisharp stuff
-let g:OmniSharp_timeout = 1
-
-"Showmatch significantly slows down omnicomplete
-"when the first match contains parentheses.
-set noshowmatch
-
-
-"don't autoselect first item in omnicomplete, show if only one item (for preview)
-"remove preview if you don't want to see any documentation whatsoever.
-"/set completeopt=longest,menuone,preview
-" Fetch full documentation during omnicomplete requests.
-" There is a performance penalty with this (especially on Mono)
-" By default, only Type/Method signatures are fetched. Full documentation can still be fetched when
-" you need it with the :OmniSharpDocumentation command.
-" let g:omnicomplete_fetch_documentation=1
-"
-"
-"Super tab settings - uncomment the next 4 lines
-" let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-" let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-" let g:SuperTabClosePreviewOnPopupClose = 1
-
-"Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
-"You might also want to look at the echodoc plugin
-" set splitbelow
-
-" Get Code Issues and syntax errors
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-" If you are using the omnisharp-roslyn backend, use the following
-" let g:syntastic_cs_checkers = ['code_checker']
-augroup omnisharp_commands
-    autocmd!
-
-    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-    " Synchronous build (blocks Vim)
-    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-    " Builds can also run asynchronously with vim-dispatch installed
-    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
-    " automatic syntax check on events (TextChanged requires Vim 7.4)
-    autocmd BufEnter,InsertLeave *.cs SyntasticCheck
-
-    " Automatically add new cs files to the nearest project on save
-    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-    "show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    "The following commands are contextual, based on the current cursor position.
-
-    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
-    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
-    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
-    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
-    "finds members in the current buffer
-    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
-    " cursor can be anywhere on the line containing an issue
-    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
-    autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
-    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
-    "navigate up by method/property/field
-    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-    "navigate down by method/property/field
-    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-
-augroup END
-
+set background=dark
 
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
 set updatetime=1000
-" Remove 'Press Enter to continue' message when type information is longer than one line.
-" omni/Omni
-set cmdheight=1
-
-nnoremap <leader>sp let<space>g:syntastic_cs_checkers<space>=<space>['syntax',<space>'semantic',<space>'issues']<cr>
-
 
 "airline tabs
 let g:airline#extensions#tabline#enabled = 1
@@ -170,7 +52,8 @@ set laststatus=2
 set encoding=utf-8
 
 " OSX
-set guifont=Menlo\ For\ Powerline
+set guifont=Fira\ Code
+" set guifont=Menlo\ For\ Powerline
 
 " windows
 " size 9 is better for 125% hdpi scaling
@@ -184,7 +67,7 @@ let g:airline_powerline_fonts = 1
 :map fp lbve"0p
 
 "explorer
-:map fe :Sexplore<cr>
+:map \fe :Sexplore<cr>
 let g:netrw_liststyle=3
 
 
@@ -196,31 +79,26 @@ au GUIEnter * set vb t_vb=
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-" disable pathogen
-let g:pathogen_disabled = ["omnisharp-vim"]
 set incsearch
 set scrolloff=1
 
-"
 let indent_guides_guide_size=1
 let indent_guides_enable_on_vim_startup=1
 
-" au BufLeave * :IndentGuidesDisable
-" au BufEnter * :IndentGuidesEnable
-
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
-
-autocmd VimEnter * SyntasticToggleMode
 
 map \gd :Gdiff<cr>
 map \gs :Gstatus<cr>
 map \gc :Gcommit<cr>
 map \gp :Git push<cr>
+map \gb :Gblame<cr>
 
 autocmd QuickFixCmdPost *grep* cwindow
 
+" close tabs
 map TQ :bp<cr>:bd #<cr>
+" delete trailing whitespaces
 map fdtw :%s/\s\+$//<cr>
 
 " start CamelCasemotion
@@ -240,13 +118,14 @@ set dictionary+=dict.txt
 map <leader>cc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
-map <leader>cl :%s/<a href/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>
+map <leader>cl :%s/<Link to/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>;
 map <leader>cd :%s/{{//g<cr>:%s/}}//g<cr>
 
 " react helpers
 map \rc oclass Component extends Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
 map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
 map \rf _cwfunction<Esc>elct{(props) <Esc>jd3jk$%ddv$=
+map \rb othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>
 
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
@@ -261,10 +140,12 @@ map <c-]> :CtrlPClearCache<CR><C-p>
 " faster go to end of line
 map + g_
 
-" console log line with ;
-map csl; Iconsole.log(<esc>t;a)<esc>
-" console log line
-map csll Iconsole.log(<esc>A);<esc>
+" console log line, delete last ';'
+map <leader>cs; :s/.*\zs;//g<return>yssIconsole.log<esc>
+" console log line then add ';' at end of line
+map <leader>csl yss)Iconsole.log<esc>
+" console log line into a string and att ';' at end of line
+map <leader>css yss'yss)Iconsole.log<esc>
 " fix syntax highlighting
 map \fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
