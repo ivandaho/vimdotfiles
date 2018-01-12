@@ -7,12 +7,6 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = http://github.com/ervandew/supertab
-[submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
-	url = http://github.com/vim-airline/vim-airline
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = http://github.com/scrooloose/syntastic
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = http://github.com/vim-airline/vim-airline-themes
@@ -67,3 +61,9 @@
 [submodule "bundle/vim-mustache-handlebars"]
 	path = bundle/vim-mustache-handlebars
 	url = git@github.com:mustache/vim-mustache-handlebars.git
+[submodule "bundle/lightline.vim"]
+	path = bundle/lightline.vim
+	url = git@github.com:itchyny/lightline.vim.git
+[submodule "bundle/ale"]
+	path = bundle/ale
+	url = git@github.com:w0rp/ale.git

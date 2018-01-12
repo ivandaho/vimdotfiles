@@ -1,16 +1,18 @@
 A repo of the setup I use.
 
+### Bundled:
+
 [CamelCaseMotion](https://github.com/bkad/camelcasemotion)
 
 [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
 
+[Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
+
 [gruvbox](https://github.com/morhetz/gruvbox/)
 
+[lightline.vim](https://github.com/itchyny/lightline.vim)
+
 [supertab](https://github.com/ervandew/supertab)
-
-[vim-airline](https://github.com/vim-airline/vim-airline)
-
-[vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
 
 [vim-commentary](https://github.com/tpope/vim-commentary)
 
@@ -34,12 +36,13 @@ A repo of the setup I use.
 
 [vim-surround](https://github.com/tpope/vim-surround)
 
+### Others:
+
 [gnome-terminal-colors](https://github.com/metalelf0/gnome-terminal-colors)
 
-[Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
 
 # Instructions:
-* clone to ~/.vim on Linux, C:/Users/username/vimfiles on Windows
+* clone to ~/.vim on Linux/MacOS, C:/Users/username/vimfiles on Windows
 * `git submodule init`
 * `git submodule update`
 * `git submodule foreach git pull origin master` to update to latest regardless of this repo's specific versions
@@ -47,19 +50,15 @@ A repo of the setup I use.
 
 # Specifics:
 
-
-
-### vim-airline
-
-install prepatched fonts, set terminal font (edit -> profile preferences)
-
 #### Fonts
 
-Font for terminal Vim on Ubuntu is Ubuntu Mono size 13 from [here](https://github.com/powerline/fonts/tree/master/UbuntuMono)
+* Terminal Vim on Ubuntu is Ubuntu Mono size 13 from [here](https://github.com/powerline/fonts/tree/master/UbuntuMono)
 
-Font for Windows gVim is DejaVuSansMono size 10 from [here](https://github.com/powerline/fonts/tree/master/DejaVuSansMono)
+* Windows gVim is DejaVuSansMono size 10 from [here](https://github.com/powerline/fonts/tree/master/DejaVuSansMono)
 
-add to .bashrc:
+* Mac OSX MacVim is DejaVuSansMono size 11 from [here](https://github.com/tonsky/FiraCode)
+
+For Ubuntu terminal Vim, add to .bashrc:
 ~~~
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 ~~~
@@ -85,3 +84,11 @@ npm install -g eslint
 npm install -g babel-eslint
 npm install -g eslint-plugin-react
 ~~~
+
+#### deoplete:
+I have tried [deoplete](https://github.com/Shougo/deoplete.nvim) but I found
+that the installation process is not straightforward, and also it is not
+performant enough for my liking. I also replaced vim-airline with
+lightline.vim for performance reasons. However, the fuzzy completion works well
+and I enable it occasionally when I feel that fuzzy completion will give me
+better productivity.

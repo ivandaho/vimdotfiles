@@ -1,6 +1,13 @@
 " disable pathogen
-let g:pathogen_disabled = ["omnisharp-vim"]
+let g:pathogen_disabled = ["omnisharp-vim,supertab"]
 execute pathogen#infect()
+
+" call deoplete#enable()
+" let g:deoplete#complete_method='omnifunc'
+" let g:deoplete#enable_smart_case=1
+" let g:deoplete#omni#input_patterns = {}
+" let g:deoplete#omni#input_patterns.javascript = '[^. *\t]\.\w*'
+
 Helptags
 syntax on
 filetype plugin indent on
@@ -21,7 +28,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 map gj :lnext<CR>
 map gk :lprevious<CR>
 " delete highlights from search etc
-map fdh :nohl<CR>
+map <silent> fdh :nohl<CR>
 
 " map fdp ^dwx$x| " delete print statement (python)
 " map fwi ^wi(<Esc>$| " correct if statement (python)
@@ -36,10 +43,8 @@ colorscheme gruvbox
 set background=dark
 
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
-set updatetime=1000
+set updatetime=500
 
-"airline tabs
-let g:airline#extensions#tabline#enabled = 1
 nnoremap tj :bnext<cr>
 nnoremap tl :bnext<cr>
 nnoremap tk :bprevious<cr>
@@ -58,7 +63,43 @@ set guifont=Fira\ Code
 " windows
 " size 9 is better for 125% hdpi scaling
 " set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
-let g:airline_powerline_fonts = 1
+"
+"airline
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline_exclude_preview = 1
+
+
+let g:lightline = {
+    \ 'enable': {
+		    \ 'statusline': 1,
+		    \ 'tabline': 1
+		    \ },
+    \ 'colorscheme': 'gruvbox',
+    \ 'active': {
+		    \ 'left': [ [ 'mode', 'paste' ],
+		    \           [ 'readonly', 'relativepath', 'modified' ] ],
+		    \ 'right': [ [ 'lineinfo' ],
+		    \            [ 'percent' ],
+		    \            [ 'filetype' ] ] },
+    \ 'inactive': {
+		    \ 'left': [ [ 'filename' ] ],
+		    \ 'right': [] }
+    \ }
+    " \'active': {
+		    " \ 'left': [ [ 'mode', 'paste' ],
+		    " \           [ 'readonly', 'filename', 'modified' ] ],
+		    " \ 'right': [ [ 'lineinfo' ],
+		    " \            [ 'percent' ],
+		    " \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+    \ 'inactive': {
+		    \ 'left': [ [ 'filename' ] ],
+		    \ 'right': [ [ 'lineinfo' ],
+		    \            [ 'percent' ] ] }
+		" let g:lightline.tabline = {
+		    " \ 'left': [ [ 'tabs' ] ],
+		    " \ 'right': [ [ 'close' ] ] }
+
 
 "backspace fix
 :set backspace=start,indent,eol
@@ -162,3 +203,10 @@ map \wd :lcd %:p:h<cr>
 " spring convert variable into equals check
 :map \st _ywiif (<esc>A == null) {<return>if (other.<esc>pA != null)<return>return false;<return>} else if (!<esc>pA.equals(other.<esc>pA))<return>return false;<return><esc>j
 
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+:map <silent> <C-l> :lopen<cr>
+:map <silent> <C-h> :ALELint<cr>
+:map <silent> \iw oimport withQuery from 'with-query';<esc>
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
