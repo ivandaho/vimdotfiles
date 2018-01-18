@@ -67,9 +67,9 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = git@github.com:w0rp/ale.git
-[submodule "vim-speeddating"]
-	path = vim-speeddating
-	url = git://github.com/tpope/vim-speeddating.git
 [submodule "bundle/fzf.vim"]
 	path = bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
+[submodule "bundle/vim-speeddating"]
+	path = bundle/vim-speeddating
+	url = git@github.com:tpope/vim-speeddating.git
