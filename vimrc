@@ -25,8 +25,6 @@ set scroll=5
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 
-map gj :lnext<CR>
-map gk :lprevious<CR>
 " delete highlights from search etc
 map <silent> fdh :nohl<CR>
 
@@ -36,7 +34,7 @@ map <silent> fdh :nohl<CR>
 let g:gruvbox_contrast_dark='medium'
 
 " for terminal
-let g:gruvbox_italic=1
+let g:gruvbox_italic=0
 let g:gruvbox_termcolors=256
 
 colorscheme gruvbox
@@ -57,7 +55,7 @@ set laststatus=2
 set encoding=utf-8
 
 " OSX
-set guifont=Fira\ Code
+" set guifont=Fira\ Code
 " set guifont=Menlo\ For\ Powerline
 
 " windows
@@ -104,21 +102,20 @@ let g:lightline = {
 "backspace fix
 :set backspace=start,indent,eol
 
-"replace current word with yanked data
-:map fp lbve"0p
-
 "explorer
 :map \fe :Sexplore<cr>
 let g:netrw_liststyle=3
-
 
 " disable esc sound
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
 
 " ctrlp fuzzy finder plugin
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<c-]>'
 let g:ctrlp_cmd = 'CtrlP'
+
+map <c-]> :CtrlP<CR>
+map <c-\> :CtrlPClearCache<CR>:CtrlP<CR>
 
 set incsearch
 set scrolloff=1
@@ -176,8 +173,6 @@ let g:ctrlp_custom_ignore = 'node_modules\|_public'
 set showcmd
 let g:ctrlp_working_path_mode = 0
 
-map <c-]> :CtrlPClearCache<CR><C-p>
-
 " faster go to end of line
 map + g_
 
@@ -210,3 +205,35 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 :map <silent> \iw oimport withQuery from 'with-query';<esc>
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" Magic cursor switching?
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
+set rtp+=/usr/local/opt/fzf
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+nmap <c-p> :FZF<cr>
+nmap <A-l> :Lines<cr>
+nmap <silent> <C-L> :Lines<cr>
+
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noruler noshowmode
+  \| autocmd BufLeave <buffer> set laststatus=2 ruler
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+map \a :Find<Space>
