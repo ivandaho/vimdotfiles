@@ -1,6 +1,7 @@
 " disable pathogen
 let g:pathogen_disabled = ["omnisharp-vim,supertab"]
 execute pathogen#infect()
+set noshowmode
 
 " call deoplete#enable()
 " let g:deoplete#complete_method='omnifunc'
@@ -8,6 +9,10 @@ execute pathogen#infect()
 " let g:deoplete#omni#input_patterns = {}
 " let g:deoplete#omni#input_patterns.javascript = '[^. *\t]\.\w*'
 
+set t_ut=
+" set termguicolors
+" execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+" execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 Helptags
 syntax on
 filetype plugin indent on
@@ -22,7 +27,7 @@ set hlsearch
 
 set scroll=5
 
-set timeout timeoutlen=1000 ttimeoutlen=100
+set timeout timeoutlen=1000 ttimeoutlen=10
 
 
 " delete highlights from search etc
@@ -81,22 +86,9 @@ let g:lightline = {
 		    \            [ 'percent' ],
 		    \            [ 'filetype' ] ] },
     \ 'inactive': {
-		    \ 'left': [ [ 'filename' ] ],
+		    \ 'left': [ [ 'filename', 'modified' ] ],
 		    \ 'right': [] }
     \ }
-    " \'active': {
-		    " \ 'left': [ [ 'mode', 'paste' ],
-		    " \           [ 'readonly', 'filename', 'modified' ] ],
-		    " \ 'right': [ [ 'lineinfo' ],
-		    " \            [ 'percent' ],
-		    " \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
-    \ 'inactive': {
-		    \ 'left': [ [ 'filename' ] ],
-		    \ 'right': [ [ 'lineinfo' ],
-		    \            [ 'percent' ] ] }
-		" let g:lightline.tabline = {
-		    " \ 'left': [ [ 'tabs' ] ],
-		    " \ 'right': [ [ 'close' ] ] }
 
 
 "backspace fix
@@ -157,13 +149,14 @@ map <leader>cc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
 map <leader>cl :%s/<Link to/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>;
-map <leader>cd :%s/{{//g<cr>:%s/}}//g<cr>
+map <leader>cdb :%s/{{//g<cr>:%s/}}//g<cr>
+map <leader>cdm ocomponentDidMount() {<cr>}<esc>O
 
 " react helpers
 map \rc oclass Component extends Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
 map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
 map \rf _cwfunction<Esc>elct{(props) <Esc>jd3jk$%ddv$=
-map \rb othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>
+map \rb /super(props<cr>othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>_ww**
 
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
@@ -183,6 +176,15 @@ map <leader>csl yss)Iconsole.log<esc>
 " console log line into a string and att ';' at end of line
 map <leader>css yss'yss)Iconsole.log<esc>
 " fix syntax highlighting
+
+" FormGroup
+map <leader>csfg cst<FormGroup>
+map <leader>csft cst<FormText>
+" FormText
+map <leader>csfc cst<FormGroup check>
+" Label
+map <leader>csll cst<Label>
+map <leader>cslc cst<Label check>
 map \fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
 map \wd :lcd %:p:h<cr>
@@ -216,6 +218,22 @@ let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
 set rtp+=/usr/local/opt/fzf
+let g:fzf_colors =
+  \ {
+  \ 'fg':       ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Keyword'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment']
+  \}
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nmap <c-p> :FZF<cr>
@@ -235,5 +253,8 @@ autocmd  FileType fzf set laststatus=0 noruler noshowmode
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 map \a :Find<Space>
+map \fat o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
+map \ts f cl<cr><esc>
+
