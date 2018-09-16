@@ -1,9 +1,10 @@
 A repo of the setup I use.
 
-### Bundled (infect with
-[vim-pathogen](https://github.com/tpope/vim-pathogen)\):
+### infect with [vim-pathogen](https://github.com/tpope/vim-pathogen):
 
 [CamelCaseMotion](https://github.com/bkad/camelcasemotion)
+
+[ale](https://github.com/w0rp/ale)
 
 [Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
 
@@ -29,9 +30,13 @@ A repo of the setup I use.
 
 [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
 
+[vim-javascript](https://github.com/pangloss/vim-javascript)
+
 [vim-jsx](https://github.com/mxw/vim-jsx)
 
 [vim-less](https://github.com/groenewege/vim-less)
+
+[vim-mustache-handlebars](https://github.com/mustache/vim-mustache-handlebars)
 
 [vim-repeat](https://github.com/tpope/vim-repeat)
 
@@ -56,7 +61,7 @@ A repo of the setup I use.
 
 # Super fast and responsive vim setup with fzf + ripgrep
 
-Alacritty is a GPU accelerated terminal emulator. Great if you want a very
+Kitty is a GPU accelerated terminal emulator. Great if you want a very
 responsive vim.
 
 * Install [fzf](https://github.com/junegunn/fzf/),
@@ -66,17 +71,7 @@ responsive vim.
 * make sure to configure fzf to use rg in your .bashrc or .bash\_profile
 
 
-* Install [Alacritty](https://github.com/jwilm/alacritty/)
-
-* Configure Alacritty at ~/.config/alacritty/alacritty.yaml or wherever your
-  config files is (see Alacritty docs for info) to read bash\_profile
-```
-shell:
-    program: /bin/bash
-    args:
-        - --login
-```
-* run `vim` in alacritty
+* Install [Kitty](https://sw.kovidgoyal.net/kitty/)
 
 # Specifics:
 
@@ -105,11 +100,3 @@ npm install -g eslint
 npm install -g babel-eslint
 npm install -g eslint-plugin-react
 ```
-
-#### deoplete:
-I have tried [deoplete](https://github.com/Shougo/deoplete.nvim)
-but I found that the installation process is not straightforward, and also it
-is not performant enough for my liking. I also replaced vim-airline with
-lightline.vim for performance reasons. However, the fuzzy completion works well
-and I enable it occasionally when I feel that fuzzy completion will give me
-better productivity.

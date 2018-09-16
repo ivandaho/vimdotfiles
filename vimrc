@@ -1,5 +1,7 @@
 " disable pathogen
+lang en_us
 let g:pathogen_disabled = ["omnisharp-vim,supertab"]
+let g:ycm_server_python_interpreter = "/usr/bin/python"
 execute pathogen#infect()
 set noshowmode
 
@@ -102,13 +104,6 @@ let g:netrw_liststyle=3
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
 
-" ctrlp fuzzy finder plugin
-let g:ctrlp_map = '<c-]>'
-let g:ctrlp_cmd = 'CtrlP'
-
-map <c-]> :CtrlP<CR>
-map <c-\> :CtrlPClearCache<CR>:CtrlP<CR>
-
 set incsearch
 set scrolloff=1
 
@@ -145,7 +140,7 @@ sunmap gE
 set dictionary+=dict.txt
 
 " blaze to react change stuff
-map <leader>cc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
+map <leader>chc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
 map <leader>cl :%s/<Link to/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>;
@@ -153,10 +148,10 @@ map <leader>cdb :%s/{{//g<cr>:%s/}}//g<cr>
 map <leader>cdm ocomponentDidMount() {<cr>}<esc>O
 
 " react helpers
-map \rc oclass Component extends Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
+map \rc oclass Component extends React.Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
 map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
 map \rf _cwfunction<Esc>elct{(props) <Esc>jd3jk$%ddv$=
-map \rb /super(props<cr>othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>_ww**
+map \rb _ye/super(<cr>othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>_ww**
 
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
@@ -183,8 +178,8 @@ map <leader>csft cst<FormText>
 " FormText
 map <leader>csfc cst<FormGroup check>
 " Label
-map <leader>csll cst<Label>
-map <leader>cslc cst<Label check>
+" map <leader>cstl cst<Label>
+" map <leader>cstc cst<Label check>
 map \fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
 map \wd :lcd %:p:h<cr>
@@ -204,6 +199,10 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 :map <silent> <C-l> :lopen<cr>
 :map <silent> <C-h> :ALELint<cr>
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+map <silent> \q :ALEFix prettier<cr>
+
 :map <silent> \iw oimport withQuery from 'with-query';<esc>
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -237,8 +236,6 @@ let g:fzf_colors =
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nmap <c-p> :FZF<cr>
-nmap <A-l> :Lines<cr>
-nmap <silent> <C-L> :Lines<cr>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler noshowmode
@@ -253,8 +250,33 @@ autocmd  FileType fzf set laststatus=0 noruler noshowmode
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 map \a :Find<Space>
 map \fat o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
 map \ts f cl<cr><esc>
 
+" experimental map to get current file name into clipboard for use with rg
+nmap <c-\> yiwo<c-r>0<esc>:s/[a-z]//g<cr>"+ye:undo<cr>?<c-r>0<cr><c-p>
+
+map \df _f cl<cr><esc>f>i<cr><esc>OclassName="d-flex"<esc>
+map \cfn :let @0=expand('%:t')<cr>
+map \cfp :let @0=@%<cr>
+map <silent> \rat yyppk:s/REQUEST/SUCCESS/g<cr>j:s/REQUEST/FAILURE/g<cr>
+map <silent> \rar \ratjdj
+map <silent> \rac _/REQUEST<cr>diw"0PNhvb"mye/SUCCESS<cr>bvnh"ny/<c-r>n<cr>:s/<c-r>n/<c-r>m/<cr>N:s/<c-r>n/<c-r>m/<cr>
+map <silent> \scd _f>i xs={12}<esc>
+map <silent> \icn _f>i className=""<esc>
+map <Plug>CloneProps $vbyPa=<esc>lveS}athis.props.<esc>
+            \:call repeat#set("\<Plug>CloneProps", v:count)<cr>
+map <Plug>CloneState $vbyPa=<esc>lveS}athis.state.<esc>
+            \:call repeat#set("\<Plug>CloneState", v:count)<cr>
+map <Plug>CloneExact $vbyPa=<esc>lveS}
+            \:call repeat#set("\<Plug>CloneExact", v:count)<cr>
+map <Plug>CloneThis $vbyPa=<esc>lveS}athis.<esc>
+            \:call repeat#set("\<Plug>CloneThis", v:count)<cr>
+map \cp <Plug>CloneProps
+map \cst <Plug>CloneState
+map \ce <Plug>CloneExact
+map \ct <Plug>CloneThis
+map <silent> \# yiw\a<c-r>0<cr>
+map <silent> \md o<c-r>0: () => dispatch(<c-r>0()),<esc>
