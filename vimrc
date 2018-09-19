@@ -35,18 +35,6 @@ set timeout timeoutlen=1000 ttimeoutlen=10
 " delete highlights from search etc
 map <silent> fdh :nohl<CR>
 
-" map fdp ^dwx$x| " delete print statement (python)
-" map fwi ^wi(<Esc>$| " correct if statement (python)
-
-let g:gruvbox_contrast_dark='medium'
-
-" for terminal
-let g:gruvbox_italic=0
-let g:gruvbox_termcolors=256
-
-colorscheme gruvbox
-set background=dark
-
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
 set updatetime=500
 
@@ -56,9 +44,9 @@ nnoremap tk :bprevious<cr>
 nnoremap th :bprevious<cr>
 nnoremap tt :enew<cr>:o
 nnoremap tq :bd<cr>
+nnoremap td :bufdo bd
 
 set laststatus=2
-"let g:OmniSharp_typeLookupInPreview = 1
 set encoding=utf-8
 
 " OSX
@@ -69,12 +57,12 @@ set encoding=utf-8
 " size 9 is better for 125% hdpi scaling
 " set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 "
-"airline
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 1
-" let g:airline_exclude_preview = 1
 
-
+let g:gruvbox_italic=0
+let g:gruvbox_termcolors=256
+let g:gruvbox_contrast_dark='medium'
+colorscheme gruvbox
+set background=dark
 let g:lightline = {
     \ 'enable': {
 		    \ 'statusline': 1,
@@ -84,13 +72,19 @@ let g:lightline = {
     \ 'active': {
 		    \ 'left': [ [ 'mode', 'paste' ],
 		    \           [ 'readonly', 'relativepath', 'modified' ] ],
-		    \ 'right': [ [ 'lineinfo' ],
-		    \            [ 'percent' ],
+		    \ 'right': [
 		    \            [ 'filetype' ] ] },
     \ 'inactive': {
 		    \ 'left': [ [ 'filename', 'modified' ] ],
-		    \ 'right': [] }
-    \ }
+		    \ 'right': []
+    \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \ },
+      \ }
+function! LightlineFilename()
+  return winwidth(0) > 60 ? @% : expand('%:t')
+endfunction
 
 
 "backspace fix
@@ -137,14 +131,13 @@ sunmap E
 sunmap gE
 " end CamelCaseMotion
 
-set dictionary+=dict.txt
-
 " blaze to react change stuff
 map <leader>chc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
 map <leader>cl :%s/<Link to/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>;
 map <leader>cdb :%s/{{//g<cr>:%s/}}//g<cr>
+
 map <leader>cdm ocomponentDidMount() {<cr>}<esc>O
 
 " react helpers
@@ -153,47 +146,17 @@ map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
 map \rf _cwfunction<Esc>elct{(props) <Esc>jd3jk$%ddv$=
 map \rb _ye/super(<cr>othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>_ww**
 
-autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
+" autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
 let g:jsx_ext_required = 0
-let g:ctrlp_custom_ignore = 'node_modules\|_public'
-
 set showcmd
-let g:ctrlp_working_path_mode = 0
 
-" faster go to end of line
-map + g_
-
-" console log line, delete last ';'
-map <leader>cs; :s/.*\zs;//g<return>yssIconsole.log<esc>
-" console log line then add ';' at end of line
 map <leader>csl yss)Iconsole.log<esc>
-" console log line into a string and att ';' at end of line
 map <leader>css yss'yss)Iconsole.log<esc>
-" fix syntax highlighting
 
-" FormGroup
-map <leader>csfg cst<FormGroup>
-map <leader>csft cst<FormText>
-" FormText
-map <leader>csfc cst<FormGroup check>
-" Label
-" map <leader>cstl cst<Label>
-" map <leader>cstc cst<Label check>
 map \fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
 map \wd :lcd %:p:h<cr>
-
-" spring convert variable into db mapping
-:map \sv _i@Column(name= "<esc>A")<esc>hvi"yoprivate String<esc>a <esc>pA;<esc>bo<esc>j
-" convert characters_like_this into charactersLikeThis
-:map \cz _f_x~
-" spring convert variable into getter/setters
-:map \sg _ywipublic String get<esc>l~A() {<return>return <esc>pa;<return>}<return><return>public void set<esc>pblll~A(String <esc>pA) {<return>this.<esc>pA = <esc>pA;<return>}<return><esc>j
-" spring convert variable into hashCode
-:map \sh _ywiresult = prime * result + ((<esc>A == null) ? 0 : <esc>pa.hashCode());<esc>j
-" spring convert variable into equals check
-:map \st _ywiif (<esc>A == null) {<return>if (other.<esc>pA != null)<return>return false;<return>} else if (!<esc>pA.equals(other.<esc>pA))<return>return false;<return><esc>j
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -203,7 +166,6 @@ let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 map <silent> \q :ALEFix prettier<cr>
 
-:map <silent> \iw oimport withQuery from 'with-query';<esc>
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
@@ -235,7 +197,17 @@ let g:fzf_colors =
   \}
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+function! GetFileInitials()
+    let @+ = @e . substitute(@0[1:-1], "[a-z]", "", "g")
+    return
+endfunction
+
 nmap <c-p> :FZF<cr>
+nmap <c-\> :Buffers<cr>
+nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
+nmap \gfi yiwv"ey<cr>:call GetFileInitials()<cr>
+nmap \rrr :so $MYVIMRC<cr>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler noshowmode
@@ -250,13 +222,16 @@ autocmd  FileType fzf set laststatus=0 noruler noshowmode
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-map \a :Find<Space>
+command! -bang -nargs=* FindinFiles call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+map \a :FindinFiles<Space>
 map \fat o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
 map \ts f cl<cr><esc>
 
-" experimental map to get current file name into clipboard for use with rg
-nmap <c-\> yiwo<c-r>0<esc>:s/[a-z]//g<cr>"+ye:undo<cr>?<c-r>0<cr><c-p>
 
 map \df _f cl<cr><esc>f>i<cr><esc>OclassName="d-flex"<esc>
 map \cfn :let @0=expand('%:t')<cr>
@@ -279,4 +254,4 @@ map \cst <Plug>CloneState
 map \ce <Plug>CloneExact
 map \ct <Plug>CloneThis
 map <silent> \# yiw\a<c-r>0<cr>
-map <silent> \md o<c-r>0: () => dispatch(<c-r>0()),<esc>
+map <silent> \md G?\<dispatch\><cr>O<c-r>0: () => dispatch(<c-r>0()),<esc>?<c-r>0<cr>
