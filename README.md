@@ -1,50 +1,7 @@
 A repo of the setup I use.
 
-### infect with [vim-pathogen](https://github.com/tpope/vim-pathogen):
+### see [vimrc](https://github.com/ivandaho/vimdotfiles/blob/master/vimrc) for list of plugins and more info
 
-[CamelCaseMotion](https://github.com/bkad/camelcasemotion)
-
-[ale](https://github.com/w0rp/ale)
-
-[Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
-
-[fzf](https://github.com/junegunn/fzf/),
-[fzf.vim](https://github.com/junegunn/fzf.vim) and then
-[ripgrep](https://github.com/BurntSushi/ripgrep)
-
-[gruvbox](https://github.com/morhetz/gruvbox/)
-
-[lightline.vim](https://github.com/itchyny/lightline.vim)
-
-[supertab](https://github.com/ervandew/supertab)
-
-[vim-commentary](https://github.com/tpope/vim-commentary)
-
-[vim-dispatch](https://github.com/tpope/vim-dispatch)
-
-[vim-eunuch](https://github.com/tpope/vim-eunuch)
-
-[vim-fugitive](https://github.com/tpope/vim-fugitive)
-
-[vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-
-[vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
-
-[vim-javascript](https://github.com/pangloss/vim-javascript)
-
-[vim-jsx](https://github.com/mxw/vim-jsx)
-
-[vim-less](https://github.com/groenewege/vim-less)
-
-[vim-mustache-handlebars](https://github.com/mustache/vim-mustache-handlebars)
-
-[vim-repeat](https://github.com/tpope/vim-repeat)
-
-[vim-sneak](https://github.com/justinmk/vim-sneak)
-
-[vim-speeddating](https://github.com/tpope/vim-speeddating)
-
-[vim-surround](https://github.com/tpope/vim-surround)
 
 ### Others:
 
@@ -53,11 +10,7 @@ A repo of the setup I use.
 
 # Instructions:
 * clone to ~/.vim on Linux/MacOS, C:/Users/username/vimfiles on Windows
-* `git submodule init`
-* `git submodule update`
-* `git submodule foreach git pull origin master` to update to latest regardless
-  of this repo's specific versions
-* see vimrc for more info
+* `:PlugInstall` inside vim
 
 # Super fast and responsive vim setup with fzf + ripgrep
 

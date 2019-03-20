@@ -1,8 +1,38 @@
 " disable pathogen
-lang en_us
-let g:pathogen_disabled = ["omnisharp-vim,supertab"]
-let g:ycm_server_python_interpreter = "/usr/bin/python"
-execute pathogen#infect()
+" lang en_us
+" let g:pathogen_disabled = ["omnisharp-vim,supertab"]
+" let g:ycm_server_python_interpreter = "/usr/bin/python"
+" execute pathogen#infect()
+
+call plug#begin('~/.vim/bundle')
+Plug 'HerringtonDarkholme/yats.vim', {'do' : 'make'}
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'airblade/vim-gitgutter'
+Plug 'bkad/CamelCaseMotion'
+Plug 'ervandew/supertab'
+Plug 'groenewege/vim-less'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'morhetz/gruvbox'
+Plug 'mxw/vim-jsx'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'tomtom/tcomment_vim'
+" Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
+call plug#end()
+
 set noshowmode
 
 " call deoplete#enable()
@@ -15,15 +45,11 @@ set t_ut=
 " set termguicolors
 " execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 " execute "set t_8b=\e[48;2;%lu;%lu;%lum"
-Helptags
-syntax on
-filetype plugin indent on
 
 set sw=4
 set ts=4
 set et
 set number
-set updatetime=1000
 
 set hlsearch
 
@@ -37,14 +63,6 @@ map <silent> fdh :nohl<CR>
 
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
 set updatetime=500
-
-nnoremap tj :bnext<cr>
-nnoremap tl :bnext<cr>
-nnoremap tk :bprevious<cr>
-nnoremap th :bprevious<cr>
-nnoremap tt :enew<cr>:o
-nnoremap tq :bd<cr>
-nnoremap td :bufdo bd
 
 set laststatus=2
 set encoding=utf-8
@@ -116,6 +134,7 @@ map \gb :Gblame<cr>
 autocmd QuickFixCmdPost *grep* cwindow
 
 " close tabs
+nnoremap tq :bd<cr>
 map TQ :bp<cr>:bd #<cr>
 " delete trailing whitespaces
 map fdtw :%s/\s\+$//<cr>
@@ -164,10 +183,13 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 :map <silent> <C-h> :ALELint<cr>
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['typescript'] = ['tsserver']
+let g:ale_linters_ignore = {'typescript': ['tslint']}
 map <silent> \q :ALEFix prettier<cr>
 
-let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+let g:ale_completion_enabled = 1
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -180,33 +202,31 @@ let &t_te.="\e[0 q"
 
 set rtp+=/usr/local/opt/fzf
 let g:fzf_colors =
-  \ {
-  \ 'fg':       ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Keyword'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment']
-  \}
+\ { "fg":      ["fg", "Normal"],
+  \ "bg":      ["bg", "Normal"],
+  \ "hl":      ["fg", "IncSearch"],
+  \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
+  \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
+  \ "hl+":     ["fg", "IncSearch"],
+  \ "info":    ["fg", "IncSearch"],
+  \ "border":  ["fg", "Ignore"],
+  \ "prompt":  ["fg", "Comment"],
+  \ "pointer": ["fg", "IncSearch"],
+  \ "marker":  ["fg", "IncSearch"],
+  \ "spinner": ["fg", "IncSearch"],
+  \ "header":  ["fg", "WildMenu"] }
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-function! GetFileInitials()
-    let @+ = @e . substitute(@0[1:-1], "[a-z]", "", "g")
-    return
-endfunction
+" function! GetFileInitials()
+"     let @+ = @e . substitute(@0[1:-1], "[a-z]", "", "g")
+"     return
+" endfunction
 
 nmap <c-p> :FZF<cr>
 nmap <c-\> :Buffers<cr>
-nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
-nmap \gfi yiwv"ey<cr>:call GetFileInitials()<cr>
+" nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
+" nmap \gfi yiwv"ey<cr>:call GetFileInitials()<cr>
 nmap \rrr :so $MYVIMRC<cr>
 
 autocmd! FileType fzf
@@ -255,3 +275,13 @@ map \ce <Plug>CloneExact
 map \ct <Plug>CloneThis
 map <silent> \# yiw\a<c-r>0<cr>
 map <silent> \md G?\<dispatch\><cr>O<c-r>0: () => dispatch(<c-r>0()),<esc>?<c-r>0<cr>
+map <silent>gd :ALEGoToDefinition<cr>
+" doesn't actually work, ALE doesn't implement this for typescript
+map <silent>gt :ALEGoToTypeDefinition<cr>
+map <silent>gh :ALEHover<cr>
+map <silent>gr :ALEFindReferences -relative<cr>
+map <silent>/<esc> :nohl<cr>
+
+" map <silent>gd :TsuquyomiDefinition<cr>
+" map <silent>gt :TsuTypeDefinition<cr>
+" autocmd FileType typescript nmap <buffer> gh : <C-u>echo tsuquyomi#hint()<CR>
