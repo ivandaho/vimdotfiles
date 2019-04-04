@@ -29,8 +29,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-jdaddy'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'chrisbra/csv.vim'
 call plug#end()
 
 set noshowmode
@@ -285,3 +287,5 @@ map <silent>/<esc> :nohl<cr>
 " map <silent>gd :TsuquyomiDefinition<cr>
 " map <silent>gt :TsuTypeDefinition<cr>
 " autocmd FileType typescript nmap <buffer> gh : <C-u>echo tsuquyomi#hint()<CR>
+
+:command! BankCheck let @f='vt,:s/\./\\./$F,wvt,yA "Checked"jgg/^\(.*\<0\>.*\)\&\(\(.*Done.*\)\@!.\)*$A"Done"kF,;wvt,:s/\\\././jj$F,w'
