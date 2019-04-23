@@ -184,8 +184,10 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 :map <silent> <C-l> :lopen<cr>
 :map <silent> <C-h> :ALELint<cr>
 let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['typescript'] = ['tsserver']
+let g:ale_linters = {
+\   'javascript': ['tsserver'],
+\   'typescript': ['tsserver'],
+\}
 let g:ale_linters_ignore = {'typescript': ['tslint']}
 map <silent> \q :ALEFix prettier<cr>
 
