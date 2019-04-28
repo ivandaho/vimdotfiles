@@ -5,7 +5,7 @@
 " execute pathogen#infect()
 
 call plug#begin('~/.vim/bundle')
-Plug 'HerringtonDarkholme/yats.vim', {'do' : 'make'}
+" Plug 'HerringtonDarkholme/yats.vim', {'do' : 'make'}
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'bkad/CamelCaseMotion'
@@ -16,13 +16,14 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
-Plug 'mxw/vim-jsx'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'tomtom/tcomment_vim'
+Plug 'chrisbra/csv.vim'
 " Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -34,6 +35,7 @@ Plug 'w0rp/ale'
 call plug#end()
 
 set noshowmode
+let g:vim_jsx_pretty_colorful_config = 1
 
 " call deoplete#enable()
 " let g:deoplete#complete_method='omnifunc'
@@ -46,8 +48,8 @@ set t_ut=
 " execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 " execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
-set sw=4
-set ts=4
+set sw=2
+set ts=2
 set et
 set number
 
@@ -182,8 +184,10 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 :map <silent> <C-l> :lopen<cr>
 :map <silent> <C-h> :ALELint<cr>
 let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['typescript'] = ['tsserver']
+let g:ale_linters = {
+\   'javascript': ['tsserver'],
+\   'typescript': ['tsserver'],
+\}
 let g:ale_linters_ignore = {'typescript': ['tslint']}
 map <silent> \q :ALEFix prettier<cr>
 
@@ -281,6 +285,9 @@ map <silent>gt :ALEGoToTypeDefinition<cr>
 map <silent>gh :ALEHover<cr>
 map <silent>gr :ALEFindReferences -relative<cr>
 map <silent>/<esc> :nohl<cr>
+map <silent>\$$ :e ~/.vim/vimrc<cr>
+map \$r :so ~/.vim/vimrc<cr>
+map \$R :so ~/.vim/vimrc<cr>
 
 " map <silent>gd :TsuquyomiDefinition<cr>
 " map <silent>gt :TsuTypeDefinition<cr>
