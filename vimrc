@@ -129,15 +129,18 @@ autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 
 map \gd :Gdiff<cr>
 map \gs :Gstatus<cr>
-map \gc :Gcommit<cr>
 map \gp :Git push<cr>
 map \gb :Gblame<cr>
 
+"fzf.vim binding
+map \gc :Commits<cr>
+
 autocmd QuickFixCmdPost *grep* cwindow
 
-" close tabs
+" close buffer
 nnoremap tq :bd<cr>
-map TQ :bp<cr>:bd #<cr>
+" close buffer and flush
+map <silent> TQ :bp<cr>:bd #<cr>
 " delete trailing whitespaces
 map fdtw :%s/\s\+$//<cr>
 
@@ -191,7 +194,7 @@ let g:ale_linters = {
 let g:ale_linters_ignore = {'typescript': ['tslint']}
 map <silent> \q :ALEFix prettier<cr>
 
-" let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_completion_enabled = 1
 
@@ -246,19 +249,23 @@ autocmd  FileType fzf set laststatus=0 noruler noshowmode
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* FindinFiles call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* FindLiteral call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* FindRegExp call fzf#vim#grep('rg --column --line-number --no-heading --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
-map \a :FindinFiles<Space>
 map \fat o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
+map \fa :FindLiteral<Space>
+map \a :FindRegExp<Space>
 map \ts f cl<cr><esc>
 
 
 map \df _f cl<cr><esc>f>i<cr><esc>OclassName="d-flex"<esc>
+" copy file name
 map \cfn :let @0=expand('%:t')<cr>
+" copy file path
 map \cfp :let @0=@%<cr>
 map <silent> \rat yyppk:s/REQUEST/SUCCESS/g<cr>j:s/REQUEST/FAILURE/g<cr>
 map <silent> \rar \ratjdj
