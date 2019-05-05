@@ -256,6 +256,9 @@ command! -bang -nargs=* Ag
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
+
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%ae %C(green)%cr"'
+
 map \fat o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
 map \fa :FindLiteral<Space>
 map \a :FindRegExp<Space>
