@@ -10,7 +10,16 @@ A repo of the setup I use.
 
 # Instructions:
 * clone to ~/.vim on Linux/MacOS, C:/Users/username/vimfiles on Windows
+*  have this in ~/.config/nvim/init.vim:
+
+```
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath=&runtimepath
+source ~/.vim/vimrc
+```
+
 * `:PlugInstall` inside vim
+* link nvim coc-settings.json to ~/.vim/coc-settings.json if needed
 
 # Super fast and responsive vim setup with fzf + ripgrep
 

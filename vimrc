@@ -31,17 +31,17 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+
+Plug 'neoclide/coc-tslint-plugin', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+
 call plug#end()
 
 set noshowmode
 let g:vim_jsx_pretty_colorful_config = 1
-
-" call deoplete#enable()
-" let g:deoplete#complete_method='omnifunc'
-" let g:deoplete#enable_smart_case=1
-" let g:deoplete#omni#input_patterns = {}
-" let g:deoplete#omni#input_patterns.javascript = '[^. *\t]\.\w*'
 
 set t_ut=
 " set termguicolors
@@ -64,7 +64,7 @@ set timeout timeoutlen=1000 ttimeoutlen=10
 map <silent> fdh :nohl<CR>
 
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
-set updatetime=500
+set updatetime=300
 
 set laststatus=2
 set encoding=utf-8
@@ -83,6 +83,12 @@ let g:gruvbox_termcolors=256
 let g:gruvbox_contrast_dark='medium'
 colorscheme gruvbox
 set background=dark
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction 
+
+let airline#extensions#coc#error_symbol = 'Error:'
 let g:lightline = {
     \ 'enable': {
 		    \ 'statusline': 1,
@@ -90,7 +96,7 @@ let g:lightline = {
 		    \ },
     \ 'colorscheme': 'gruvbox',
     \ 'active': {
-		    \ 'left': [ [ 'mode', 'paste' ],
+		    \ 'left': [ [ 'mode', 'cocstatus','paste' ],
 		    \           [ 'readonly', 'relativepath', 'modified' ] ],
 		    \ 'right': [
 		    \            [ 'filetype' ] ] },
@@ -100,12 +106,27 @@ let g:lightline = {
     \ },
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
+      \   'cocstatus': 'StatusDiagnostic',
       \ },
       \ }
+
 function! LightlineFilename()
   return winwidth(0) > 60 ? @% : expand('%:t')
 endfunction
 
+" for custom lightline status
+function! StatusDiagnostic() abort
+	  let info = get(b:, 'coc_diagnostic_info', {})
+	  if empty(info) | return '' | endif
+	  let msgs = []
+	  " if get(info, 'error', 0)
+	    call add(msgs, 'E' . info['error'])
+	  " endif
+	  " if get(info, 'warning', 0)
+	    call add(msgs, 'W' . info['warning'])
+	  " endif
+    return join(msgs, ' ')
+	endfunction
 
 "backspace fix
 :set backspace=start,indent,eol
@@ -182,21 +203,11 @@ map \fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
 map \wd :lcd %:p:h<cr>
 
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 :map <silent> <C-l> :lopen<cr>
-:map <silent> <C-h> :ALELint<cr>
-let g:ale_fixers = {}
-let g:ale_linters = {
-\   'javascript': ['tsserver'],
-\   'typescript': ['tsserver'],
-\}
-let g:ale_linters_ignore = {'typescript': ['tslint']}
-map <silent> \q :ALEFix prettier<cr>
-
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_completion_enabled = 1
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+map <silent> \q :Prettier<cr>
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -259,22 +270,24 @@ command! -bang -nargs=* Ag
 
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%ae %C(green)%cr"'
 
-map \fat o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
+map <Plug>ExportConstFromClipboard o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
+  \:call repeat#set("\<Plug>ExportConstFromClipboard", v:count)<cr>
+map \fat <Plug>ExportConstFromClipboard
+
 map \fa :FindLiteral<Space>
 map \a :FindRegExp<Space>
-map \ts f cl<cr><esc>
 
+map <Plug>NewLineAtSpace f cl<cr><esc>
+  \:call repeat#set("\<Plug>NewLineAtSpace", v:count)<cr>
+map \ts <Plug>NewLineAtSpace
 
-map \df _f cl<cr><esc>f>i<cr><esc>OclassName="d-flex"<esc>
 " copy file name
 map \cfn :let @0=expand('%:t')<cr>
+map \ccfn :let @+=expand('%:t')<cr>
 " copy file path
 map \cfp :let @0=@%<cr>
-map <silent> \rat yyppk:s/REQUEST/SUCCESS/g<cr>j:s/REQUEST/FAILURE/g<cr>
-map <silent> \rar \ratjdj
-map <silent> \rac _/REQUEST<cr>diw"0PNhvb"mye/SUCCESS<cr>bvnh"ny/<c-r>n<cr>:s/<c-r>n/<c-r>m/<cr>N:s/<c-r>n/<c-r>m/<cr>
-map <silent> \scd _f>i xs={12}<esc>
-map <silent> \icn _f>i className=""<esc>
+map \ccfp :let @+=@%<cr>
+
 map <Plug>CloneProps $vbyPa=<esc>lveS}athis.props.<esc>
             \:call repeat#set("\<Plug>CloneProps", v:count)<cr>
 map <Plug>CloneState $vbyPa=<esc>lveS}athis.state.<esc>
@@ -287,18 +300,32 @@ map \cp <Plug>CloneProps
 map \cst <Plug>CloneState
 map \ce <Plug>CloneExact
 map \ct <Plug>CloneThis
-map <silent> \# yiw\a<c-r>0<cr>
-map <silent> \md G?\<dispatch\><cr>O<c-r>0: () => dispatch(<c-r>0()),<esc>?<c-r>0<cr>
-map <silent>gd :ALEGoToDefinition<cr>
-" doesn't actually work, ALE doesn't implement this for typescript
-map <silent>gt :ALEGoToTypeDefinition<cr>
-map <silent>gh :ALEHover<cr>
-map <silent>gr :ALEFindReferences -relative<cr>
+
 map <silent>/<esc> :nohl<cr>
 map <silent>\$$ :e ~/.vim/vimrc<cr>
 map \$r :so ~/.vim/vimrc<cr>
 map \$R :so ~/.vim/vimrc<cr>
 
-" map <silent>gd :TsuquyomiDefinition<cr>
-" map <silent>gt :TsuTypeDefinition<cr>
-" autocmd FileType typescript nmap <buffer> gh : <C-u>echo tsuquyomi#hint()<CR>
+
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+map <silent>gr <Plug>(coc-references)
+map <silent>gd <Plug>(coc-definition)
+map <silent>gt <Plug>(coc-type-definition)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+" map \ff :call CocAction('quickfixes')<CR>
+map \ff :call CocAction('quickfixes')<CR>
+map gf <Plug>(coc-fix-current)
+map g2 <Plug>(coc-rename)
+map g1 <Plug>(coc-float-hide)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+hi default CocHighlightText  guibg=#111111 ctermbg=100
