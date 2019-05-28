@@ -88,7 +88,6 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction 
 
-let airline#extensions#coc#error_symbol = 'Error:'
 let g:lightline = {
     \ 'enable': {
 		    \ 'statusline': 1,
@@ -99,12 +98,13 @@ let g:lightline = {
 		    \ 'left': [ [ 'mode', 'cocstatus','paste' ],
 		    \           [ 'readonly', 'relativepath', 'modified' ] ],
 		    \ 'right': [
-		    \            [ 'filetype' ] ] },
+		    \            [ 'gitbranch'],[ 'filetype' ] ] },
     \ 'inactive': {
 		    \ 'left': [ [ 'filename', 'modified' ] ],
 		    \ 'right': []
     \ },
       \ 'component_function': {
+      \   'gitbranch': 'LightlineBranchName',
       \   'filename': 'LightlineFilename',
       \   'cocstatus': 'StatusDiagnostic',
       \ },
@@ -112,6 +112,10 @@ let g:lightline = {
 
 function! LightlineFilename()
   return winwidth(0) > 60 ? @% : expand('%:t')
+endfunction
+
+function! LightlineBranchName()
+  return winwidth(0) > 120 ? fugitive#head() : ''
 endfunction
 
 " for custom lightline status
@@ -151,7 +155,16 @@ autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 map \gd :Gdiff<cr>
 map \gs :Gstatus<cr>
 map \gp :Git push<cr>
-map \gb :Gblame<cr>
+map \gb :set termguicolors<cr>:Gblame<cr>
+
+" Buffer Leave
+augroup myBufferLeave
+    autocmd BufLeave *.fugitiveblame set notermguicolors
+augroup END
+" Buffer Enter
+augroup myBufferEnter
+    autocmd BufEnter *.fugitiveblame set termguicolors
+augroup END
 
 "fzf.vim binding
 map \gc :Commits<cr>
@@ -206,7 +219,7 @@ map \wd :lcd %:p:h<cr>
 nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 :map <silent> <C-l> :lopen<cr>
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! Prettier :CocCommand prettier.formatFile
 map <silent> \q :Prettier<cr>
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -324,8 +337,8 @@ endfunction
 map \ff :call CocAction('quickfixes')<CR>
 map gf <Plug>(coc-fix-current)
 map g2 <Plug>(coc-rename)
-map g1 <Plug>(coc-float-hide)
+map <silent>g1 <Plug>(coc-float-hide)
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold *.tsx,*.ts,*.jsx,*.js silent call CocActionAsync('highlight')
 
 hi default CocHighlightText  guibg=#111111 ctermbg=100
