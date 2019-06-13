@@ -275,6 +275,7 @@ autocmd  FileType fzf set laststatus=0 noruler noshowmode
 " --color: Search color options
 command! -bang -nargs=* FindLiteral call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* FindRegExp call fzf#vim#grep('rg --column --line-number --no-heading --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* FindRegExpCaseSensitive call fzf#vim#grep('rg --column --line-number --no-heading --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -289,6 +290,7 @@ map \fat <Plug>ExportConstFromClipboard
 
 map \fa :FindLiteral<Space>
 map \a :FindRegExp<Space>
+map \ca :FindRegExpCaseSensitive<Space>
 
 map <Plug>NewLineAtSpace f cl<cr><esc>
   \:call repeat#set("\<Plug>NewLineAtSpace", v:count)<cr>
@@ -324,6 +326,8 @@ nnoremap <silent> gh :call <SID>show_documentation()<CR>
 map <silent>gr <Plug>(coc-references)
 map <silent>gd <Plug>(coc-definition)
 map <silent>gt <Plug>(coc-type-definition)
+map <silent>gj <Plug>(coc-float-hide)<Plug>(coc-diagnostic-info)
+map <silent>gl :echo CocAction('getCurrentFunctionSymbol')<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -334,7 +338,7 @@ function! s:show_documentation()
 endfunction
 
 " map \ff :call CocAction('quickfixes')<CR>
-map \ff :call CocAction('quickfixes')<CR>
+map \ff :call CocAction('codeAction')<CR>
 map gf <Plug>(coc-fix-current)
 map g2 <Plug>(coc-rename)
 map <silent>g1 <Plug>(coc-float-hide)
@@ -342,3 +346,16 @@ map <silent>g1 <Plug>(coc-float-hide)
 autocmd CursorHold *.tsx,*.ts,*.jsx,*.js silent call CocActionAsync('highlight')
 
 hi default CocHighlightText  guibg=#111111 ctermbg=100
+map <silent> \ccs yeoconstructor(props: 0) {}kosuper(props)
+
+" Change CoLon to Comma
+
+
+"
+map <silent> <Plug>ChangeColonToComma :set nohlsearch<cr>:s/:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>ChangeColonToComma", v:count)<cr>
+map <silent> \clc <Plug>ChangeColonToComma
+
+map <silent> <Plug>ColonDelete :set nohlsearch<cr>:s/:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>ColonDelete", v:count)<cr>
+map <silent> \cld <Plug>ColonDelete
