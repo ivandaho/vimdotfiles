@@ -349,13 +349,21 @@ hi default CocHighlightText  guibg=#111111 ctermbg=100
 map <silent> \ccs yeoconstructor(props: 0) {}kosuper(props)
 
 " Change CoLon to Comma
-
-
-"
-map <silent> <Plug>ChangeColonToComma :set nohlsearch<cr>:s/:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
+map <silent> <Plug>ChangeColonToComma V<Plug>VChangeColonToComma
   \:call repeat#set("\<Plug>ChangeColonToComma", v:count)<cr>
 map <silent> \clc <Plug>ChangeColonToComma
 
-map <silent> <Plug>ColonDelete :set nohlsearch<cr>:s/:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
+" Change CoLon to Comma (visual)
+vmap <silent> <Plug>VChangeColonToComma <esc>:set nohlsearch<cr>gv:s/:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VChangeColonToComma", v:count)<cr>
+vmap <silent> \clc <Plug>VChangeColonToComma
+
+" Delete after CoLon
+map <silent> <Plug>ColonDelete V<Plug>VColonDelete
   \:call repeat#set("\<Plug>ColonDelete", v:count)<cr>
 map <silent> \cld <Plug>ColonDelete
+
+" Delete after CoLon (visual)
+vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
+vmap <silent> \cld <Plug>VColonDelete
