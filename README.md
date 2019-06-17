@@ -1,16 +1,11 @@
-A repo of the setup I use.
+A repo of the setup I use. I work mostly with React & TypeScript
 
 ### see [vimrc](https://github.com/ivandaho/vimdotfiles/blob/master/vimrc) for list of plugins and more info
 
-
-### Others:
-
-[gnome-terminal-colors](https://github.com/metalelf0/gnome-terminal-colors)
-
-
 # Instructions:
-* clone to ~/.vim on Linux/MacOS, C:/Users/username/vimfiles on Windows
-*  have this in ~/.config/nvim/init.vim:
+
+- clone to ~/.vim on Linux/MacOS, C:/Users/username/vimfiles on Windows
+- have this in ~/.config/nvim/init.vim:
 
 ```
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -18,47 +13,26 @@ let &packpath=&runtimepath
 source ~/.vim/vimrc
 ```
 
-* `:PlugInstall` inside vim
-* link nvim coc-settings.json to ~/.vim/coc-settings.json if needed
+- `:PlugInstall` inside vim
+- link nvim coc-settings.json to ~/.vim/coc-settings.json if needed
 
 # Super fast and responsive vim setup with fzf + ripgrep
 
 Kitty is a GPU accelerated terminal emulator. Great if you want a very
 responsive vim.
 
-* Install [fzf](https://github.com/junegunn/fzf/),
+- Install [fzf](https://github.com/junegunn/fzf/),
   [fzf.vim](https://github.com/junegunn/fzf.vim) and
-[ripgrep](https://github.com/BurntSushi/ripgrep)
+  [ripgrep](https://github.com/BurntSushi/ripgrep)
 
-* make sure to configure fzf to use rg in your .bashrc or .bash\_profile
-
+- make sure to configure fzf to use rg in your .bashrc or .bash_profile
 
 * Install [Kitty](https://sw.kovidgoyal.net/kitty/)
+* Install [Neovim](https://github.com/neovim/neovim/) - you will need the
+  `--HEAD` option for floating windows
 
-# Specifics:
-
-#### Fonts
-
-* Terminal Vim on Ubuntu is Ubuntu Mono size 13 from
-  [here](https://github.com/powerline/fonts/tree/master/UbuntuMono)
-
-* Windows gVim is DejaVuSansMono size 10 from
-  [here](https://github.com/powerline/fonts/tree/master/DejaVuSansMono)
-
-* Mac OSX MacVim is Fira Code size 11 from
-  [here](https://github.com/tonsky/FiraCode)
-
-For Ubuntu terminal Vim, add to .bashrc:
-```
-source
-"$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-```
 # Others:
 
-#### eslint:
+Ligature Enabled Font: Fira Code size 11 from
+[here](https://github.com/tonsky/FiraCode)
 
-```
-npm install -g eslint
-npm install -g babel-eslint
-npm install -g eslint-plugin-react
-```
