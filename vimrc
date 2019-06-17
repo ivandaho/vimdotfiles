@@ -1,9 +1,3 @@
-" disable pathogen
-" lang en_us
-" let g:pathogen_disabled = ["omnisharp-vim,supertab"]
-" let g:ycm_server_python_interpreter = "/usr/bin/python"
-" execute pathogen#infect()
-
 call plug#begin('~/.vim/bundle')
 " Plug 'HerringtonDarkholme/yats.vim', {'do' : 'make'}
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -59,7 +53,6 @@ set scroll=5
 
 set timeout timeoutlen=1000 ttimeoutlen=10
 
-
 " delete highlights from search etc
 map <silent> fdh :nohl<CR>
 
@@ -83,10 +76,6 @@ let g:gruvbox_termcolors=256
 let g:gruvbox_contrast_dark='medium'
 colorscheme gruvbox
 set background=dark
-
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction 
 
 let g:lightline = {
     \ 'enable': {
@@ -118,7 +107,7 @@ function! LightlineBranchName()
   return winwidth(0) > 120 ? fugitive#head() : ''
 endfunction
 
-" for custom lightline status
+" for custom lightline status (via coc.nvim)
 function! StatusDiagnostic() abort
 	  let info = get(b:, 'coc_diagnostic_info', {})
 	  if empty(info) | return '' | endif
@@ -154,7 +143,8 @@ autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 
 map \gd :Gdiff<cr>
 map \gs :Gstatus<cr>
-map \gp :Git push<cr>
+
+" Git blame with termguicolors
 map \gb :set termguicolors<cr>:Gblame<cr>
 
 " Buffer Leave
@@ -194,17 +184,8 @@ map <leader>chc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
 map <leader>cn :%s/class=/className=/g<cr>
 map <leader>cb :%s/<br>/<br\/>/g<cr>
 map <leader>cl :%s/<Link to/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>;
-map <leader>cdb :%s/{{//g<cr>:%s/}}//g<cr>
 
 map <leader>cdm ocomponentDidMount() {<cr>}<esc>O
-
-" react helpers
-map \rc oclass Component extends React.Component {<cr>render() {<cr>return (<cr>)<cr>}<cr>}<esc>%_w
-map \rp oconstructor(props) {<cr>super(props);<cr>}<esc>kw
-map \rf _cwfunction<Esc>elct{(props) <Esc>jd3jk$%ddv$=
-map \rb _ye/super(<cr>othis.<Esc>pv_y$a = <Esc>pa.bind(this);<Esc>_ww**
-
-" autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
 let g:jsx_ext_required = 0
 set showcmd
@@ -215,12 +196,6 @@ map <leader>css yss'yss)Iconsole.log<esc>
 map \fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
 map \wd :lcd %:p:h<cr>
-
-nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
-nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
-:map <silent> <C-l> :lopen<cr>
-command! Prettier :CocCommand prettier.formatFile
-map <silent> \q :Prettier<cr>
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -247,13 +222,6 @@ let g:fzf_colors =
   \ "spinner": ["fg", "IncSearch"],
   \ "header":  ["fg", "WildMenu"] }
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" function! GetFileInitials()
-"     let @+ = @e . substitute(@0[1:-1], "[a-z]", "", "g")
-"     return
-" endfunction
-
 nmap <c-p> :FZF<cr>
 nmap <c-\> :Buffers<cr>
 " nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
@@ -276,11 +244,6 @@ autocmd  FileType fzf set laststatus=0 noruler noshowmode
 command! -bang -nargs=* FindLiteral call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* FindRegExp call fzf#vim#grep('rg --column --line-number --no-heading --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* FindRegExpCaseSensitive call fzf#vim#grep('rg --column --line-number --no-heading --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
 
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%ae %C(green)%cr"'
 
@@ -321,7 +284,7 @@ map <silent>\$$ :e ~/.vim/vimrc<cr>
 map \$r :so ~/.vim/vimrc<cr>
 map \$R :so ~/.vim/vimrc<cr>
 
-
+" coc.nvim start
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
 map <silent>gr <Plug>(coc-references)
 map <silent>gd <Plug>(coc-definition)
@@ -346,6 +309,14 @@ map <silent>g1 <Plug>(coc-float-hide)
 autocmd CursorHold *.tsx,*.ts,*.jsx,*.js silent call CocActionAsync('highlight')
 
 hi default CocHighlightText  guibg=#111111 ctermbg=100
+
+nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
+:map <silent> <C-l> :lopen<cr>
+command! Prettier :CocCommand prettier.formatFile
+map <silent> \q :Prettier<cr>
+" coc.nvim end
+
 map <silent> \ccs yeoconstructor(props: 0) {}kosuper(props)
 
 " Change CoLon to Comma
@@ -382,4 +353,7 @@ vmap <silent> \ctc <Plug>VChangeTabToColon
 map <silent> <Plug>AddTryCatchWithSetState VS{Itry $%A finally {}Othis.setState({loading: false})yykkPffcwtruej"0p
   \:call repeat#set("\<Plug>AddTryCatchWithSetState", v:count)<cr>
 map <silent> \tc <Plug>AddTryCatchWithSetState
+
+" provide interfaces to a class
+map \cis _wye$bea<I0Props, I0State>kointerface I0Props {}interface I0State {}
 
