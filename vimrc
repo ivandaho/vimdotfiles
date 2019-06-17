@@ -95,7 +95,7 @@ let g:lightline = {
 		    \ },
     \ 'colorscheme': 'gruvbox',
     \ 'active': {
-		    \ 'left': [ [ 'mode', 'cocstatus','paste' ],
+		    \ 'left': [ [ 'mode'],[ 'cocstatus','paste' ],
 		    \           [ 'readonly', 'relativepath', 'modified' ] ],
 		    \ 'right': [
 		    \            [ 'gitbranch'],[ 'filetype' ] ] },
@@ -367,3 +367,19 @@ map <silent> \cld <Plug>ColonDelete
 vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
 vmap <silent> \cld <Plug>VColonDelete
+
+" Change Tab to Colon. Useful when copying model from swagger
+map <silent> <Plug>ChangeTabToColon V<Plug>VChangeTabToColon
+  \:call repeat#set("\<Plug>ChangeTabToColon", v:count)<cr>
+map <silent> \ctc <Plug>ChangeTabToColon
+
+" Change CoLon to Comma (visual)
+vmap <silent> <Plug>VChangeTabToColon <esc>:set nohlsearch<cr>gv:s/	/:/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VChangeTabToColon", v:count)<cr>
+vmap <silent> \ctc <Plug>VChangeTabToColon
+
+" Add try catch with set loading state to api call
+map <silent> <Plug>AddTryCatchWithSetState VS{Itry $%A finally {}Othis.setState({loading: false})yykkPffcwtruej"0p
+  \:call repeat#set("\<Plug>AddTryCatchWithSetState", v:count)<cr>
+map <silent> \tc <Plug>AddTryCatchWithSetState
+
