@@ -1,5 +1,6 @@
 {
   "coc.preferences.hoverTarget": "float",
+  "suggest.timeout": 5000,
   "coc.preferences.useQuickfixForLocations": true
 }
 
