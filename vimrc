@@ -25,7 +25,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'commit': 'e40efcbd31ac6b9531e211db30648b645e10ecab', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'neoclide/coc-tslint-plugin', {'do': 'yarn install --frozen-lockfile'}
@@ -251,7 +251,7 @@ map <Plug>ExportConstFromClipboard o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<
   \:call repeat#set("\<Plug>ExportConstFromClipboard", v:count)<cr>
 map \fat <Plug>ExportConstFromClipboard
 
-map \fa :FindLiteral<Space>
+map \la :FindLiteral<Space>
 map \a :FindRegExp<Space>
 map \ca :FindRegExpCaseSensitive<Space>
 
