@@ -25,7 +25,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'neoclide/coc.nvim', {'commit': 'e40efcbd31ac6b9531e211db30648b645e10ecab', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'neoclide/coc-tslint-plugin', {'do': 'yarn install --frozen-lockfile'}
@@ -142,7 +142,7 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 
 map \gd :Gdiff<cr>
-map \gs :Gstatus<cr>
+map \gs :G<cr>
 
 " Git blame with termguicolors
 map \gb :set termguicolors<cr>:Gblame<cr>
