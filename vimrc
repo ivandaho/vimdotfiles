@@ -53,23 +53,11 @@ set scroll=5
 
 set timeout timeoutlen=1000 ttimeoutlen=10
 
-" delete highlights from search etc
-map <silent> fdh :nohl<CR>
-
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
 set updatetime=300
 
 set laststatus=2
 set encoding=utf-8
-
-" OSX
-" set guifont=Fira\ Code
-" set guifont=Menlo\ For\ Powerline
-
-" windows
-" size 9 is better for 125% hdpi scaling
-" set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
-"
 
 let g:gruvbox_italic=0
 let g:gruvbox_termcolors=256
@@ -158,6 +146,7 @@ augroup END
 
 "fzf.vim binding
 map \gc :Commits<cr>
+map \bc :BCommits<cr>
 
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -166,7 +155,7 @@ nnoremap tq :bd<cr>
 " close buffer and flush
 map <silent> TQ :bp<cr>:bd #<cr>
 " delete trailing whitespaces
-map fdtw :%s/\s\+$//<cr>
+map \dtw :%s/\s\+$//<cr>
 
 " start CamelCasemotion
 map <silent> W <Plug>CamelCaseMotion_w
@@ -223,6 +212,7 @@ let g:fzf_colors =
   \ "header":  ["fg", "WildMenu"] }
 
 nmap <c-p> :FZF<cr>
+nmap \p :FZF<cr>
 nmap <c-\> :Buffers<cr>
 " nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
 " nmap \gfi yiwv"ey<cr>:call GetFileInitials()<cr>
@@ -317,7 +307,7 @@ command! Prettier :CocCommand prettier.formatFile
 map <silent> \q :Prettier<cr>
 " coc.nvim end
 
-map <silent> \ccs yeoconstructor(props: 0) {}kosuper(props)
+map <silent> \ccs yeoconstructor(props: 0) {}Osuper(props)
 
 " Change CoLon to Comma
 map <silent> <Plug>ChangeColonToComma V<Plug>VChangeColonToComma
