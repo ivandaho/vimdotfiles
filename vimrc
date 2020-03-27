@@ -18,7 +18,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'tomtom/tcomment_vim'
 Plug 'chrisbra/csv.vim'
-" Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -28,7 +28,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 
-Plug 'neoclide/coc-tslint-plugin', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 
