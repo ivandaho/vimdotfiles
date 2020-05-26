@@ -346,4 +346,6 @@ map <silent> \tc <Plug>AddTryCatchWithSetState
 
 " provide interfaces to a class
 map \cis _wye$bea<I0Props, I0State>kointerface I0Props {}interface I0State {}
+map \ia oimport 0 from './0';
+
 
