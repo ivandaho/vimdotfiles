@@ -45,7 +45,7 @@ set t_ut=
 set sw=2
 set ts=2
 set et
-set number
+set relativenumber
 
 set hlsearch
 
@@ -210,10 +210,12 @@ let g:fzf_colors =
   \ "marker":  ["fg", "IncSearch"],
   \ "spinner": ["fg", "IncSearch"],
   \ "header":  ["fg", "WildMenu"] }
+let g:fzf_layout={'down':'40%'}
 
 nmap <c-p> :FZF<cr>
 nmap \p :FZF<cr>
-nmap <c-\> :Buffers<cr>
+nmap <c-\> :call fzf#vim#buffers({'options': ['--layout=default', '--info=inline']})<cr>
+" nmap <c-\> :Buffers<cr>
 " nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
 " nmap \gfi yiwv"ey<cr>:call GetFileInitials()<cr>
 nmap \rrr :so $MYVIMRC<cr>
@@ -281,6 +283,11 @@ map <silent>gd <Plug>(coc-definition)
 map <silent>gt <Plug>(coc-type-definition)
 map <silent>gj <Plug>(coc-float-hide)<Plug>(coc-diagnostic-info)
 map <silent>gl :echo CocAction('getCurrentFunctionSymbol')<CR>
+
+nnoremap <nowait><expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1, 2) : "\<C-e>"
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(0, 2) : "\<C-f>"
+inoremap <nowait><expr> <C-e> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, 2)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, 2)\<cr>" : "\<Left>"
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
