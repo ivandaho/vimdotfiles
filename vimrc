@@ -45,6 +45,7 @@ set t_ut=
 set sw=2
 set ts=2
 set et
+set number
 set relativenumber
 
 set hlsearch
