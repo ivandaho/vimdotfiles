@@ -125,7 +125,7 @@ set incsearch
 set scrolloff=1
 
 let indent_guides_guide_size=1
-let indent_guides_enable_on_vim_startup=1
+let indent_guides_enable_on_vim_startup=0
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
@@ -169,18 +169,11 @@ sunmap E
 sunmap gE
 " end CamelCaseMotion
 
-" blaze to react change stuff
-map <leader>chc :%s/<!--/\{\/*/<cr>:%s/-->/*\/\}<cr>
-map <leader>cn :%s/class=/className=/g<cr>
-map <leader>cb :%s/<br>/<br\/>/g<cr>
-map <leader>cl :%s/<Link to/<Link to/g<cr>:%s/<\/a>/<\/Link>/g<cr>;
-
-map <leader>cdm ocomponentDidMount() {<cr>}<esc>O
-
 let g:jsx_ext_required = 0
 set showcmd
 
 map <leader>csl yss)Iconsole.log<esc>
+map <leader>csc _v$hyPa: , <esc>hhv_S'yss)Iconsole.log<esc>
 map <leader>css yss'yss)Iconsole.log<esc>
 
 map \fs :syntax sync fromstart<cr>
@@ -216,10 +209,6 @@ let g:fzf_layout={'down':'40%'}
 nmap <c-p> :FZF<cr>
 nmap \p :FZF<cr>
 nmap <c-\> :call fzf#vim#buffers({'options': ['--layout=default', '--info=inline']})<cr>
-" nmap <c-\> :Buffers<cr>
-" nmap \<c-p> yiwv"ey<cr>:call GetFileInitials()<cr>:FZF<cr>
-" nmap \gfi yiwv"ey<cr>:call GetFileInitials()<cr>
-nmap \rrr :so $MYVIMRC<cr>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler noshowmode
@@ -283,8 +272,11 @@ map <silent>gr <Plug>(coc-references)
 map <silent>gd <Plug>(coc-definition)
 map <silent>gt <Plug>(coc-type-definition)
 map <silent>gj <Plug>(coc-float-hide)<Plug>(coc-diagnostic-info)
+
+" doesnt work??
 map <silent>gl :echo CocAction('getCurrentFunctionSymbol')<CR>
 
+" coc.nvim scroll float window
 nnoremap <nowait><expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1, 2) : "\<C-e>"
 nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(0, 2) : "\<C-f>"
 inoremap <nowait><expr> <C-e> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, 2)\<cr>" : "\<Right>"
@@ -298,8 +290,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-" map \ff :call CocAction('quickfixes')<CR>
-map \ff :call CocAction('codeAction')<CR>
+" still doesn't work?
+map \fg :call CocAction('quickfixes')<CR>
+map \ff :call CocActionAsync('codeAction')<CR>
 map gf <Plug>(coc-fix-current)
 map g2 <Plug>(coc-rename)
 map <silent>g1 <Plug>(coc-float-hide)
@@ -314,8 +307,6 @@ nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 command! Prettier :CocCommand prettier.formatFile
 map <silent> \q :Prettier<cr>
 " coc.nvim end
-
-map <silent> \ccs yeoconstructor(props: 0) {}Osuper(props)
 
 " Change CoLon to Comma
 map <silent> <Plug>ChangeColonToComma V<Plug>VChangeColonToComma
@@ -342,7 +333,7 @@ map <silent> <Plug>ChangeTabToColon V<Plug>VChangeTabToColon
   \:call repeat#set("\<Plug>ChangeTabToColon", v:count)<cr>
 map <silent> \ctc <Plug>ChangeTabToColon
 
-" Change CoLon to Comma (visual)
+" Change Tab to Colon. (visual) Useful when copying model from swagger
 vmap <silent> <Plug>VChangeTabToColon <esc>:set nohlsearch<cr>gv:s/	/:/<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeTabToColon", v:count)<cr>
 vmap <silent> \ctc <Plug>VChangeTabToColon
