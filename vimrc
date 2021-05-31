@@ -31,6 +31,8 @@ Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'junegunn/goyo.vim'
+
 
 call plug#end()
 
@@ -84,7 +86,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'LightlineBranchName',
       \   'filename': 'LightlineFilename',
-      \   'cocstatus': 'StatusDiagnostic',
+      \   'cocstatus': 'StatusDiagnostic'
       \ },
       \ }
 
@@ -114,7 +116,7 @@ function! StatusDiagnostic() abort
 :set backspace=start,indent,eol
 
 "explorer
-:map \fe :Sexplore<cr>
+:map <leader>fe :Sexplore<cr>
 let g:netrw_liststyle=3
 
 " disable esc sound
@@ -130,11 +132,11 @@ let indent_guides_enable_on_vim_startup=0
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 
-map \gd :Gdiff<cr>
-map \gs :G<cr>
+map <leader>gd :Gdiff<cr>
+map <leader>gs :G<cr>
 
 " Git blame with termguicolors
-map \gb :set termguicolors<cr>:Gblame<cr>
+map <leader>gb :set termguicolors<cr>:Gblame<cr>
 
 " Buffer Leave
 augroup myBufferLeave
@@ -146,8 +148,8 @@ augroup myBufferEnter
 augroup END
 
 "fzf.vim binding
-map \gc :Commits<cr>
-map \bc :BCommits<cr>
+map <leader>gc :Commits<cr>
+map <leader>bc :BCommits<cr>
 
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -156,7 +158,7 @@ nnoremap tq :bd<cr>
 " close buffer and flush
 map <silent> TQ :bp<cr>:bd #<cr>
 " delete trailing whitespaces
-map \dtw :%s/\s\+$//<cr>
+map <leader>dtw :%s/\s\+$//<cr>
 
 " start CamelCasemotion
 map <silent> W <Plug>CamelCaseMotion_w
@@ -176,9 +178,9 @@ map <leader>csl yss)Iconsole.log<esc>
 map <leader>csc _v$hyPa: , <esc>hhv_S'yss)Iconsole.log<esc>
 map <leader>css yss'yss)Iconsole.log<esc>
 
-map \fs :syntax sync fromstart<cr>
+map <leader>fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
-map \wd :lcd %:p:h<cr>
+map <leader>wd :lcd %:p:h<cr>
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -207,7 +209,7 @@ let g:fzf_colors =
 let g:fzf_layout={'down':'40%'}
 
 nmap <c-p> :FZF<cr>
-nmap \p :FZF<cr>
+nmap <leader>p :FZF<cr>
 nmap <c-\> :call fzf#vim#buffers({'options': ['--layout=default', '--info=inline']})<cr>
 
 autocmd! FileType fzf
@@ -262,6 +264,7 @@ map \ce <Plug>CloneExact
 map \ct <Plug>CloneThis
 
 map <silent>/<esc> :nohl<cr>
+map <silent>/<tab> :nohl<cr>
 map <silent>\$$ :e ~/.vim/vimrc<cr>
 map \$r :so ~/.vim/vimrc<cr>
 map \$R :so ~/.vim/vimrc<cr>
@@ -348,3 +351,6 @@ map \cis _wye$bea<I0Props, I0State>kointerface I0Props {}interface I0Sta
 map \ia oimport 0 from './0';
 
 
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_def_mapping_enabled = 0

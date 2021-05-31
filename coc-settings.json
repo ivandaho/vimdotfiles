@@ -1,7 +1,17 @@
 {
   "coc.preferences.hoverTarget": "float",
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "disableWorkspaceFolders": true,
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
   "prettier.eslintIntegration": true,
   "suggest.timeout": 5000,
   "coc.preferences.useQuickfixForLocations": true
 }
-
