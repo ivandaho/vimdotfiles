@@ -32,6 +32,7 @@ Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'junegunn/goyo.vim'
+Plug 'darrikonn/vim-gofmt'
 
 
 call plug#end()
@@ -297,10 +298,14 @@ endfunction
 map \fg :call CocAction('quickfixes')<CR>
 map \ff :call CocActionAsync('codeAction')<CR>
 map gf <Plug>(coc-fix-current)
+
 map g2 <Plug>(coc-rename)
+map gw <Plug>(coc-rename)
+map <silent>g<tab> <Plug>(coc-float-hide)
+map <silent>g<esc> <Plug>(coc-float-hide)
 map <silent>g1 <Plug>(coc-float-hide)
 
-autocmd CursorHold *.tsx,*.ts,*.jsx,*.js silent call CocActionAsync('highlight')
+autocmd CursorHold *.tsx,*.ts,*.jsx,*.js,*.go silent call CocActionAsync('highlight')
 
 hi default CocHighlightText  guibg=#111111 ctermbg=100
 
