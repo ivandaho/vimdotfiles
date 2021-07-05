@@ -136,17 +136,8 @@ autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 map <leader>gd :Gdiff<cr>
 map <leader>gs :G<cr>
 
-" Git blame with termguicolors
-map <leader>gb :set termguicolors<cr>:Gblame<cr>
-
-" Buffer Leave
-augroup myBufferLeave
-    autocmd BufLeave *.fugitiveblame set notermguicolors
-augroup END
-" Buffer Enter
-augroup myBufferEnter
-    autocmd BufEnter *.fugitiveblame set termguicolors
-augroup END
+" Git blame
+map <leader>gb :Gblame<cr>
 
 "fzf.vim binding
 map <leader>gc :Commits<cr>
@@ -359,3 +350,4 @@ map \ia oimport 0 from './0';
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
+let $FZF_DEFAULT_COMMAND = 'rg --files'
