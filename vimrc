@@ -137,7 +137,7 @@ map <leader>gd :Gdiff<cr>
 map <leader>gs :G<cr>
 
 " Git blame
-map <leader>gb :Gblame<cr>
+map <leader>gb :Git blame<cr>
 
 "fzf.vim binding
 map <leader>gc :Commits<cr>
@@ -305,6 +305,8 @@ nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 :map <silent> <C-l> :lopen<cr>
 command! Prettier :CocCommand prettier.formatFile
 map <silent> \q :Prettier<cr>
+let g:coc_enable_locationlist = 0
+autocmd User CocLocationsChange CocList --normal location
 " coc.nvim end
 
 " Change CoLon to Comma
