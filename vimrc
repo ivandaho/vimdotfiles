@@ -47,7 +47,7 @@ set t_ut=
 
 set sw=2
 set ts=2
-set et
+" set et
 set number
 set relativenumber
 
@@ -294,6 +294,7 @@ map g2 <Plug>(coc-rename)
 map gw <Plug>(coc-rename)
 map <silent>g<tab> <Plug>(coc-float-hide)
 map <silent>g<esc> <Plug>(coc-float-hide)
+nmap <expr> <esc> coc#float#has_float() ? "\<Plug>(coc-float-hide)" : '\<esc>'
 map <silent>g1 <Plug>(coc-float-hide)
 
 autocmd CursorHold *.tsx,*.ts,*.jsx,*.js,*.go silent call CocActionAsync('highlight')
@@ -353,3 +354,7 @@ let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
 let $FZF_DEFAULT_COMMAND = 'rg --files'
+
+copy jira ticket number with braces during commit message, if branch name starts with ticket number
+map <leader>cbn _4j3wy3e_gg$
+map <leader>cbb _4j3wy3e:let @0='[0]'<cr>_gg$
