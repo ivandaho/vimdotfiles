@@ -355,6 +355,6 @@ let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
 let $FZF_DEFAULT_COMMAND = 'rg --files'
 
-copy jira ticket number with braces during commit message, if branch name starts with ticket number
+" copy jira ticket number with braces during commit message, if branch name starts with ticket number
 map <leader>cbn _4j3wy3e_gg$
 map <leader>cbb _4j3wy3e:let @0='[0]'<cr>_gg$

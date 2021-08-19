@@ -1,4 +1,18 @@
-export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-alias tt="tig --date-order --all"
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
 
+alias tt="tig --date-order --all"
+alias vim=nvim
+
+function fzf_git_recent_branch -d "Efficient fish keybinding for fzf with git branch"
+  eval "git branch --sort=-authordate | fzf --query (commandline)" | read -l select
+
+  if not test -z $select
+    eval "git checkout (builtin string trim --left --chars='* ' $select)"
+  end
+
+  commandline -f repaint
+end
+
+bind \cg 'fzf_git_recent_branch'
