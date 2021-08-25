@@ -41,3 +41,6 @@ plugins. Kitty also supports ligatures while Alacritty does not.
 
 Ligature Enabled Font: Fira Code size 11 from
 [here](https://github.com/tonsky/FiraCode)
+
+[bat](https://github.com/sharkdp/bat) and
+[delta](https://github.com/dandavison/delta) for better syntax highlighting in fzf preview window and git diff
