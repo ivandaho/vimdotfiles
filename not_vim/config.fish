@@ -4,6 +4,7 @@ end
 
 alias tt="tig --date-order --all"
 alias vim=nvim
+alias gfa=" git fetch --all"
 
 function fzf_git_recent_branch -d "Efficient fish keybinding for fzf with git branch"
   eval "git branch --sort=-authordate | fzf --query (commandline)" | read -l select
