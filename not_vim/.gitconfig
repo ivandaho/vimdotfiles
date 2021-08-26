@@ -1,0 +1,28 @@
+[user]
+	# name = ...
+	# email = ...
+[delta]
+	line-numbers = true
+	syntax-theme = gruvbox-dark
+	features = decorations
+[pager]
+  diff = delta
+	log = delta
+	reflog = delta
+	show = delta
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+
+
+[delta "decorations"]
+  commit-decoration-style = blue ul
+  commit-style = white
+	plus-style = syntax  "#174d16"
+  file-style = syntax
+  file-decoration-style = blue box
+  hunk-header-decoration-style = blue box
+  # hunk-header-file-style = white
+  hunk-header-line-number-style = "#067a00"
+  # hunk-header-style = file line-number syntax
