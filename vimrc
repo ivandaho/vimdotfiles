@@ -33,7 +33,7 @@ Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'junegunn/goyo.vim'
 Plug 'darrikonn/vim-gofmt'
-
+Plug 'wavded/vim-stylus'
 
 call plug#end()
 
@@ -239,6 +239,7 @@ map \ts <Plug>NewLineAtSpace
 " copy file name
 map \cfn :let @0=expand('%:t')<cr>
 map \ccfn :let @+=expand('%:t')<cr>
+map \cccfn \cfni0Iconst A: React.FC<0Props> = () => {}O//joexport default 0ggwwyiwOinterface 0 {}O//
 " copy file path
 map \cfp :let @0=@%<cr>
 map \ccfp :let @+=@%<cr>
