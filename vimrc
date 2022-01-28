@@ -132,6 +132,9 @@ let indent_guides_enable_on_vim_startup=0
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
+autocmd FileType stylus setlocal shiftwidth=2 expandtab
+autocmd FileType typescriptreact setlocal shiftwidth=2 noexpandtab
+autocmd FileType typescript setlocal shiftwidth=2 noexpandtab
 
 map <leader>gd :Gdiff<cr>
 map <leader>gs :G<cr>
