@@ -5,10 +5,7 @@
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "disableWorkspaceFolders": true,
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true
-      }
+      "filetypes": ["go"]
     }
   },
   "prettier.eslintIntegration": true,
