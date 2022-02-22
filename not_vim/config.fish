@@ -17,3 +17,7 @@ function fzf_git_recent_branch -d "Efficient fish keybinding for fzf with git br
 end
 
 bind \cg 'fzf_git_recent_branch'
+
+function nvm
+    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+end
