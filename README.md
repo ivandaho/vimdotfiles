@@ -33,7 +33,9 @@ Ligature Enabled Font: Fira Code size 11 from
 
 - fish shell
   - fisher
-	- `fisher add edc/bass`
+	- `fisher install edc/bass`
 	- nvm with bass with fisher
 
 - not_vim/setup.sh is there for convenience
+- karabiner.json requires exact `product_id`, tweak as necessary 834 is 14"
+	mbp, 835 is 16" mbp
