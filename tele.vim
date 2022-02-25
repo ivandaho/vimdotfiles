@@ -1,6 +1,7 @@
 lua << EOF
 local defaultTheme = 'get_ivy'
 local opts = { noremap=true, silent=true }
+local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 
 local mapWTheme = function(mode, lhs, teleFn, fnOpts)
@@ -23,7 +24,9 @@ require('telescope').setup{
 		mappings = {
 			i = {
 				["<C-h>"] = action_layout.toggle_preview,
-				["<esc>"] =  require('telescope.actions').close,
+				["<esc>"] = actions.close,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
 			}
 		}
 	},
