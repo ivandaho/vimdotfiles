@@ -38,7 +38,7 @@ local nvim_lsp = require'lspconfig'
 
 vim.g.coq_settings = {  auto_start = 'shut-up'  }
 local coq = require "coq"
-local servers = { 'tsserver' }
+local servers = { 'tsserver', 'eslint' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup(coq.lsp_ensure_capabilities{
     on_attach = on_attach,
@@ -90,6 +90,7 @@ prettier.setup({
 })
 
 vim.api.nvim_set_keymap('n', '<Leader>q', ':Prettier<CR>', opts)
+vim.api.nvim_set_keymap('n', '<Leader>es', ':EslintFixAll<CR>', opts)
 
 --
 -- -- Setup nvim-cmp.

@@ -1,4 +1,6 @@
 [user]
+	name = Ivan Ho
+	email = ivandaho@gmail.com
 	# name = ...
 	# email = ...
 [delta]
@@ -26,3 +28,6 @@
   # hunk-header-file-style = white
   hunk-header-line-number-style = "#067a00"
   # hunk-header-style = file line-number syntax
+
+[core]
+	editor = nvim
