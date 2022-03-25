@@ -33,6 +33,7 @@ Plug 'jose-elias-alvarez/null-ls.nvim', { 'branch': 'main' }
 Plug 'MunifTanjim/prettier.nvim', { 'branch': 'main' }
 Plug 'hrsh7th/nvim-cmp'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " coc start
 " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}

@@ -13,6 +13,9 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj',    '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+	-- if client == 'gopls' then
+	-- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
+	-- end
 			
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
@@ -38,7 +41,7 @@ local nvim_lsp = require'lspconfig'
 
 vim.g.coq_settings = {  auto_start = 'shut-up'  }
 local coq = require "coq"
-local servers = { 'tsserver', 'eslint' }
+local servers = { 'tsserver', 'eslint', 'gopls' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup(coq.lsp_ensure_capabilities{
     on_attach = on_attach,
@@ -48,6 +51,20 @@ for _, lsp in pairs(servers) do
     }
   })
 end
+
+
+nvim_lsp.golangci_lint_ls.setup(coq.lsp_ensure_capabilities{
+	on_attach = on_attach,
+	flags = {
+		-- This will be the default in neovim 0.7+
+		debounce_text_changes = 150,
+	},
+	filetypes = {'go'},
+	cmd = {'/Users/ivanho/go/bin/golangci-lint-langserver'},
+	init_options = {
+		command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json" };
+	}
+})
 
 local null_ls = require("null-ls")
 local prettier = require("prettier")
@@ -91,6 +108,31 @@ prettier.setup({
 
 vim.api.nvim_set_keymap('n', '<Leader>q', ':Prettier<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>es', ':EslintFixAll<CR>', opts)
+
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  -- Install languages synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing
+  -- ignore_install = { "javascript" },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = { "c", "rust" },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 
 --
 -- -- Setup nvim-cmp.

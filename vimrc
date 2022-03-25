@@ -285,3 +285,9 @@ map <silent> <leader><esc> :ccl<cr>
 hi LspReferenceText guibg=#111111 ctermbg=100
 hi LspReferenceRead guibg=#000000 ctermbg=100
 hi LspReferenceWrite guibg=#FFFFFF ctermbg=100
+
+autocmd BufNewFile,BufRead *.mdx set syntax=markdown.jsx
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
