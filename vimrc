@@ -31,6 +31,8 @@ let g:gruvbox_contrast_dark='medium'
 colorscheme gruvbox
 set background=dark
 
+set noswapfile
+
 let g:lightline = {
     \ 'enable': {
 		    \ 'statusline': 1,
@@ -288,6 +290,6 @@ hi LspReferenceWrite guibg=#FFFFFF ctermbg=100
 
 autocmd BufNewFile,BufRead *.mdx set syntax=markdown.jsx
 
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+" nnoremap J mzJ`z
