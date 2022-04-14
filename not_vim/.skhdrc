@@ -1,0 +1,126 @@
+:: leaderMode @ : yabai -m config window_shadow off;\
+ 									yabai -m config window_border on;\
+ 									yabai -m config window_border_width 8
+
+:: default : yabai -m config window_shadow on;\
+									yabai -m config window_border off;\
+									yabai -m config window_opacity off
+
+:: thirdsMode @
+:: fullScreenMode @
+:: displayMode @
+:: leftHalfMode @
+:: rightHalfMode @
+:: flipMode @
+:: swapMode @
+
+
+ctrl - f ; leaderMode
+
+leaderMode < escape ; default
+thirdsMode < escape ; default
+fullScreenMode < escape ; default
+displayMode < escape ; default
+leftHalfMode < escape ; default
+rightHalfMode < escape ; default
+flipMode < escape ; default
+swapMode < escape ; default
+
+# basic navigation
+ctrl - left: yabai -m window --focus prev
+ctrl - right: yabai -m window --focus next
+ctrl - up: yabai -m window --focus north
+ctrl - down: yabai -m window --focus south
+
+leaderMode < h ; leftHalfMode
+leaderMode < l ; rightHalfMode
+leaderMode < j ; thirdsMode
+leaderMode < k ; fullScreenMode
+
+# toggle padding and exit mode
+leaderMode < p : yabai -m space --toggle padding;yabai -m space --toggle gap;skhd -k "escape"
+# reduce padding
+leaderMode < y : yabai -m space --padding rel:5:5:5:5;yabai -m space --gap rel:5:5:5:5;
+# increase padding
+leaderMode < u : yabai -m space --padding rel:-5:-5:-5:-5;yabai -m space --gap rel:-5:-5:-5:-5;
+# reset padding
+leaderMode < o : yabai -m config --space 2 top_padding 40;\
+								 yabai -m config --space 2 right_padding 40;\
+								 yabai -m config --space 2 left_padding 40;\
+								 yabai -m config --space 2 window_gap 40;\
+								 yabai -m config --space 2 bottom_padding 200;\
+								 skhd -k "escape"
+
+leaderMode < f ; flipMode
+leaderMode < ctrl - f ; flipMode
+leaderMode < s ; swapMode
+leaderMode < ctrl - s ; swapMode
+
+# rearrange windows
+# '='
+leaderMode < 0x18 : yabai -m space --balance y-axis;skhd -k "escape"
+# '-'
+leaderMode < 0x1B : yabai -m space --layout bsp;skhd -k "escape"
+
+flipMode < h: yabai -m space --mirror y-axis
+flipMode < l: yabai -m space --mirror y-axis
+flipMode < j: yabai -m space --mirror x-axis
+flipMode < k: yabai -m space --mirror x-axis
+
+
+swapMode < h: yabai -m window --swap prev
+swapMode < l: yabai -m window --swap next
+swapMode < j: yabai -m window --swap south
+swapMode < k: yabai -m window --swap north
+
+# occupy left half in float, swap pos with first window in bsp
+leftHalfMode < h : yabai -m window --grid 1:2:0:0:1:1;\
+                   yabai -m window --swap first;\
+									 skhd -k "escape"
+
+# top left, bottom left corner
+leftHalfMode < j : yabai -m window --grid 2:2:0:1:1:1;skhd -k "escape"
+leftHalfMode < k : yabai -m window --grid 2:2:0:0:1:1;skhd -k "escape"
+
+# occupy right half in float, swap pos with last window in bsp
+rightHalfMode < l : yabai -m window --grid 1:2:1:0:1:1;\
+                    yabai -m window --swap last;\
+									  skhd -k "escape"
+
+# top right, bottom right corner
+rightHalfMode < j : yabai -m window --grid 2:2:1:1:1:1;skhd -k "escape"
+rightHalfMode < k : yabai -m window --grid 2:2:1:0:1:1;skhd -k "escape"
+
+# [x  ]
+thirdsMode < h : yabai -m window --grid 1:3:0:0:1:1;skhd -k "escape"
+# [ x ]
+thirdsMode < m : yabai -m window --grid 1:3:1:0:1:1;skhd -k "escape"
+# [xx ]
+thirdsMode < k : yabai -m window --grid 1:3:0:0:2:1;skhd -k "escape"
+# [  x]
+thirdsMode < l : yabai -m window --grid 1:3:2:0:1:1;skhd -k "escape"
+# float in middle
+thirdsMode < j : yabai -m window --grid 9:21:1:1:19:7;skhd -k "escape"
+
+# toggle full screen, respects padding
+fullScreenMode < k : yabai -m window --toggle zoom-fullscreen;\
+                     yabai -m window --grid 1:1:0:0:1:1;\
+										 skhd -k "escape"
+
+# toggle zoom to parent size
+leaderMode < z : yabai -m window --toggle zoom-parent;skhd -k "escape"
+fullScreenMode < j : yabai -m window --toggle zoom-parent;\
+                     yabai -m config bottom_padding 200;\
+                     yabai -m window --grid 1:1:0:0:1:1;\
+                     yabai -m config bottom_padding 0;\
+                     skhd -k "escape"
+
+
+# move window to recent monitor, resize, and maintain focus
+leaderMode < m ; displayMode
+displayMode < m : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                 yabai -m window --display recent && \
+                 yabai -m window --focus ${cur_window} && \
+                 yabai -m window --grid 27:63:1:1:61:25;skhd -k "escape"
+
+
