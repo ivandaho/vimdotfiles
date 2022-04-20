@@ -110,9 +110,38 @@ vim.api.nvim_set_keymap('n', '<Leader>q', ':Prettier<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>es', ':EslintFixAll<CR>', opts)
 
 require'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "maintained",
-
+-- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {
+		"bash",
+		"css",
+		"dockerfile",
+		"fish",
+		"go",
+		"gomod",
+		"gowork",
+		"graphql",
+		"html",
+		"http",
+		"java",
+		"javascript",
+		"jsdoc",
+		"json",
+		"json5",
+		"jsonc",
+		"lua",
+		"make",
+		"markdown",
+		"pug",
+		"python",
+		"ql",
+		"regex",
+		"scss",
+		"tsx",
+		"typescript",
+		"vim",
+		"vue",
+		"yaml",
+	},
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
