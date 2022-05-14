@@ -40,7 +40,7 @@ require('telescope').setup{
 }
 require('telescope').load_extension('fzf')
 
-mapWTheme('n', '<c-\\>', 'buffers')
+mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true" )
 mapWTheme('n', '\\ta', 'live_grep')
 mapWTheme('n', 'gd', 'lsp_definitions')
 mapWTheme('n', 'gr', 'lsp_references')

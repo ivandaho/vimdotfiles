@@ -3,7 +3,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'bkad/CamelCaseMotion'
-Plug 'ervandew/supertab'
 Plug 'groenewege/vim-less'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -32,7 +31,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim', { 'branch': 'main' }
 Plug 'MunifTanjim/prettier.nvim', { 'branch': 'main' }
 Plug 'hrsh7th/nvim-cmp'
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " coc start
