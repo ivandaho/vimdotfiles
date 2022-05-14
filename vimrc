@@ -60,7 +60,7 @@ function! LightlineFilename()
 endfunction
 
 function! LightlineBranchName()
-  return winwidth(0) > 120 ? fugitive#head() : ''
+  return winwidth(0) > 120 ? FugitiveHead() : ''
 endfunction
 
 " for custom lightline status (via coc.nvim)
@@ -189,7 +189,7 @@ command! -bang -nargs=* FindRegExp call fzf#vim#grep('rg --column --line-number 
 command! -bang -nargs=* FindRegExpCaseSensitive call fzf#vim#grep('rg --column --line-number --no-heading --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, fzf#vim#with_preview(), <bang>0)
 
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%ae %C(green)%cr"'
-let g:fzf_preview_window = ['right:40%', 'ctrl-r']
+let g:fzf_preview_window = ['right:40%', 'ctrl-h']
 
 map <Plug>ExportConstFromClipboard o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
   \:call repeat#set("\<Plug>ExportConstFromClipboard", v:count)<cr>
@@ -289,6 +289,11 @@ hi LspReferenceRead guibg=#000000 ctermbg=100
 hi LspReferenceWrite guibg=#FFFFFF ctermbg=100
 
 autocmd BufNewFile,BufRead *.mdx set syntax=markdown.jsx
+
+" TODO: better macro
+nmap <silent>\ft :s/\(true\)\\|\(false\)/true<cr>
+nmap <silent>\ff :s/\(true\)\\|\(false\)/false<cr>
+
 
 " nnoremap n nzzzv
 " nnoremap N Nzzzv
