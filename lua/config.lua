@@ -198,19 +198,36 @@ cmp.setup({
 			end
 		end,
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort(),
+		['<C-e>'] = cmp.mapping.complete({
+			config = {
+				sources = {
+					{ name = 'buffer',
+						option = {
+							get_bufnrs = function()
+								return vim.api.nvim_list_bufs()
+							end
+						}
+					}
+				}
+			}
+		}),
+
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'buffer' },
 		-- { name = 'vsnip' }, -- For vsnip users.
 		-- { name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
-		{ name = 'buffer' },
+		{ name = 'buffer' ,
+			option = {
+				get_bufnrs = function()
+					return vim.api.nvim_list_bufs()
+				end
+			}
+	},
 	}),
 	confirmation = {
 		get_commit_characters = function(commit_characters)

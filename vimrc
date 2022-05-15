@@ -291,8 +291,8 @@ hi LspReferenceWrite guibg=#FFFFFF ctermbg=100
 autocmd BufNewFile,BufRead *.mdx set syntax=markdown.jsx
 
 " TODO: better macro
-nmap <silent>\ft :s/\(true\)\\|\(false\)/true<cr>
-nmap <silent>\ff :s/\(true\)\\|\(false\)/false<cr>
+nmap <silent>\ft :s/\(true\)\\|\(false\)/true<cr>:nohl<cr>
+nmap <silent>\ff :s/\(true\)\\|\(false\)/false<cr>:nohl<cr>
 
 
 " nnoremap n nzzzv
