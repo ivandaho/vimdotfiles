@@ -36,9 +36,15 @@ require('telescope').setup{
 		-- theme = "ivy",
 		},
 	},
-	-- extensions = {},
+	extensions = {
+		["ui-select"] = {
+      require("telescope.themes").get_cursor {
+      }
+    }
+	},
 }
 require('telescope').load_extension('fzf')
+require("telescope").load_extension("ui-select")
 
 mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true" )
 mapWTheme('n', '\\ta', 'live_grep')
@@ -50,5 +56,5 @@ EOF
 nmap <c-p> <cmd>Telescope find_files<cr>
 nmap :: <cmd>Telescope command_history<cr>
 
-nnoremap gf :lua require'telescope.builtin'.lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>
-vnoremap gf :lua require'telescope.builtin'.lsp_range_code_actions(require('telescope.themes').get_cursor({}))<cr>
+nnoremap <silent> gf :call v:lua.vim.lsp.buf.code_action()<cr>
+vnoremap <silent> gf :call v:lua.vim.lsp.buf.range_code_action()<cr>
