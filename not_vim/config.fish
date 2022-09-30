@@ -21,3 +21,6 @@ bind \cg 'fzf_git_recent_branch'
 function nvm
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 end
+
+export PATH=/Users/ivanho/Library/Python/3.8/bin:"$PATH"
+

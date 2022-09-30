@@ -211,6 +211,7 @@ map \cccfn \cfni0Iconst A: React.FC<0Props> = () => {}O//joexport de
 map \cfp :let @0=@%<cr>
 map \ccfp :let @+=@%<cr>
 
+" useful for component props
 map <Plug>CloneProps $vbyPa=<esc>lveS}athis.props.<esc>
             \:call repeat#set("\<Plug>CloneProps", v:count)<cr>
 map <Plug>CloneState $vbyPa=<esc>lveS}athis.state.<esc>
@@ -233,13 +234,43 @@ map \$R :so ~/.config/nvim/vimrc<cr>
 
 map g<esc> :call v:lua.vim.lsp.util.buf_clear_references()<cr>
 
+" Change Equal (=) Delete
+map <silent> <Plug>ChangeEqualDelete V<Plug>VChangeEqualDelete
+  \:call repeat#set("\<Plug>ChangeEqualDelete", v:count)<cr>
+map <silent> \cwd <Plug>ChangeEqualDelete
+
+" Change Equal (=) Delete (visual)
+vmap <silent> <Plug>VChangeEqualDelete <esc>:set nohlsearch<cr>gv:s/=.*//<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VChangeEqualDelete", v:count)<cr>
+vmap <silent> \cwd <Plug>VChangeEqualDelete
+
+" Change CoLon to Equal (=)
+map <silent> <Plug>ChangeColonToEqual V<Plug>VChangeColonToEqual
+  \:call repeat#set("\<Plug>ChangeColonToEqual", v:count)<cr>
+map <silent> \cle <Plug>ChangeColonToEqual
+
+" Change CoLon to Equal (=) (visual)
+vmap <silent> <Plug>VChangeColonToEqual <esc>:set nohlsearch<cr>gv:s/?\?:.*/=/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VChangeColonToEqual", v:count)<cr>
+vmap <silent> \cle <Plug>VChangeColonToEqual
+
+" Change CoLon to Equal (=) with braces
+map <silent> <Plug>ChangeColonToEqualWithBraces V<Plug>VChangeColonToEqualWithBraces
+  \:call repeat#set("\<Plug>ChangeColonToEqualWithBraces", v:count)<cr>
+map <silent> \clb <Plug>ChangeColonToEqualWithBraces
+
+" Change CoLon to Equal (=) with braces (visual)
+vmap <silent> <Plug>VChangeColonToEqualWithBraces <esc>:set nohlsearch<cr>gv:s/\(\w*\)\(?\?:.*\)/\1={\1}<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VChangeColonToEqualWithBraces", v:count)<cr>
+vmap <silent> \clb <Plug>VChangeColonToEqualWithBraces
+
 " Change CoLon to Comma
 map <silent> <Plug>ChangeColonToComma V<Plug>VChangeColonToComma
   \:call repeat#set("\<Plug>ChangeColonToComma", v:count)<cr>
 map <silent> \clc <Plug>ChangeColonToComma
 
 " Change CoLon to Comma (visual)
-vmap <silent> <Plug>VChangeColonToComma <esc>:set nohlsearch<cr>gv:s/:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
+vmap <silent> <Plug>VChangeColonToComma <esc>:set nohlsearch<cr>gv:s/?\?:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeColonToComma", v:count)<cr>
 vmap <silent> \clc <Plug>VChangeColonToComma
 
@@ -249,7 +280,7 @@ map <silent> <Plug>ColonDelete V<Plug>VColonDelete
 map <silent> \cld <Plug>ColonDelete
 
 " Delete after CoLon (visual)
-vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
+vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/?\?:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
 vmap <silent> \cld <Plug>VColonDelete
 
@@ -293,6 +324,11 @@ autocmd BufNewFile,BufRead *.mdx set syntax=markdown.jsx
 " TODO: better macro
 nmap <silent>\ft :s/\(true\)\\|\(false\)/true<cr>:nohl<cr>
 nmap <silent>\ff :s/\(true\)\\|\(false\)/false<cr>:nohl<cr>
+
+" for lsp_definitions to behave well with react
+nmap go g#ggNgd
+
+set mouse=r
 
 
 " nnoremap n nzzzv

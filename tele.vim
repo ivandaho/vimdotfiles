@@ -17,7 +17,7 @@ require('telescope').setup{
 			 width = 0.999,
 			 height = 0.5,
 			 anchor = "S",
-			 -- preview_cutoff = 9999999,
+			 preview_cutoff = 20,
 			},
 		 scroll_speed = 2
 		},
@@ -49,7 +49,7 @@ require("telescope").load_extension("ui-select")
 mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true" )
 mapWTheme('n', '\\ta', 'live_grep')
 mapWTheme('n', 'gd', 'lsp_definitions')
-mapWTheme('n', 'gr', 'lsp_references', "fname_width = 60")
+mapWTheme('n', 'gr', 'lsp_references', "fname_width = 120")
 EOF
 
 

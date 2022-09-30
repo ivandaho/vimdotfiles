@@ -1,3 +1,6 @@
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
 yabai -m config window_border_width 8
 yabai -m config normal_window_border_color 0x00FFFFFF
 yabai -m config window_opacity off
@@ -6,9 +9,8 @@ yabai -m config normal_window_opacity 0.70
 yabai -m rule --add app!="^(Alacritty)\$" manage=off
 # yabai -m rule --add app!="^(Alacritty|Firefox)\$" manage=off
 yabai -m config layout bsp
-yabai -m config --space 2 top_padding 40
-yabai -m config --space 2 right_padding 40
-yabai -m config --space 2 left_padding 40
-yabai -m config --space 2 window_gap 40
-
-yabai -m config --space 2 bottom_padding 200
+yabai -m config --space 2 top_padding 10
+yabai -m config --space 2 right_padding 10
+yabai -m config --space 2 left_padding 10
+yabai -m config --space 2 window_gap 10
+yabai -m config --space 2 bottom_padding 10

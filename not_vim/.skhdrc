@@ -1,10 +1,12 @@
-:: leaderMode @ : yabai -m config window_shadow on;\
- 									yabai -m config window_border on;\
- 									yabai -m config window_border_width 8
+:: leaderMode @
 
-:: default : yabai -m config window_shadow on;\
-									yabai -m config window_border off;\
-									yabai -m config window_opacity off
+# :: leaderMode @ : yabai -m config window_shadow on;\
+ 									# yabai -m config window_border on;\
+ 									# yabai -m config window_border_width 8
+# 
+# :: default : yabai -m config window_shadow off;\
+# 									yabai -m config window_border off;
+									# yabai -m config window_opacity off
 
 :: thirdsMode @
 :: fullScreenMode @
@@ -44,18 +46,18 @@ leaderMode < y : yabai -m space --padding rel:5:5:5:5;yabai -m space --gap rel:5
 # increase padding
 leaderMode < u : yabai -m space --padding rel:-5:-5:-5:-5;yabai -m space --gap rel:-5:-5:-5:-5;
 # reset padding
-leaderMode < o : yabai -m config --space 2 top_padding 40;\
-								 yabai -m config --space 2 right_padding 40;\
-								 yabai -m config --space 2 left_padding 40;\
-								 yabai -m config --space 2 window_gap 40;\
+leaderMode < o : yabai -m config --space 2 top_padding 10;\
+								 yabai -m config --space 2 right_padding 10;\
+								 yabai -m config --space 2 left_padding 10;\
+								 yabai -m config --space 2 window_gap 10;\
 								 yabai -m config --space 2 bottom_padding 200;\
 								 skhd -k "escape"
 
-leaderMode < p : yabai -m config --space 2 top_padding 40;\
-                 yabai -m config --space 2 right_padding 40;\
-                 yabai -m config --space 2 left_padding 40;\
-                 yabai -m config --space 2 window_gap 40;\
-                 yabai -m config --space 2 bottom_padding 40;\
+leaderMode < p : yabai -m config --space 2 top_padding 10;\
+                 yabai -m config --space 2 right_padding 10;\
+                 yabai -m config --space 2 left_padding 10;\
+                 yabai -m config --space 2 window_gap 10;\
+                 yabai -m config --space 2 bottom_padding 10;\
                  skhd -k "escape"
 
 leaderMode < f ; flipMode
@@ -69,6 +71,11 @@ leaderMode < 0x18 : yabai -m space --balance y-axis;skhd -k "escape"
 # '-'
 leaderMode < 0x1B : yabai -m space --layout bsp;skhd -k "escape"
 leaderMode < q : yabai -m window --toggle float;skhd -k "escape"
+# todo add a mode for this instead of occupying 3 binds
+leaderMode < w : yabai -m config --space 2 window_shadow float;skhd -k "escape"
+leaderMode < e : yabai -m config --space 2 window_shadow on;skhd -k "escape"
+leaderMode < r : yabai -m config --space 2 window_shadow off;skhd -k "escape"
+
 
 flipMode < h: yabai -m space --mirror y-axis
 flipMode < l: yabai -m space --mirror y-axis
@@ -127,8 +134,12 @@ fullScreenMode < j : yabai -m window --toggle zoom-parent;\
 # move window to recent monitor, resize, and maintain focus
 leaderMode < m ; displayMode
 displayMode < m : cur_window=$(yabai -m query --windows --window | jq '.id') && \
-                 yabai -m window --display recent && \
-                 yabai -m window --focus ${cur_window} && \
-                 yabai -m window --grid 27:63:1:1:61:25;skhd -k "escape"
+                  yabai -m window --display recent && \
+                  yabai -m window --focus ${cur_window} && \
+                  yabai -m window --grid 27:63:1:1:61:25;skhd -k "escape"
 
-
+displayMode < k : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                  yabai -m window --display recent && \
+                  yabai -m window --focus ${cur_window} && \
+                  yabai -m window --grid 1:1:0:0:1:1;\
+								  skhd -k "escape"
