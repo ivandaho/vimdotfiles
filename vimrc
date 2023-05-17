@@ -95,8 +95,6 @@ map <leader>gb :Git blame<cr>
 map <leader>gc :Commits<cr>
 map <leader>bc :BCommits<cr>
 
-" autocmd QuickFixCmdPost *grep* cwindow
-
 " close buffer
 nnoremap tq :bd<cr>
 " close buffer and flush
@@ -118,6 +116,7 @@ sunmap gE
 let g:jsx_ext_required = 0
 set showcmd
 
+" console logs
 map <leader>csl yss)Iconsole.log<esc>
 map <leader>csc _v$hyPa: , <esc>hhv_S'yss)Iconsole.log<esc>
 map <leader>css yss'yss)Iconsole.log<esc>
@@ -152,39 +151,6 @@ let g:fzf_colors =
   \ "header":  ["fg", "WildMenu"] }
 let g:fzf_layout={'down':'40%'}
 
-nmap <c-p> :FZF<cr>
-nmap <leader>p :FZF<cr>
-nmap <c-\> :call fzf#vim#buffers({'options': ['--layout=default', '--info=inline']})<cr>
-
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noruler noshowmode
-  \| autocmd BufLeave <buffer> set laststatus=2 ruler
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* FindLiteral call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --glob "!coverage" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-command! -bang -nargs=* FindRegExp call fzf#vim#grep('rg --column --line-number --no-heading --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --glob "!coverage" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* FindRegExpRespectIgnore call fzf#vim#grep('rg --column --line-number --no-heading --ignore-case --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --glob "!coverage" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* FindRegExpCaseSensitive call fzf#vim#grep('rg --column --line-number --no-heading --no-ignore --hidden --follow --glob "!.git/*" --glob "!package-lock.json" --glob "!build" --glob "!node_modules" --glob "!coverage" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, fzf#vim#with_preview(), <bang>0)
-
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%ae %C(green)%cr"'
-let g:fzf_preview_window = ['right:40%', 'ctrl-h']
-
-map <Plug>ExportConstFromClipboard o<c-r>0<esc>Iexport const <esc>A = '<c-r>0';<esc>
-  \:call repeat#set("\<Plug>ExportConstFromClipboard", v:count)<cr>
-map \fat <Plug>ExportConstFromClipboard
-
-map \la :FindLiteral<Space>
-map \a :FindRegExp<Space>
-map \s :FindRegExpRespectIgnore<Space>
-map \ca :FindRegExpCaseSensitive<Space>
 
 map <Plug>NewLineAtSpace f cl<cr><esc>
   \:call repeat#set("\<Plug>NewLineAtSpace", v:count)<cr>
@@ -193,7 +159,6 @@ map \ts <Plug>NewLineAtSpace
 " copy file name
 map \cfn :let @0=expand('%:t')<cr>
 map \ccfn :let @+=expand('%:t')<cr>
-map \cccfn \cfni0Iconst A: React.FC<0Props> = () => {}O//joexport default 0ggwwyiwOinterface 0 {}O//
 " copy file path
 map \cfp :let @0=@%<cr>
 map \ccfp :let @+=@%<cr>
@@ -219,7 +184,7 @@ map \$r :so ~/.config/nvim/vimrc<cr>
 map \$R :so ~/.config/nvim/vimrc<cr>
 
 
-map g<esc> :call v:lua.vim.lsp.util.buf_clear_references()<cr>
+map <silent>g<esc> :call v:lua.vim.lsp.util.buf_clear_references()<cr>
 
 " Change Equal (=) Delete
 map <silent> <Plug>ChangeEqualDelete V<Plug>VChangeEqualDelete
@@ -286,19 +251,12 @@ map <silent> <Plug>AddTryCatchWithSetState VS{Itry $%A finally {}Othis.setSta
   \:call repeat#set("\<Plug>AddTryCatchWithSetState", v:count)<cr>
 map <silent> \tc <Plug>AddTryCatchWithSetState
 
-" provide interfaces to a class
-map \cis _wye$bea<I0Props, I0State>kointerface I0Props {}interface I0State {}
 map \ia oimport 0 from './0';
-
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
-let $FZF_DEFAULT_COMMAND = 'rg --files'
 
-" copy jira ticket number with braces during commit message, if branch name starts with ticket number
-map <leader>cbn _4j3wy3e_gg$
-map <leader>cbb _4j3wy3e:let @0='[0]'<cr>_gg$
 map <silent> <leader><esc> :ccl<cr>
 :autocmd FileType qf nnoremap <silent> <buffer> o <CR>:cclose<CR>
 
@@ -316,8 +274,3 @@ nmap <silent>\ff :s/\(true\)\\|\(false\)/false<cr>:nohl<cr>
 nmap go g#ggNgd
 
 set mouse=r
-
-
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
-" nnoremap J mzJ`z

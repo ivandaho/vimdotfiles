@@ -5,8 +5,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bkad/CamelCaseMotion'
 Plug 'groenewege/vim-less'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
