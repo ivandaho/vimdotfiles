@@ -26,7 +26,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'darrikonn/vim-gofmt'
 Plug 'iloginow/vim-stylus'
 Plug 'neovim/nvim-lspconfig'
-Plug 'jose-elias-alvarez/null-ls.nvim', { 'branch': 'main' }
 Plug 'MunifTanjim/prettier.nvim', { 'branch': 'main' }
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'

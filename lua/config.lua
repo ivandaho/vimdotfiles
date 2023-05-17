@@ -4,8 +4,6 @@ local on_attach = function(client, bufnr)
 
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-	-- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -17,10 +15,6 @@ local on_attach = function(client, bufnr)
 	-- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
 	-- end
 			
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-
-
 	vim.api.nvim_exec(
 	[[
 		function! Highlight()
@@ -31,11 +25,8 @@ local on_attach = function(client, bufnr)
 
 		autocmd CursorHold * call Highlight()
 	]], false)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
-
--- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gw', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
 local nvim_lsp = require'lspconfig'
 
@@ -67,27 +58,7 @@ nvim_lsp.golangci_lint_ls.setup{
 	capabilities = capabilities
 }
 
-local null_ls = require("null-ls")
 local prettier = require("prettier")
-
--- null_ls.setup({
--- 	sources = {
--- 		require("null-ls").builtins.formatting.stylua,
--- 		require("null-ls").builtins.diagnostics.eslint,
--- 		require("null-ls").builtins.completion.spell,
--- 	},
---   on_attach = function(client, bufnr)
---     if client.resolved_capabilities.document_formatting then
---       vim.cmd("nnoremap <silent><buffer> <Leader>q :lua vim.lsp.buf.formatting()<CR>")
---       -- format on save
---       -- vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
---     end
---
---     if client.resolved_capabilities.document_range_formatting then
---       vim.cmd("xnoremap <silent><buffer> <Leader>q :lua vim.lsp.buf.range_formatting({})<CR>")
---     end
---   end,
--- })
 
 prettier.setup({
   bin = 'prettier', -- or `prettierd`
@@ -251,14 +222,4 @@ cmp.setup.cmdline('/', {
 	sources = {
 		{ name = 'buffer' }
 	}
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline' }
-	})
 })
