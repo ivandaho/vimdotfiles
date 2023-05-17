@@ -48,7 +48,7 @@ require("telescope").load_extension("ui-select")
 
 mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true" )
 mapWTheme('n', '\\ta', 'live_grep')
-mapWTheme('n', 'gd', 'lsp_definitions')
+mapWTheme('n', 'gd', 'lsp_definitions', "fname_width = 120")
 mapWTheme('n', 'gr', 'lsp_references', "fname_width = 120")
 EOF
 
@@ -57,4 +57,3 @@ nmap <c-p> <cmd>Telescope find_files<cr>
 nmap :: <cmd>Telescope command_history<cr>
 
 nnoremap <silent> gf :call v:lua.vim.lsp.buf.code_action()<cr>
-vnoremap <silent> gf :call v:lua.vim.lsp.buf.range_code_action()<cr>
