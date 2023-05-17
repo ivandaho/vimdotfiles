@@ -40,7 +40,7 @@ let g:lightline = {
 		    \ },
     \ 'colorscheme': 'gruvbox',
     \ 'active': {
-		    \ 'left': [ [ 'mode'],[ 'cocstatus','paste' ],
+		    \ 'left': [ [ 'mode'],['paste' ],
 		    \           [ 'readonly', 'relativepath', 'modified' ] ],
 		    \ 'right': [
 		    \            [ 'gitbranch'],[ 'filetype' ] ] },
@@ -51,7 +51,6 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'LightlineBranchName',
       \   'filename': 'LightlineFilename',
-      \   'cocstatus': 'StatusDiagnostic'
       \ },
       \ }
 
@@ -62,20 +61,6 @@ endfunction
 function! LightlineBranchName()
   return winwidth(0) > 120 ? FugitiveHead() : ''
 endfunction
-
-" for custom lightline status (via coc.nvim)
-function! StatusDiagnostic() abort
-	  let info = get(b:, 'coc_diagnostic_info', {})
-	  if empty(info) | return '' | endif
-	  let msgs = []
-	  " if get(info, 'error', 0)
-	    call add(msgs, 'E' . info['error'])
-	  " endif
-	  " if get(info, 'warning', 0)
-	    call add(msgs, 'W' . info['warning'])
-	  " endif
-    return join(msgs, ' ')
-	endfunction
 
 "backspace fix
 :set backspace=start,indent,eol

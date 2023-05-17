@@ -35,14 +35,6 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" coc start
-" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-" coc end
-
 " telescope start
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -53,9 +45,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' , 'branch': 'mai
 call plug#end()
 
 source ~/.config/nvim/vimrc
-
-" use coc
-" source coc.vim
 
 " use telescope
 source ~/.config/nvim/tele.vim
