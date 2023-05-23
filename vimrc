@@ -117,9 +117,18 @@ let g:jsx_ext_required = 0
 set showcmd
 
 " console logs
-map <leader>csl yss)Iconsole.log<esc>
-map <leader>csc _v$hyPa: , <esc>hhv_S'yss)Iconsole.log<esc>
-map <leader>css yss'yss)Iconsole.log<esc>
+map <Plug>ConSoleLog yss)Iconsole.log<esc>
+  \:call repeat#set("\<Plug>ConSoleLog", v:count)<cr>
+map <leader>csl <Plug>ConSoleLog
+
+map <Plug>ConSolelogCopy _v$hyPa: , <esc>hhv_S'yss)Iconsole.log<esc>
+  \:call repeat#set("\<Plug>ConSolelogCopy", v:count)<cr>
+map <leader>csc <Plug>ConSolelogCopy
+
+map <Plug>ConsoleLogString yss'yss)Iconsole.log<esc>
+  \:call repeat#set("\<Plug>ConsoleLogString", v:count)<cr>
+map <leader>css <Plug>ConsoleLogString
+
 
 map <leader>fs :syntax sync fromstart<cr>
 " cd to the current's file's directory
@@ -154,14 +163,14 @@ let g:fzf_layout={'down':'40%'}
 
 map <Plug>NewLineAtSpace f cl<cr><esc>
   \:call repeat#set("\<Plug>NewLineAtSpace", v:count)<cr>
-map \ts <Plug>NewLineAtSpace
+map <leader>ts <Plug>NewLineAtSpace
 
 " copy file name
-map \cfn :let @0=expand('%:t')<cr>
-map \ccfn :let @+=expand('%:t')<cr>
+map <leader>cfn :let @0=expand('%:t')<cr>
+map <leader>ccfn :let @+=expand('%:t')<cr>
 " copy file path
-map \cfp :let @0=@%<cr>
-map \ccfp :let @+=@%<cr>
+map <leader>cfp :let @0=@%<cr>
+map <leader>ccfp :let @+=@%<cr>
 
 " useful for component props
 map <Plug>CloneProps $vbyPa=<esc>lveS}athis.props.<esc>
@@ -172,16 +181,16 @@ map <Plug>CloneExact $vbyPa=<esc>lveS}
             \:call repeat#set("\<Plug>CloneExact", v:count)<cr>
 map <Plug>CloneThis $vbyPa=<esc>lveS}athis.<esc>
             \:call repeat#set("\<Plug>CloneThis", v:count)<cr>
-map \cp <Plug>CloneProps
-map \cst <Plug>CloneState
-map \ce <Plug>CloneExact
-map \ct <Plug>CloneThis
+map <leader>cp <Plug>CloneProps
+map <leader>cst <Plug>CloneState
+map <leader>ce <Plug>CloneExact
+map <leader>ct <Plug>CloneThis
 
 map <silent>/<esc> :nohl<cr>
 map <silent>/<tab> :nohl<cr>
-map <silent>\$$ :e ~/.config/nvim/vimrc<cr>
-map \$r :so ~/.config/nvim/vimrc<cr>
-map \$R :so ~/.config/nvim/vimrc<cr>
+map <silent><leader>$$ :e ~/.config/nvim/vimrc<cr>
+map <leader>$r :so ~/.config/nvim/vimrc<cr>
+map <leader>$R :so ~/.config/nvim/vimrc<cr>
 
 
 map <silent>g<esc> :call v:lua.vim.lsp.util.buf_clear_references()<cr>
@@ -189,69 +198,79 @@ map <silent>g<esc> :call v:lua.vim.lsp.util.buf_clear_references()<cr>
 " Change Equal (=) Delete
 map <silent> <Plug>ChangeEqualDelete V<Plug>VChangeEqualDelete
   \:call repeat#set("\<Plug>ChangeEqualDelete", v:count)<cr>
-map <silent> \cwd <Plug>ChangeEqualDelete
+map <silent> <leader>cwd <Plug>ChangeEqualDelete
 
 " Change Equal (=) Delete (visual)
 vmap <silent> <Plug>VChangeEqualDelete <esc>:set nohlsearch<cr>gv:s/=.*//<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeEqualDelete", v:count)<cr>
-vmap <silent> \cwd <Plug>VChangeEqualDelete
+vmap <silent> <leader>cwd <Plug>VChangeEqualDelete
 
 " Change CoLon to Equal (=)
 map <silent> <Plug>ChangeColonToEqual V<Plug>VChangeColonToEqual
   \:call repeat#set("\<Plug>ChangeColonToEqual", v:count)<cr>
-map <silent> \cle <Plug>ChangeColonToEqual
+map <silent> <leader>cle <Plug>ChangeColonToEqual
 
 " Change CoLon to Equal (=) (visual)
 vmap <silent> <Plug>VChangeColonToEqual <esc>:set nohlsearch<cr>gv:s/?\?:.*/=/<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeColonToEqual", v:count)<cr>
-vmap <silent> \cle <Plug>VChangeColonToEqual
+vmap <silent> <leader>cle <Plug>VChangeColonToEqual
 
 " Change CoLon to Equal (=) with braces
 map <silent> <Plug>ChangeColonToEqualWithBraces V<Plug>VChangeColonToEqualWithBraces
   \:call repeat#set("\<Plug>ChangeColonToEqualWithBraces", v:count)<cr>
-map <silent> \clb <Plug>ChangeColonToEqualWithBraces
+map <silent> <leader>clb <Plug>ChangeColonToEqualWithBraces
 
 " Change CoLon to Equal (=) with braces (visual)
 vmap <silent> <Plug>VChangeColonToEqualWithBraces <esc>:set nohlsearch<cr>gv:s/\(\w*\)\(?\?:.*\)/\1={\1}<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeColonToEqualWithBraces", v:count)<cr>
-vmap <silent> \clb <Plug>VChangeColonToEqualWithBraces
+vmap <silent> <leader>clb <Plug>VChangeColonToEqualWithBraces
 
 " Change CoLon to Comma
 map <silent> <Plug>ChangeColonToComma V<Plug>VChangeColonToComma
   \:call repeat#set("\<Plug>ChangeColonToComma", v:count)<cr>
-map <silent> \clc <Plug>ChangeColonToComma
+map <silent> <leader>clc <Plug>ChangeColonToComma
 
 " Change CoLon to Comma (visual)
 vmap <silent> <Plug>VChangeColonToComma <esc>:set nohlsearch<cr>gv:s/?\?:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeColonToComma", v:count)<cr>
-vmap <silent> \clc <Plug>VChangeColonToComma
+vmap <silent> <leader>clc <Plug>VChangeColonToComma
 
 " Delete after CoLon
 map <silent> <Plug>ColonDelete V<Plug>VColonDelete
   \:call repeat#set("\<Plug>ColonDelete", v:count)<cr>
-map <silent> \cld <Plug>ColonDelete
+map <silent> <leader>cld <Plug>ColonDelete
 
 " Delete after CoLon (visual)
 vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/?\?:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
-vmap <silent> \cld <Plug>VColonDelete
+vmap <silent> <leader>cld <Plug>VColonDelete
+
+" Delete after CoLon retain colon
+map <silent> <Plug>ColonDelete V<Plug>VColonDelete
+  \:call repeat#set("\<Plug>ColonDelete", v:count)<cr>
+map <silent> <leader>clsd <Plug>ColonDelete
+
+" Delete after CoLon retain colon (visual)
+vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/?\?:.*/:/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
+vmap <silent> <leader>clsd <Plug>VColonDelete
 
 " Change Tab to Colon. Useful when copying model from swagger
 map <silent> <Plug>ChangeTabToColon V<Plug>VChangeTabToColon
   \:call repeat#set("\<Plug>ChangeTabToColon", v:count)<cr>
-map <silent> \ctc <Plug>ChangeTabToColon
+map <silent> <leader>ctc <Plug>ChangeTabToColon
 
 " Change Tab to Colon. (visual) Useful when copying model from swagger
 vmap <silent> <Plug>VChangeTabToColon <esc>:set nohlsearch<cr>gv:s/	/:/<cr>:let @/=''<cr>:set hlsearch<cr>
   \:call repeat#set("\<Plug>VChangeTabToColon", v:count)<cr>
-vmap <silent> \ctc <Plug>VChangeTabToColon
+vmap <silent> <leader>ctc <Plug>VChangeTabToColon
 
 " Add try catch with set loading state to api call
 map <silent> <Plug>AddTryCatchWithSetState VS{Itry $%A finally {}Othis.setState({loading: false})yykkPffcwtruej"0p
   \:call repeat#set("\<Plug>AddTryCatchWithSetState", v:count)<cr>
-map <silent> \tc <Plug>AddTryCatchWithSetState
+map <silent> <leader>tc <Plug>AddTryCatchWithSetState
 
-map \ia oimport 0 from './0';
+map <leader>ia oimport 0 from './0';
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
@@ -267,8 +286,8 @@ hi LspReferenceWrite guibg=#FFFFFF ctermbg=100
 autocmd BufNewFile,BufRead *.mdx set syntax=markdown.jsx
 
 " TODO: better macro
-nmap <silent>\ft :s/\(true\)\\|\(false\)/true<cr>:nohl<cr>
-nmap <silent>\ff :s/\(true\)\\|\(false\)/false<cr>:nohl<cr>
+nmap <silent><leader>ft :s/\(true\)\\|\(false\)/true<cr>:nohl<cr>
+nmap <silent><leader>ff :s/\(true\)\\|\(false\)/false<cr>:nohl<cr>
 
 " for lsp_definitions to behave well with react
 nmap go g#ggNgd
