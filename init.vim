@@ -3,15 +3,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'bkad/CamelCaseMotion'
-Plug 'groenewege/vim-less'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'pangloss/vim-javascript'
+" Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'tomtom/tcomment_vim'
 Plug 'chrisbra/csv.vim'
@@ -22,23 +21,27 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
 Plug 'darrikonn/vim-gofmt'
-Plug 'iloginow/vim-stylus'
 Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/null-ls.nvim', { 'branch': 'main' } " prettier.nvim
 Plug 'MunifTanjim/prettier.nvim', { 'branch': 'main' }
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'jose-elias-alvarez/null-ls.nvim', { 'branch': 'main' }
 
 " telescope start
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' , 'branch': 'main'}
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
 " telescope end
+
+" still need fzf for commit browser i guess
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 

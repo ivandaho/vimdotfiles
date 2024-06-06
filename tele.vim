@@ -27,6 +27,8 @@ require('telescope').setup{
 				["<esc>"] = actions.close,
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
+        ["<C-s>"] = actions.cycle_previewers_next,
+        ["<C-a>"] = actions.cycle_previewers_prev,
 			}
 		}
 	},
@@ -40,6 +42,13 @@ require('telescope').setup{
 		["ui-select"] = {
       require("telescope.themes").get_cursor {
       }
+    },
+		fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
     }
 	},
 }
@@ -48,8 +57,23 @@ require("telescope").load_extension("ui-select")
 
 mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true" )
 mapWTheme('n', '<leader>ta', 'live_grep')
-mapWTheme('n', 'gd', 'lsp_definitions', "fname_width = 120")
-mapWTheme('n', 'gr', 'lsp_references', "fname_width = 120")
+mapWTheme('n', 'gd', 'lsp_definitions', "fname_width = 120, show_line = false")
+mapWTheme('n', 'gr', 'lsp_references', "fname_width = 250, show_line = false")
+" -- mapWTheme('n', '<leader>gc', 'git_commits')
+" mapWTheme('n', '<leader>bc', 'git_bcommits')
+"
+"
+" local builtin = require("telescope.builtin")
+"
+" my_git_commits = function()
+"   local opts = {}
+"   opts.git_command = {"git", "log", "--pretty=format:%C(#8ec07c)%h%<(20,trunc) %C(#b8bb26 bold)%an %C(#928374 no-bold)%as %C(#d3869b)%s"}
+" 	builtin.git_commits(opts)
+" end
+"
+"
+" -- vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>lua my_git_commits()<cr>", opts)
+"
 EOF
 
 

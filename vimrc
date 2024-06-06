@@ -76,9 +76,6 @@ au GUIEnter * set vb t_vb=
 set incsearch
 set scrolloff=1
 
-let indent_guides_guide_size=1
-let indent_guides_enable_on_vim_startup=0
-
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
 autocmd FileType stylus setlocal shiftwidth=2 expandtab
@@ -92,8 +89,10 @@ map <leader>gs :G<cr>
 map <leader>gb :Git blame<cr>
 
 "fzf.vim binding
+let g:fzf_vim = {}
+let g:fzf_vim.commits_log_options = '--graph --color=always --format="%C(#8ec07c)%h%<(20,trunc) %C(#b8bb26 bold)%an %C(#928374 no-bold)%as %C(#d3869b)%s"'
 map <leader>gc :Commits<cr>
-map <leader>bc :BCommits<cr>
+" map <leader>bc :BCommits<cr>
 
 " close buffer
 nnoremap tq :bd<cr>
@@ -113,7 +112,6 @@ sunmap E
 sunmap gE
 " end CamelCaseMotion
 
-let g:jsx_ext_required = 0
 set showcmd
 
 " console logs
@@ -246,14 +244,14 @@ vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/?\?:.*//<cr>:let @
 vmap <silent> <leader>cld <Plug>VColonDelete
 
 " Delete after CoLon retain colon
-map <silent> <Plug>ColonDelete V<Plug>VColonDelete
-  \:call repeat#set("\<Plug>ColonDelete", v:count)<cr>
-map <silent> <leader>clsd <Plug>ColonDelete
+map <silent> <Plug>ColonDeleteRetain V<Plug>VColonDeleteRetain
+  \:call repeat#set("\<Plug>ColonDeleteRetain", v:count)<cr>
+map <silent> <leader>clsd <Plug>ColonDeleteRetain
 
 " Delete after CoLon retain colon (visual)
-vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/?\?:.*/:/<cr>:let @/=''<cr>:set hlsearch<cr>
-  \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
-vmap <silent> <leader>clsd <Plug>VColonDelete
+vmap <silent> <Plug>VColonDeleteRetain <esc>:set nohlsearch<cr>gv:s/?\?:.*/:/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VColonDeleteRetain", v:count)<cr>
+vmap <silent> <leader>clsd <Plug>VColonDeleteRetain
 
 " Change Tab to Colon. Useful when copying model from swagger
 map <silent> <Plug>ChangeTabToColon V<Plug>VChangeTabToColon
@@ -292,4 +290,10 @@ nmap <silent><leader>ff :s/\(true\)\\|\(false\)/false<cr>:nohl<cr>
 " for lsp_definitions to behave well with react
 nmap go g#ggNgd
 
+nmap gas viwo<esc>W~hyeu/0<cr>
+" quick format eslint then prettier
+nmap \ea \es\q
+
 set mouse=r
+
+map <leader>ref <leader>cfn :Rename _0<cr>

@@ -79,6 +79,8 @@ prettier.setup({
 
 vim.api.nvim_set_keymap('n', '<Leader>q', ':Prettier<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>es', ':EslintFixAll<CR>', opts)
+vim.api.nvim_set_keymap('i', 'fnfn', '() => {}i<enter>O', opts)
+vim.api.nvim_set_keymap('i', 'fnfl', '() => {}i<enter>Oja', opts)
 
 require'nvim-treesitter.configs'.setup {
 -- One of "all", "maintained" (parsers with maintainers), or a list of languages
