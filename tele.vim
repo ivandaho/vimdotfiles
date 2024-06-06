@@ -59,21 +59,21 @@ mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = tr
 mapWTheme('n', '<leader>ta', 'live_grep')
 mapWTheme('n', 'gd', 'lsp_definitions', "fname_width = 120, show_line = false")
 mapWTheme('n', 'gr', 'lsp_references', "fname_width = 250, show_line = false")
-" -- mapWTheme('n', '<leader>gc', 'git_commits')
-" mapWTheme('n', '<leader>bc', 'git_bcommits')
-"
-"
-" local builtin = require("telescope.builtin")
-"
-" my_git_commits = function()
-"   local opts = {}
-"   opts.git_command = {"git", "log", "--pretty=format:%C(#8ec07c)%h%<(20,trunc) %C(#b8bb26 bold)%an %C(#928374 no-bold)%as %C(#d3869b)%s"}
-" 	builtin.git_commits(opts)
-" end
-"
-"
-" -- vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>lua my_git_commits()<cr>", opts)
-"
+--  -- mapWTheme('n', '<leader>gc', 'git_commits')
+--  mapWTheme('n', '<leader>bc', 'git_bcommits')
+-- 
+-- 
+--  local builtin = require("telescope.builtin")
+-- 
+--  my_git_commits = function()
+--    local opts = {}
+--    opts.git_command = {"git", "log", "--pretty=format:%C(#8ec07c)%h%<(20,trunc) %C(#b8bb26 bold)%an %C(#928374 no-bold)%as %C(#d3869b)%s"}
+--  	builtin.git_commits(opts)
+--  end
+-- 
+-- 
+--  -- vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>lua my_git_commits()<cr>", opts)
+-- 
 EOF
 
 
