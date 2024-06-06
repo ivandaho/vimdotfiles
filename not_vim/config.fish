@@ -24,3 +24,6 @@ end
 
 export PATH=/Users/ivanho/Library/Python/3.8/bin:"$PATH"
 
+
+# Created by `pipx` on 2023-07-07 08:30:21
+set PATH $PATH /Users/ivanho/.local/bin
