@@ -5,7 +5,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bkad/CamelCaseMotion'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'morhetz/gruvbox'
+Plug 'ellisonleao/gruvbox.nvim'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'pangloss/vim-javascript'
 " Plug 'maxmellon/vim-jsx-pretty'
@@ -20,7 +20,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline-themes'
 " Plug 'junegunn/goyo.vim'
 Plug 'darrikonn/vim-gofmt'
 Plug 'neovim/nvim-lspconfig'
@@ -63,3 +62,5 @@ function! GrepQuickFix(pat)
   call setqflist(all)
 endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
+
+colorscheme gruvbox

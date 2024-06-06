@@ -25,10 +25,6 @@ set updatetime=300
 set laststatus=2
 set encoding=utf-8
 
-let g:gruvbox_italic=0
-let g:gruvbox_termcolors=256
-let g:gruvbox_contrast_dark='medium'
-colorscheme gruvbox
 set background=dark
 
 set noswapfile
@@ -38,7 +34,7 @@ let g:lightline = {
 		    \ 'statusline': 1,
 		    \ 'tabline': 1
 		    \ },
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'seoul256',
     \ 'active': {
 		    \ 'left': [ [ 'mode'],['paste' ],
 		    \           [ 'readonly', 'relativepath', 'modified' ] ],
