@@ -254,11 +254,11 @@ require("gruvbox").setup({
   inverse = true, -- invert background for search, diffs, statuslines and errors
   contrast = "", -- can be "hard", "soft" or empty string
   palette_overrides = {},
-  overrides = {
-		["LspReferenceRead"] = { bg = "#458599" },
-		["LspReferenceText"] = { bg = "#ebdbb2" },
-		["LspReferenceWrite"] = { bg = "#ff0000" },
-	},
+  -- overrides = {
+	-- 	["LspReferenceRead"] = { bg = "#458599" },
+	-- 	["LspReferenceText"] = { bg = "#ebdbb2" },
+	-- 	["LspReferenceWrite"] = { bg = "#ff0000" },
+	-- },
   dim_inactive = false,
   transparent_mode = false,
 })
