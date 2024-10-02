@@ -30,7 +30,7 @@ end
 
 local nvim_lsp = require'lspconfig'
 
-local servers = { 'tsserver', 'eslint', 'gopls' }
+local servers = { 'ts_ls', 'eslint', 'gopls' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
 	require('lspconfig')[lsp].setup{
