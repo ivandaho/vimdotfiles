@@ -9,7 +9,7 @@ set t_ut=
 
 set sw=2
 set ts=2
-" set et
+set et
 set number
 set relativenumber
 
@@ -264,7 +264,7 @@ map <silent> <Plug>AddTryCatchWithSetState VS{Itry $%A finally {}Othis.setSta
   \:call repeat#set("\<Plug>AddTryCatchWithSetState", v:count)<cr>
 map <silent> <leader>tc <Plug>AddTryCatchWithSetState
 
-map <leader>ia oimport 0 from './0';
+map <leader>ia ggoimport { 0 } from './0';
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
