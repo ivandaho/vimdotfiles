@@ -42,6 +42,8 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+
 call plug#end()
 
 source ~/.config/nvim/vimrc

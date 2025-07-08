@@ -10,6 +10,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj',    '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm',    '<cmd>call Black()<CR>', opts)
 	-- if client == 'gopls' then
 	-- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
 	-- end
@@ -30,7 +31,7 @@ end
 
 local nvim_lsp = require'lspconfig'
 
-local servers = { 'ts_ls', 'eslint', 'gopls' }
+local servers = { 'ts_ls', 'eslint', 'gopls', 'pyright' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
 	require('lspconfig')[lsp].setup{
