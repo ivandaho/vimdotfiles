@@ -5,7 +5,7 @@
 # ln -s ~/.config/nvim/not_vim/karabiner/ ~/.config
 
 # alacritty
-ln -F -s ~/.config/nvim/not_vim/.alacritty.yml ~/.alacritty.yml
+ln -F -s ~/.config/nvim/not_vim/.alacritty.toml ~/.alacritty.toml
 
 # git
 ln -F -s ~/.config/nvim/not_vim/.gitconfig ~/.gitconfig

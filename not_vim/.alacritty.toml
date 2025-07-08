@@ -1,0 +1,22 @@
+[[keyboard.bindings]]
+chars = "\u0011"
+key = "Q"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001E"
+key = "Key6"
+mods = "Control"
+
+[colors.primary]
+background = "#282828"
+foreground = "#ebdbb2"
+
+[font]
+size = 13.0
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Thin"
+
+[keyboard]
