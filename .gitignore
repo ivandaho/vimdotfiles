@@ -1,6 +1,7 @@
 pack
 plugbackup
 autoload/plug.vim.old
+autoload/plug.vim
 plugged
 .DS_Store
 not_vim/karabiner/automatic_backups/

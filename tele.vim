@@ -37,9 +37,16 @@ require('telescope').setup{
 	},
 	-- defaults = {},
 	pickers = {
-	find_files = {
-		-- theme = "ivy",
+    find_files = {
+      -- theme = "ivy",
 		},
+    live_grep = {
+      file_ignore_patterns = { 'node_modules', '.git' },
+      theme = "ivy",
+      additional_args = function(_)
+        return { "--hidden" }
+      end
+    },
 	},
 	extensions = {
 		["ui-select"] = {
@@ -60,7 +67,6 @@ require("telescope").load_extension("ui-select")
 
 mapWTheme('n', '<c-p>', 'find_files', "hidden = true, file_ignore_patterns = {'.git'}" )
 mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true" )
-mapWTheme('n', '<leader>ta', 'live_grep')
 mapWTheme('n', 'gd', 'lsp_definitions', "fname_width = 120, show_line = false")
 mapWTheme('n', 'gr', 'lsp_references', "fname_width = 250, show_line = false")
 --  -- mapWTheme('n', '<leader>gc', 'git_commits')
@@ -81,6 +87,7 @@ mapWTheme('n', 'gr', 'lsp_references', "fname_width = 250, show_line = false")
 EOF
 
 
+nmap <leader>ta <cmd>Telescope live_grep<cr>
 nmap :: <cmd>Telescope command_history<cr>
 
 nnoremap <silent> gf :call v:lua.vim.lsp.buf.code_action()<cr>
