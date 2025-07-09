@@ -15,6 +15,7 @@
 :: flipMode @
 :: swapMode @
 :: appSwitcherMode @
+:: infoMode @
 
 
 ctrl - f ; leaderMode
@@ -28,6 +29,7 @@ rightHalfMode < escape ; default
 flipMode < escape ; default
 swapMode < escape ; default
 appSwitcherMode < escape ; default
+infoMode < escape ; default
 
 # basic navigation
 ctrl - left: yabai -m window --focus prev;yabai -m window --focus stack.prev
@@ -42,6 +44,8 @@ leaderMode < l ; rightHalfMode
 leaderMode < j ; thirdsMode
 leaderMode < k ; fullScreenMode
 leaderMode < g ; appSwitcherMode
+leaderMode < i : infoMode; \
+                 sketchybar --trigger updateWindowInfo;skhd -k "escape"
 
 # padding stuff
 # ----------------------------------------------------------------------------------------------------
@@ -80,7 +84,7 @@ leaderMode < 0x18 : yabai -m space --balance y-axis;skhd -k "escape"
 # '-'
 leaderMode < 0x1B : yabai -m space --layout bsp;skhd -k "escape"
 leaderMode < q : yabai -m window --toggle float;skhd -k "escape"; \
-                 sketchybar --trigger updateIsFloating YABAI_EVENT="$(yabai -m query --windows --window | jq '.["is-floating"]')"
+                 sketchybar --trigger updateIsFloating
 
 # todo add a mode for this instead of occupying 3 binds
 leaderMode < w : yabai -m config --space 1 window_shadow float;skhd -k "escape"
@@ -163,8 +167,9 @@ displayMode < k : cur_window=$(yabai -m query --windows --window | jq '.id') && 
 
 
 # go to app directly instead of alt tab
-appSwitcherMode < y : open /Applications/Alacritty.app;skhd -k "escape"
-appSwitcherMode < u : open /Applications/Firefox.app;skhd -k "escape"
-appSwitcherMode < t : open /Applications/Telegram.app;skhd -k "escape"
-appSwitcherMode < 0x2B : open /System/Applications/System\ Settings.app;skhd -k "escape"
-appSwitcherMode < f : $HOME/.config/nvim/not_vim/app_switch.sh Finder;skhd -k "escape"
+appSwitcherMode < y : open /Applications/Alacritty.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
+appSwitcherMode < u : open /Applications/Firefox.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
+appSwitcherMode < t : open /Applications/Telegram.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
+appSwitcherMode < 0x2B : open /System/Applications/System\ Settings.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
+appSwitcherMode < f : $HOME/.config/nvim/not_vim/app_switch.sh Finder;sketchybar --trigger updateWindowInfo;skhd -k "escape"
+appSwitcherMode < s : $HOME/.config/nvim/not_vim/app_switch.sh Spotify;sketchybar --trigger updateWindowInfo;skhd -k "escape"

@@ -24,3 +24,4 @@ ln -F -s ~/.config/nvim/not_vim/config.fish ~/.config/fish/config.fish
 mkdir -p  ~/.config/sketchybar/plugins
 ln -F -s ~/.config/nvim/not_vim/sketchybar/sketchybarrc ~/.config/sketchybar/sketchybarrc
 ln -F -s ~/.config/nvim/not_vim/sketchybar/plugins/yabai.sh ~/.config/sketchybar/plugins/yabai.sh
+ln -F -s ~/.config/nvim/not_vim/sketchybar/plugins/app_windows.sh ~/.config/sketchybar/plugins/app_windows.sh

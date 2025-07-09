@@ -7,24 +7,35 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 sketchybar --bar topmost=on position=top height=40 blur_radius=0 color=0x00000000 y_offset=35 hidden=off
 default=(
-  padding_left=5
-  padding_right=5
-  icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
+  padding_left=0
+  padding_right=0
+  label.font="Hack Nerd Font:Bold:14.0" icon.color=0xffffffff
   label.color=0xffffffff
-  icon.padding_left=4
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
+  label.padding_left=16
+  label.padding_right=16
 )
 sketchybar --default "${default[@]}"
 
 sketchybar --add item yabai right \
-           --set yabai  script="$PLUGIN_DIR/yabai.sh" \
-           --set yabai  blur_radius=30 \
-           --add event updateIsFloating                        \
-           --subscribe yabai updateIsFloating                        \
+           --set yabai script="$PLUGIN_DIR/yabai.sh" \
+                       background.border_width=2 \
+                       background.corner_radius=8 \
+                       background.border_color=0x20ffffff \
+                       background.color=0xB4000000 \
+                       popup.align=right \
+                       popup.background.drawing=on \
+                       popup.background.border_width=2 \
+                       popup.background.corner_radius=8 \
+                       popup.background.border_color=0x20ffffff \
+                       popup.background.color=0xB4000000 \
+           --add item app_windows right \
+           --set app_windows script="$PLUGIN_DIR/app_windows.sh" \
+                             blur_radius=30 \
+           --add event updateWindowInfo \
+           --add event updateIsFloating \
+           --subscribe yabai updateIsFloating \
+           --subscribe yabai updateWindowInfo \
+           --subscribe app_windows updateWindowInfo \
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

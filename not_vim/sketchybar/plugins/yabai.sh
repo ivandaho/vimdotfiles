@@ -1,19 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-# The $NAME variable is passed from sketchybar and holds the name of
-# the item invoking this script:
-# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+PIDFILE="/tmp/sketchybar_yabai.pid"
 
-mystring="${YABAI_EVENT}"
-if [ "$YABAI_EVENT" = "true" ]; then
-  mystring="Disabled"
-else
-  mystring="Enabled"
+MYOBJ="$(yabai -m query --windows --window | jq "{app, \"is-floating\"}")"
+
+isFloating=$(echo "$MYOBJ" | jq -r 'if ."is-floating" == true then "Disabled" else "Enabled" end')
+app=$(echo "$MYOBJ" | jq -r '.app')
+sketchybar --set "$NAME" label="${isFloating}: ${app}" \
+                         drawing=on
+echo $$ > "$PIDFILE"
+sleep 3
+
+if [ -f "$PIDFILE" ] && [ "$(cat "$PIDFILE")" = "$$" ]; then
+  sketchybar --set yabai drawing=off
+  rm -f "$PIDFILE"
 fi
-
-mystring="${mystring}":"$(yabai -m query --windows --window | jq '.app')"
-
-sketchybar --set "$NAME" label=${mystring}
-sketchybar --bar hidden=off
-sleep 1
-sketchybar --bar hidden=on
