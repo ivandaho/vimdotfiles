@@ -1,0 +1,30 @@
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+sketchybar --bar topmost=on position=top height=40 blur_radius=0 color=0x00000000 y_offset=35 hidden=off
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="Hack Nerd Font:Bold:17.0"
+  label.font="Hack Nerd Font:Bold:14.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+sketchybar --add item yabai right \
+           --set yabai  script="$PLUGIN_DIR/yabai.sh" \
+           --set yabai  blur_radius=30 \
+           --add event updateIsFloating                        \
+           --subscribe yabai updateIsFloating                        \
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update

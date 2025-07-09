@@ -20,3 +20,7 @@ ln -F -s ~/.config/nvim/not_vim/.tmux.conf ~/.tmux.conf
 mkdir -p  ~/.config/fish
 ln -F -s ~/.config/nvim/not_vim/config.fish ~/.config/fish/config.fish
 
+# sketchybar
+mkdir -p  ~/.config/sketchybar/plugins
+ln -F -s ~/.config/nvim/not_vim/sketchybar/sketchybarrc ~/.config/sketchybar/sketchybarrc
+ln -F -s ~/.config/nvim/not_vim/sketchybar/plugins/yabai.sh ~/.config/sketchybar/plugins/yabai.sh

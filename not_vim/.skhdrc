@@ -14,6 +14,7 @@
 :: rightHalfMode @
 :: flipMode @
 :: swapMode @
+:: appSwitcherMode @
 
 
 ctrl - f ; leaderMode
@@ -26,6 +27,7 @@ leftHalfMode < escape ; default
 rightHalfMode < escape ; default
 flipMode < escape ; default
 swapMode < escape ; default
+appSwitcherMode < escape ; default
 
 # basic navigation
 ctrl - left: yabai -m window --focus prev;yabai -m window --focus stack.prev
@@ -39,6 +41,7 @@ leaderMode < h ; leftHalfMode
 leaderMode < l ; rightHalfMode
 leaderMode < j ; thirdsMode
 leaderMode < k ; fullScreenMode
+leaderMode < g ; appSwitcherMode
 
 # padding stuff
 # ----------------------------------------------------------------------------------------------------
@@ -76,7 +79,9 @@ leaderMode < ctrl - s ; swapMode
 leaderMode < 0x18 : yabai -m space --balance y-axis;skhd -k "escape"
 # '-'
 leaderMode < 0x1B : yabai -m space --layout bsp;skhd -k "escape"
-leaderMode < q : yabai -m window --toggle float;skhd -k "escape"
+leaderMode < q : yabai -m window --toggle float;skhd -k "escape"; \
+                 sketchybar --trigger updateIsFloating YABAI_EVENT="$(yabai -m query --windows --window | jq '.["is-floating"]')"
+
 # todo add a mode for this instead of occupying 3 binds
 leaderMode < w : yabai -m config --space 1 window_shadow float;skhd -k "escape"
 leaderMode < e : yabai -m config --space 1 window_shadow on;skhd -k "escape"
@@ -155,3 +160,11 @@ displayMode < k : cur_window=$(yabai -m query --windows --window | jq '.id') && 
                   yabai -m window --focus ${cur_window} && \
                   yabai -m window --grid 1:1:0:0:1:1;\
 								  skhd -k "escape"
+
+
+# go to app directly instead of alt tab
+appSwitcherMode < y : open /Applications/Alacritty.app;skhd -k "escape"
+appSwitcherMode < u : open /Applications/Firefox.app;skhd -k "escape"
+appSwitcherMode < t : open /Applications/Telegram.app;skhd -k "escape"
+appSwitcherMode < 0x2B : open /System/Applications/System\ Settings.app;skhd -k "escape"
+appSwitcherMode < f : $HOME/.config/nvim/not_vim/app_switch.sh Finder;skhd -k "escape"
