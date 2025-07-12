@@ -1,7 +1,7 @@
-# :: leaderMode @
+:: leaderMode @
 
-:: leaderMode @ : yabai -m config window_border off;\
- 									yabai -m config window_border_width 4;
+# :: leaderMode @ : yabai -m config window_border off;\
+#  									yabai -m config window_border_width 4;
 # 
 # :: default : yabai -m config window_shadow off;\
 # 									yabai -m config window_border off;
@@ -44,8 +44,10 @@ leaderMode < l ; rightHalfMode
 leaderMode < j ; thirdsMode
 leaderMode < k ; fullScreenMode
 leaderMode < g ; appSwitcherMode
-leaderMode < i : infoMode; \
-                 sketchybar --trigger updateWindowInfo;skhd -k "escape"
+leaderMode < i : $HOME/.config/nvim/not_vim/notif_trigger.sh;skhd -k "escape"
+
+cmd - 0x32 -> : $HOME/.config/nvim/not_vim/notif_trigger.sh;
+cmd + shift - 0x32 -> : $HOME/.config/nvim/not_vim/notif_trigger.sh;
 
 # padding stuff
 # ----------------------------------------------------------------------------------------------------
@@ -164,12 +166,26 @@ displayMode < k : cur_window=$(yabai -m query --windows --window | jq '.id') && 
                   yabai -m window --focus ${cur_window} && \
                   yabai -m window --grid 1:1:0:0:1:1;\
 								  skhd -k "escape"
+displayMode < h : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                  yabai -m window --display recent && \
+                  yabai -m window --focus ${cur_window} && \
+                  yabai -m window --grid 1:2:0:0:1:1;\
+                  yabai -m window --swap first;\
+									skhd -k "escape"
+displayMode < l : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                  yabai -m window --display recent && \
+                  yabai -m window --focus ${cur_window} && \
+                  yabai -m window --grid 1:2:1:0:1:1;\
+                  yabai -m window --swap last;\
+									skhd -k "escape"
 
 
 # go to app directly instead of alt tab
-appSwitcherMode < y : open /Applications/Alacritty.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
-appSwitcherMode < u : open /Applications/Firefox.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
-appSwitcherMode < t : open /Applications/Telegram.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
-appSwitcherMode < 0x2B : open /System/Applications/System\ Settings.app;sketchybar --trigger updateWindowInfo;skhd -k "escape"
-appSwitcherMode < f : $HOME/.config/nvim/not_vim/app_switch.sh Finder;sketchybar --trigger updateWindowInfo;skhd -k "escape"
-appSwitcherMode < s : $HOME/.config/nvim/not_vim/app_switch.sh Spotify;sketchybar --trigger updateWindowInfo;skhd -k "escape"
+appSwitcherMode < y : $HOME/.config/nvim/not_vim/app_switch.sh Alacritty;skhd -k "escape"
+appSwitcherMode < u : $HOME/.config/nvim/not_vim/app_switch.sh Firefox;skhd -k "escape"
+appSwitcherMode < t : $HOME/.config/nvim/not_vim/app_switch.sh Telegram;skhd -k "escape"
+appSwitcherMode < 0x2B : $HOME/.config/nvim/not_vim/app_switch.sh System\ Settings;skhd -k "escape" # comma (,)
+appSwitcherMode < 0x2F : $HOME/.config/nvim/not_vim/app_switch.sh Activity\ Monitor;skhd -k "escape" # comma (,)
+appSwitcherMode < f : $HOME/.config/nvim/not_vim/app_switch.sh Finder;skhd -k "escape"
+appSwitcherMode < s : $HOME/.config/nvim/not_vim/app_switch.sh Spotify;skhd -k "escape"
+appSwitcherMode < e : $HOME/.config/nvim/not_vim/app_switch.sh Microsoft\ Edge;skhd -k "escape"

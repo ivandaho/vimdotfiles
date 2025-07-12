@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 /usr/bin/env osascript <<SCRIPT
 -------------------------------------
@@ -10,3 +10,5 @@ tell application "$1"
 end tell
 -------------------------------------
 SCRIPT
+
+source /Users/$USER/.config/nvim/not_vim/notif_trigger.sh

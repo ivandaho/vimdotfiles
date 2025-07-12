@@ -1,4 +1,6 @@
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+yabai -m signal --add event=window_created action=$HOME/.config/nvim/not_vim/notif_trigger.sh
+yabai -m signal --add event=window_destroyed action=$HOME/.config/nvim/not_vim/notif_trigger.sh
 sudo yabai --load-sa
 
 yabai -m rule --add app!="^(Alacritty)\$" manage=off
