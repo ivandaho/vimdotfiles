@@ -1,6 +1,7 @@
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m signal --add event=window_created action=$HOME/.config/nvim/not_vim/notif_trigger.sh
 yabai -m signal --add event=window_destroyed action=$HOME/.config/nvim/not_vim/notif_trigger.sh
+
 sudo yabai --load-sa
 
 yabai -m rule --add app!="^(Alacritty)\$" manage=off
@@ -9,8 +10,8 @@ yabai -m rule --add app=".*" sub-layer=normal
 yabai -m rule --apply
 
 yabai -m config layout bsp
-yabai -m config --space 1 top_padding 10
-yabai -m config --space 1 right_padding 10
-yabai -m config --space 1 left_padding 10
-yabai -m config --space 1 window_gap 10
-yabai -m config --space 1 bottom_padding 10
+yabai -m config --space 2 top_padding 74
+# yabai -m config --space 2 right_padding 10
+# yabai -m config --space 2 left_padding 10
+# yabai -m config --space 2 window_gap 10
+# yabai -m config --space 2 bottom_padding 10
