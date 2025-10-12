@@ -79,7 +79,7 @@ autocmd FileType typescriptreact setlocal shiftwidth=2 noexpandtab
 autocmd FileType typescript setlocal shiftwidth=2 noexpandtab
 
 map <leader>gd :Gdiff<cr>
-map <leader>gs :G<cr>
+map <silent><leader>gs :G<cr>
 
 " Git blame
 map <leader>gb :Git blame<cr>
