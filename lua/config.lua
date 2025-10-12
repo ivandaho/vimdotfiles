@@ -127,6 +127,7 @@ require'nvim-treesitter.configs'.setup {
 		"vim",
 		"vue",
 		"yaml",
+    "terraform",
 	},
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
