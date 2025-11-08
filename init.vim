@@ -6,6 +6,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'sainnhe/gruvbox-material'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'pangloss/vim-javascript'
 " Plug 'maxmellon/vim-jsx-pretty'
@@ -65,4 +66,4 @@ function! GrepQuickFix(pat)
 endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
 
-colorscheme gruvbox
+colorscheme gruvbox-material
