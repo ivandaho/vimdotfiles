@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
 	-- if client == 'gopls' then
 	-- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
 	-- end
-			
+
 	vim.api.nvim_exec(
 	[[
 		function! Highlight()
@@ -29,20 +29,34 @@ local on_attach = function(client, bufnr)
 
 end
 
-local nvim_lsp = require'lspconfig'
-
 local servers = { 'ts_ls', 'eslint', 'gopls', 'pyright', 'sourcekit' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
-	require('lspconfig')[lsp].setup{
+	vim.lsp.config(lsp, {
 		on_attach = on_attach,
 		flags = {
 			-- This will be the default in neovim 0.7+
 			debounce_text_changes = 150,
 		},
     capabilities = capabilities
-	}
+	})
+  vim.lsp.enable(lsp)
 end
+
+vim.lsp.config('lua_ls', {
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {
+          "vim"
+        }
+      }
+    }
+  }
+})
+
+vim.lsp.enable('lua_ls')
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
@@ -50,21 +64,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 vim.lsp.handlers["textDocument/diagnostic"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
   border = "rounded",
 })
-
-
-nvim_lsp.golangci_lint_ls.setup{
-	on_attach = on_attach,
-	flags = {
-		-- This will be the default in neovim 0.7+
-		debounce_text_changes = 150,
-	},
-	filetypes = {'go'},
-	cmd = {'/Users/ivanho/go/bin/golangci-lint-langserver'},
-	init_options = {
-		command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json" };
-	},
-	capabilities = capabilities
-}
 
 local prettier = require("prettier")
 
@@ -184,19 +183,7 @@ cmp.setup({
 			end
 		end,
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-e>'] = cmp.mapping.complete({
-			config = {
-				sources = {
-					{ name = 'buffer',
-						option = {
-							get_bufnrs = function()
-								return vim.api.nvim_list_bufs()
-							end
-						}
-					}
-				}
-			}
-		}),
+		['<C-e>'] = cmp.mapping.abort(),
 
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
