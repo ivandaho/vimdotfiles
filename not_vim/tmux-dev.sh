@@ -1,9 +1,14 @@
 #!/bin/sh
 
-source ./.custom.tmux.env
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/.custom.tmux.env"
 
 version=1.0
-startServerCmd='nvm use'
+nvmUse='nvm use'
+startServerCmd0="echo ''"
+startServerCmd1="echo ''"
+startServerCmd2="echo ''"
 
 # get options
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
@@ -15,28 +20,27 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   #   shift; string=$1
   #   ;;
   -s | --start-server )
-		startServerCmd="$startServerCmd && $privateStartServerCmd"
+		startServerCmd0="$nvmUse && $privateStartServerCmd0"
+		startServerCmd1="$privateStartServerCmd1"
+		startServerCmd2="$nvmUse && $privateStartServerCmd2"
     ;;
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
-tmux new-session -n 'com' -c $HOME -s ivan \; \
-	send-keys "cd ${path1} && ${startServerCmd}" C-m \; \
-	split-window -h -c $path1 \; \
-	split-window -v -c $path1 -t 0 \; \
-	send-keys -t 1 'nvm use' C-m \; \
-	send-keys -t 2 'nvm use' C-m \; \
-	new-window -n 'webui' -c "${path2}" \; \
+tmux new-session -n 'actual' -c $HOME -s ivan \; \
+	send-keys "cd ${path0} && ${startServerCmd0}" C-m \; \
+	split-window -h -c $path0 \; \
+	send-keys -t 1 "${nvmUse}" C-m \; \
+  \
+	new-window -n 'fastapi-transaction-server' -c "${path1}" \; \
+	split-window -h -c "${path1}"\; \
+	send-keys -t 0 "${startServerCmd1}" C-m \; \
+  \
+	new-window -n 'transaction-syncer-fe' -c "${path2}" \; \
 	split-window -h -c "${path2}"\; \
-	send-keys -t 0 'nvm use' C-m \; \
-	send-keys -t 1 'nvm use' C-m \; \
-	new-window -n 'exp' -c "${path3}" \; \
-	split-window -h -c "${path3}"\; \
-	send-keys -t 0 'nvm use' C-m \; \
-	send-keys -t 0 'npm run dev' C-m \; \
-	send-keys -t 1 'nvm use' C-m \; \
-	new-window -n 'stuff' -c "${path4}" \; \
-	split-window -h -c "${path4}"\; \
-	send-keys -t 0 'nvm use' C-m \; \
-	send-keys -t 0 'npm run dev' C-m \; \
-	send-keys -t 1 'nvm use' C-m \; \
+	send-keys -t 0 "${startServerCmd2}" C-m \; \
+	send-keys -t 2 "${nvmUse}" C-m \; \
+  \
+	new-window -n 'ocr' -c "${path3}" \; \
+	split-window -h -c "${path3}"\;
+
