@@ -9,16 +9,16 @@ alias gfa=" git fetch --all"
 brew shellenv | source
 
 function fzf_git_recent_branch -d "Efficient fish keybinding for fzf with git branch"
-  eval "git branch --sort=-authordate | fzf --query (commandline)" | read -l select
+    eval "git branch --sort=-authordate | fzf --query (commandline)" | read -l select
 
-  if not test -z $select
-    eval "git checkout (builtin string trim --left --chars='* ' $select)"
-  end
+    if not test -z $select
+        eval "git checkout (builtin string trim --left --chars='* ' $select)"
+    end
 
-  commandline -f repaint
+    commandline -f repaint
 end
 
-bind \cg 'fzf_git_recent_branch'
+bind \cg fzf_git_recent_branch
 
 function nvm
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
@@ -30,3 +30,11 @@ export PATH=/Users/ivanho/Library/Python/3.9/bin:"$PATH"
 # Created by `pipx` on 2023-07-07 08:30:21
 set PATH $PATH /Users/ivanho/.local/bin
 pyenv init - fish | source
+
+source $HOME/.turso/env.fish
+
+# opencode
+fish_add_path /Users/ivanho/.opencode/bin
+
+bind \e\[1\;2D prevd-or-backward-word
+bind \e\[1\;2C nextd-or-forward-word
