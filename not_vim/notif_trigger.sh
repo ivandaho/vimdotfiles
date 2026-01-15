@@ -5,6 +5,6 @@ YABAI_RESULT="$(yabai -m query --windows)"
 RESULT=$(echo "$YABAI_RESULT" | jq -r "map(select(.app == \"$CURRENT_WINDOW\")) | map({id, app, title, hasFocus: .\"has-focus\", isMinimized: .\"is-minimized\"}) | tojson")
 
 
-RESULT2=$(echo "$RESULT" | jq -r "{yabaiWindows: ., type: \"message\", message: \"$RESULT2\"}")
+RESULT2=$(echo "$RESULT" | jq -r "{yabaiWindows: ., type: \"window\", message: \"$RESULT2\"}")
 
 echo -n "$RESULT2" | nc -U /tmp/notif-overlay.sock
