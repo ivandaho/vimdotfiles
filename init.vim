@@ -24,8 +24,7 @@ Plug 'tpope/vim-surround'
 " Plug 'junegunn/goyo.vim'
 Plug 'darrikonn/vim-gofmt'
 Plug 'neovim/nvim-lspconfig'
-Plug 'jose-elias-alvarez/null-ls.nvim', { 'branch': 'main' } " prettier.nvim
-Plug 'MunifTanjim/prettier.nvim', { 'branch': 'main' }
+Plug 'sbdchd/neoformat'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -67,3 +66,8 @@ endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
 
 colorscheme gruvbox-material
+
+let g:neoformat_try_node_exe = 1
+let g:neoformat_enabled_typescriptreact = ['eslint_d', 'prettier']
+let g:neoformat_enabled_typescript = ['eslint_d', 'prettier']
+let g:neoformat_run_all_formatters = 1
