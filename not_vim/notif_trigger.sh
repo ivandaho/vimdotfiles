@@ -7,4 +7,6 @@ RESULT=$(echo "$YABAI_RESULT" | jq -r "map(select(.app == \"$CURRENT_WINDOW\")) 
 
 RESULT2=$(echo "$RESULT" | jq -r "{yabaiWindows: ., type: \"window\", message: \"$RESULT2\"}")
 
+# echo "$RESULT2" >> ~/.config/nvim/not_vim/notif_trigger.log
+#
 echo -n "$RESULT2" | nc -U /tmp/notif-overlay.sock
