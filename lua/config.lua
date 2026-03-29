@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
   -- vim.api.nvim_set_hl(0,
 end
 
-local servers = { 'ts_ls', 'eslint', 'gopls', 'pyright', 'sourcekit' }
+local servers = { 'ts_ls', 'eslint', 'gopls', 'pyright', 'sourcekit', 'vue_ls' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
   vim.lsp.config(lsp, {
@@ -62,27 +62,27 @@ vim.lsp.handlers["textDocument/diagnostic"] = vim.lsp.with(vim.lsp.handlers.diag
   border = "rounded",
 })
 
-local prettier = require("prettier")
+-- local prettier = require("prettier")
 
-prettier.setup({
-  bin = 'prettier', -- or `prettierd`
-  filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "less",
-    "markdown",
-    "scss",
-    "typescript",
-    "typescriptreact",
-    "yaml",
-  },
-})
+-- prettier.setup({
+--   bin = 'prettier', -- or `prettierd`
+--   filetypes = {
+--     "css",
+--     "graphql",
+--     "html",
+--     "javascript",
+--     "javascriptreact",
+--     "json",
+--     "less",
+--     "markdown",
+--     "scss",
+--     "typescript",
+--     "typescriptreact",
+--     "yaml",
+--   },
+-- })
 
-vim.api.nvim_set_keymap('n', '<Leader>q', ':Prettier<CR>', opts)
+vim.api.nvim_set_keymap('n', '<Leader>q', ':Neoformat<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>es', ':EslintFixAll<CR>', opts)
 vim.api.nvim_set_keymap('i', 'fnfn', '() => {}i<enter>O', opts)
 vim.api.nvim_set_keymap('i', 'fncn', '() => ({})hi<enter>O', opts)
@@ -91,7 +91,7 @@ vim.api.nvim_set_keymap('i', 'cncn', 'className=""i', opts)
 vim.api.nvim_set_keymap('i', 'fnfl', '() => {}i<enter>Oja', opts)
 vim.api.nvim_set_keymap('i', 'fncl', '() => ({})hi<enter>Oja', opts)
 
-require 'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.config'.setup {
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
     "bash",
@@ -254,3 +254,11 @@ require("gruvbox").setup({
   transparent_mode = false,
 })
 vim.cmd("colorscheme gruvbox")
+
+-- In fugitive Git window, map 'cl' to start commit with message
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'fugitive',
+  callback = function()
+    vim.keymap.set('n', 'cl', ":Git commit -m ''<Left>", { buffer = true })
+  end,
+})
