@@ -81,8 +81,7 @@ leaderMode < ctrl - s ; swapMode
 leaderMode < 0x18 : yabai -m space --balance y-axis;skhd -k "escape"
 # '-'
 leaderMode < 0x1B : yabai -m space --layout bsp;skhd -k "escape"
-leaderMode < q : yabai -m window --toggle float;skhd -k "escape"; \
-                 sketchybar --trigger updateIsFloating
+leaderMode < q : yabai -m window --toggle float;skhd -k "escape"
 
 # todo add a mode for this instead of occupying 3 binds
 leaderMode < w : yabai -m config --space 1 window_shadow float;skhd -k "escape"
