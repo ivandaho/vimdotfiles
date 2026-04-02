@@ -3,11 +3,11 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover({border = "rounded"})<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gw', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.jump({count=1})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.jump({count=-1})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj', '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>call Black()<CR>', opts)
   -- if client == 'gopls' then
   -- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
@@ -55,12 +55,6 @@ vim.lsp.config('lua_ls', {
 
 vim.lsp.enable('lua_ls')
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-})
-vim.lsp.handlers["textDocument/diagnostic"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
-  border = "rounded",
-})
 
 -- local prettier = require("prettier")
 
@@ -91,16 +85,12 @@ vim.api.nvim_set_keymap('i', 'cncn', 'className=""i', opts)
 vim.api.nvim_set_keymap('i', 'fnfl', '() => {}i<enter>Oja', opts)
 vim.api.nvim_set_keymap('i', 'fncl', '() => ({})hi<enter>Oja', opts)
 
-require 'nvim-treesitter.config'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = {
+require 'nvim-treesitter'.install {
     "bash",
     "css",
     "dockerfile",
     "fish",
     "go",
-    "gomod",
-    "gowork",
     "graphql",
     "html",
     "http",
@@ -109,7 +99,6 @@ require 'nvim-treesitter.config'.setup {
     "jsdoc",
     "json",
     "json5",
-    "jsonc",
     "lua",
     "make",
     "markdown",
@@ -124,26 +113,7 @@ require 'nvim-treesitter.config'.setup {
     "vue",
     "yaml",
     "terraform",
-  },
-  -- Install languages synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- List of parsers to ignore installing
-  -- ignore_install = { "javascript" },
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
+    "lua"
 }
 
 
