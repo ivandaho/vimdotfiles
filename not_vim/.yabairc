@@ -12,7 +12,7 @@ yabai -m config window_animation_duration 0.1
 yabai -m config window_animation_easing ease_out_expo
 
 yabai -m config layout bsp
-yabai -m config --space 2 top_padding 74
+# yabai -m config --space 2 top_padding 74
 # yabai -m config --space 2 right_padding 10
 # yabai -m config --space 2 left_padding 10
 # yabai -m config --space 2 window_gap 10
