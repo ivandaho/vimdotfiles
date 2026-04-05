@@ -1,13 +1,14 @@
+vim.o.winborder = "rounded"
 local opts = { noremap = true, silent = true }
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover({border = "rounded"})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gw', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.jump({count=1})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.jump({count=-1})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj', '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.jump({count=1, float = true})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.jump({count=-1, float = true})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>call Black()<CR>', opts)
   -- if client == 'gopls' then
   -- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
@@ -23,7 +24,8 @@ local on_attach = function(client, bufnr)
 
 		autocmd CursorHold * call Highlight()
 	]], false)
-  -- vim.api.nvim_set_hl(0,
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
 end
 
 local servers = { 'ts_ls', 'eslint', 'gopls', 'pyright', 'sourcekit', 'vue_ls' }
