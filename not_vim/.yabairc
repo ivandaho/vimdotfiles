@@ -8,6 +8,8 @@ yabai -m rule --add app!="^(Alacritty)\$" manage=off
 # yabai -m rule --add app!="^(Alacritty|Firefox)\$" manage=off
 yabai -m rule --add app=".*" sub-layer=normal
 yabai -m rule --apply
+yabai -m config window_animation_duration 0.1
+yabai -m config window_animation_easing ease_out_expo
 
 yabai -m config layout bsp
 yabai -m config --space 2 top_padding 74
