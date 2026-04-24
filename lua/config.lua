@@ -1,4 +1,9 @@
 vim.o.winborder = "rounded"
+vim.g.gitgutter_sign_added = '█'
+vim.g.gitgutter_sign_modified = '█⫶'
+vim.g.gitgutter_sign_removed = '█▁'
+vim.g.gitgutter_sign_removed_first_line = '█▔'
+vim.g.gitgutter_sign_modified_removed = "█▟"
 local opts = { noremap = true, silent = true }
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -9,7 +14,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-j>', '<cmd>lua vim.diagnostic.jump({count=1, float = true})<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>', '<cmd>lua vim.diagnostic.jump({count=-1, float = true})<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gj', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>call Black()<CR>', opts)
   -- if client == 'gopls' then
   -- 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '\\q',    ':GoFmt<CR>', {})
   -- end
@@ -28,7 +32,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
 end
 
-local servers = { 'ts_ls', 'eslint', 'gopls', 'pyright', 'sourcekit', 'vue_ls' }
+local servers = { 'ts_ls', 'eslint', 'gopls', 'basedpyright', 'sourcekit', 'vue_ls' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in pairs(servers) do
   vim.lsp.config(lsp, {

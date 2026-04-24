@@ -42,8 +42,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
-
 call plug#end()
 
 source ~/.config/nvim/vimrc
@@ -65,9 +63,8 @@ function! GrepQuickFix(pat)
 endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
 
-colorscheme gruvbox-material
-
 let g:neoformat_try_node_exe = 1
 let g:neoformat_enabled_typescriptreact = ['eslint_d', 'prettier']
 let g:neoformat_enabled_typescript = ['eslint_d', 'prettier']
+let g:neoformat_enabled_python = ['ruff']
 let g:neoformat_run_all_formatters = 1
