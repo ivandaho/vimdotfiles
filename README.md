@@ -1,15 +1,12 @@
 A repo of the setup I use, including some other non vim dotfiles. I work mostly
 with React & TypeScript
 
-### [more info](https://github.com/ivandaho/vimdotfiles/blob/master/vimrc)
 
 # Instructions
 
-- clone to ~/.config/nvim
+- Plugin Manager [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-- `:PlugInstall` inside vim
-- link nvim coc-settings.json to ~/.vim/coc-settings.json if needed
-
+- `:Lazy` inside vim
 # fzf with ripgrep
 
 - Install [fzf](https://github.com/junegunn/fzf/),
@@ -21,7 +18,8 @@ with React & TypeScript
 # Increased Performance
 
 - Install [Kitty](https://sw.kovidgoyal.net/kitty/) or
-  [Alacritty](https://github.com/alacritty/alacritty)
+- [Alacritty](https://github.com/alacritty/alacritty) or
+- [Ghostty](https://ghostty.org/)
 
 # Others
 
@@ -36,6 +34,6 @@ Ligature Enabled Font: Fira Code size 11 from
 	- `fisher install edc/bass`
 	- nvm with bass with fisher
 
-- not_vim/setup.sh is there for convenience
+- not_vim/setup.sh is there for convenience *TODO: update this*
 - karabiner.json requires exact `product_id`, tweak as necessary 834 is 14"
 	mbp, 835 is 16" mbp

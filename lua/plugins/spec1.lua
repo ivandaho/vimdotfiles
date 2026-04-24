@@ -210,7 +210,6 @@ return {
   { 'hrsh7th/cmp-buffer', },
   {
     'itchyny/lightline.vim',
-    enabled = false,
     config = function()
       vim.g.lightline = {
         enable = {
@@ -258,9 +257,15 @@ return {
     end,
   },
   {
-    enabled = false,
     'ivandaho/lightline-lsp',
     branch = 'chore/deprecation-warning',
+    config = function()
+      vim.cmd([[let g:lightline#lsp#indicator_hints = "\uf002 "]])
+      vim.cmd([[let g:lightline#lsp#indicator_infos = "\uf129 "]])
+      vim.cmd([[let g:lightline#lsp#indicator_warnings = "\uf071 "]])
+      vim.cmd([[let g:lightline#lsp#indicator_errors = "\uf05e "]])
+      vim.cmd([[let g:lightline#lsp#indicator_ok = "\uf00c"]])
+    end
 
   },
   {
