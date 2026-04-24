@@ -13,10 +13,9 @@ background = "#282828"
 foreground = "#ebdbb2"
 
 [font]
-size = 13.0
+size = 15.0
 
 [font.normal]
 family = "JetBrains Mono"
-style = "Thin"
 
 [keyboard]
