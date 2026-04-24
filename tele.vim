@@ -41,7 +41,7 @@ require('telescope').setup{
       -- theme = "ivy",
 		},
     live_grep = {
-      file_ignore_patterns = { 'node_modules', '.git' },
+      file_ignore_patterns = { 'node_modules', '.git', 'env' },
       theme = "ivy",
       additional_args = function(_)
         return { "--hidden" }
