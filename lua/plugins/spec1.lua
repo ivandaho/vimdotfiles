@@ -15,12 +15,12 @@ return {
       vim.cmd([[map <silent> B <Plug>CamelCaseMotion_b]])
       vim.cmd([[map <silent> E <Plug>CamelCaseMotion_e]])
       vim.cmd([[map <silent> gE <Plug>CamelCaseMotion_ge]])
-      vim.cmd([[omap <silent> iw <Plug>CamelCaseMotion_iw]])
-      vim.cmd([[xmap <silent> iw <Plug>CamelCaseMotion_iw]])
-      vim.cmd([[omap <silent> ib <Plug>CamelCaseMotion_ib]])
-      vim.cmd([[xmap <silent> ib <Plug>CamelCaseMotion_ib]])
-      vim.cmd([[omap <silent> ie <Plug>CamelCaseMotion_ie]])
-      vim.cmd([[xmap <silent> ie <Plug>CamelCaseMotion_ie]])
+      vim.cmd([[omap <silent> iW <Plug>CamelCaseMotion_iw]])
+      vim.cmd([[xmap <silent> iW <Plug>CamelCaseMotion_iw]])
+      -- vim.cmd([[omap <silent> iB <Plug>CamelCaseMotion_ib]])
+      -- vim.cmd([[xmap <silent> iB <Plug>CamelCaseMotion_ib]])
+      -- vim.cmd([[omap <silent> iE <Plug>CamelCaseMotion_ie]])
+      -- vim.cmd([[xmap <silent> iE <Plug>CamelCaseMotion_ie]])
     end,
   },
   {
@@ -226,10 +226,10 @@ return {
           left = { { 'filename', 'modified' } },
           right = {}
         },
-        component_function = {
-          gitbranch = 'LightlineBranchName',
-          filename = 'LightlineFilename',
-        },
+        -- component_function = {
+        --   gitbranch = 'LightlineBranchName',
+        --   filename = 'LightlineFilename',
+        -- },
         component_expand = {
           linter_hints = 'lightline#lsp#hints',
           linter_infos = 'lightline#lsp#infos',
@@ -257,8 +257,7 @@ return {
     end,
   },
   {
-    'ivandaho/lightline-lsp',
-    branch = 'chore/deprecation-warning',
+    'spywhere/lightline-lsp',
     config = function()
       vim.cmd([[let g:lightline#lsp#indicator_hints = "\uf002 "]])
       vim.cmd([[let g:lightline#lsp#indicator_infos = "\uf129 "]])
