@@ -77,14 +77,14 @@ return {
 
         vim.api.nvim_exec(
           [[
-		function! Highlight()
-			call v:lua.vim.lsp.buf.document_highlight()
-			call v:lua.vim.lsp.util.buf_clear_references()
+            function! Highlight()
+              call v:lua.vim.lsp.buf.document_highlight()
+              call v:lua.vim.lsp.util.buf_clear_references()
 
-		endfunction
+            endfunction
 
-		autocmd CursorHold * call Highlight()
-	]], false)
+            autocmd CursorHold * call Highlight()
+          ]], false)
         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
       end
@@ -94,6 +94,17 @@ return {
       for _, lsp in pairs(servers) do
         vim.lsp.config(lsp, {
           on_attach = on_attach,
+          single_file_support = true,
+          settings = {
+            basedpyright = {
+              analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+                typeCheckingMode = 'standard',
+              },
+            },
+          },
           flags = {
             -- This will be the default in neovim 0.7+
             debounce_text_changes = 150,
