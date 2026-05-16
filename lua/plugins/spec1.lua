@@ -89,7 +89,7 @@ return {
         vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
       end
 
-      local servers = { 'ts_ls', 'eslint', 'gopls', 'basedpyright', 'sourcekit', 'vue_ls' }
+      local servers = { 'ts_ls', 'eslint', 'gopls', 'basedpyright', 'sourcekit', 'vue_ls', 'rust_analyzer' }
       local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
       for _, lsp in pairs(servers) do
         vim.lsp.config(lsp, {
