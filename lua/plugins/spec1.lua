@@ -370,7 +370,7 @@ return {
             -- theme = "ivy",
           },
           live_grep = {
-            file_ignore_patterns = { 'node_modules', '.git', 'env' },
+            file_ignore_patterns = { 'node_modules', '^%.git', '^%.env' },
             theme = "ivy",
             additional_args = function(_)
               return { "--hidden" }
@@ -394,7 +394,7 @@ return {
       require('telescope').load_extension('fzf')
       require("telescope").load_extension("ui-select")
 
-      mapWTheme('n', '<c-p>', 'find_files', "hidden = true, file_ignore_patterns = {'.git'}")
+      mapWTheme('n', '<c-p>', 'find_files', "hidden = true, file_ignore_patterns = {'^%.git'}")
       mapWTheme('n', '<c-\\>', 'buffers', "sort_mru = true, ignore_current_buffer = true")
       mapWTheme('n', 'gd', 'lsp_definitions', "fname_width = 120, show_line = false")
       mapWTheme('n', 'gr', 'lsp_references', "fname_width = 250, show_line = false")
@@ -445,5 +445,6 @@ return {
       vim.cmd([[map <leader>gc :Commits<cr>]])
       vim.cmd([[map <leader>bc :BCommits<cr>]])
     end
-  }
+  },
+  {'kevinhwang91/nvim-bqf'}
 }
