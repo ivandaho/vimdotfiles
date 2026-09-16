@@ -142,6 +142,7 @@ vim.cmd([[set ts=2]])
 vim.cmd([[set et]])
 vim.cmd([[set number]])
 vim.cmd([[set relativenumber]])
+vim.cmd([[set updatetime=1000]])
 
 -- TODO: check if these are still needed
 -- autocmd FileType html setlocal shiftwidth=2 tabstop=2
