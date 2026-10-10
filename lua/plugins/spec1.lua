@@ -268,7 +268,8 @@ return {
     end,
   },
   {
-    'spywhere/lightline-lsp',
+    'https://github.com/ivandaho/lightline-lsp',
+    branch = 'chore/remove-echom',
     config = function()
       vim.cmd([[let g:lightline#lsp#indicator_hints = "\uf002 "]])
       vim.cmd([[let g:lightline#lsp#indicator_infos = "\uf129 "]])

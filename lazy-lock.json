@@ -7,7 +7,7 @@
   "fzf.vim": { "branch": "master", "commit": "023de3c0e158ff9c2b0992175af10be97c2f2158" },
   "gruvbox.nvim": { "branch": "main", "commit": "154eb5ff5b96d0641307113fa385eaf0d36d9796" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
-  "lightline-lsp": { "branch": "master", "commit": "5c00998b7fe06c101d887479ea9b753100527037" },
+  "lightline-lsp": { "branch": "chore/remove-echom", "commit": "427046327d08e0460eaf8603ee14520c8175f5d8" },
   "lightline.vim": { "branch": "master", "commit": "255f61db1a4cc36ee11eb479261d6bc471ed0819" },
   "neoformat": { "branch": "master", "commit": "9d95e5ca3ab263363758d5b1d7a174a30556ab2d" },
   "nvim-bqf": { "branch": "main", "commit": "c282a62bec6c0621a1ef5132aa3f4c9fc4dcc2c7" },
